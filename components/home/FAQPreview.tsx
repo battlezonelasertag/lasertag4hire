@@ -16,12 +16,6 @@ export default function FAQPreview() {
         <div className="grid grid-cols-1 lg:grid-cols-[0.9fr_1.1fr] gap-12 items-start">
           {/* Left: Header */}
           <div className="lg:sticky lg:top-32">
-            <span
-              className="eyebrow inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-4 text-[var(--blue)]"
-              style={{ background: "rgba(37,99,235,0.08)", border: "1px solid rgba(37,99,235,0.15)" }}
-            >
-              Common questions
-            </span>
             <h2
               className="section-heading text-[var(--ink)] mb-4"
               style={{ fontSize: "clamp(1.875rem, 3.5vw, 2.75rem)" }}

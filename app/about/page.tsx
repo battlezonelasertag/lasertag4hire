@@ -15,10 +15,17 @@ export default function AboutPage() {
       <main className="min-h-[100dvh] section-cream">
         {/* Header */}
         <div
-          className="pt-36 pb-16 px-6"
-          style={{ background: "linear-gradient(135deg, #0C1B3A 0%, #09090B 100%)" }}
+          className="pt-36 pb-16 px-6 relative overflow-hidden"
+          style={{ background: "#09090B" }}
         >
-          <div className="max-w-3xl mx-auto">
+          <img
+            src="/images/page_header_about.jpg"
+            alt=""
+            aria-hidden="true"
+            style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center", opacity: 0.35, zIndex: 0 }}
+          />
+          <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to right, rgba(9,9,11,0.85) 40%, rgba(9,9,11,0.4) 100%)", zIndex: 1 }} />
+          <div className="max-w-3xl mx-auto" style={{ position: "relative", zIndex: 2 }}>
             <span
               className="eyebrow inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-4 text-white/50"
               style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.1)" }}

@@ -41,3 +41,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Claude Code internal files
+.claude/
+
+# Source photo assets (deploy via public/images instead)
+LT4H Website Photos/

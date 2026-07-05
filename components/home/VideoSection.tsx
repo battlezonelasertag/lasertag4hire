@@ -40,29 +40,17 @@ export default function VideoSection() {
           className="relative rounded-[1.5rem] overflow-hidden mx-auto"
           style={{ maxWidth: "900px", aspectRatio: "16/9", background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)" }}
         >
-          {/* Replace with actual video */}
+          {/* Background image — replace outer div src with video when available */}
+          <img
+            src="/images/why-choose-us-weekend.jpg"
+            alt="Laser tag event action shot"
+            className="absolute inset-0 w-full h-full"
+            style={{ objectFit: "cover", objectPosition: "center 20%" }}
+          />
           <div
-            className="absolute inset-0 flex items-center justify-center"
-            style={{
-              background: "linear-gradient(145deg, #0C1B3A 0%, #1a0a1a 100%)",
-            }}
-          >
-            {/* Placeholder visual */}
-            <div className="text-center">
-              <div
-                className="text-6xl font-bold text-white/10 mb-4"
-                style={{ fontFamily: "var(--font-syne)" }}
-              >
-                LT4H
-              </div>
-              <p
-                className="text-white/30 text-sm"
-                style={{ fontFamily: "var(--font-dm-sans)" }}
-              >
-                Event video coming soon
-              </p>
-            </div>
-          </div>
+            className="absolute inset-0"
+            style={{ background: "rgba(9,9,11,0.45)" }}
+          />
 
           {/* Play button overlay */}
           {!playing && (

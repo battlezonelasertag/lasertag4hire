@@ -4,6 +4,12 @@ import { useState, useCallback } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { PACKAGES, ADD_ONS } from "@/lib/data";
+
+const PACKAGE_IMAGES: Record<string, string> = {
+  "bolter-no-scope": "/images/package-option-bolter-no-scope.jpg",
+  "bolter-scope":    "/images/package-option-bolter-scope.jpg",
+  "predator":        "/images/package-option-predator.jpg",
+};
 import type { ConfiguratorState } from "@/lib/types";
 import EnquiryModal from "@/components/ui/EnquiryModal";
 
@@ -65,6 +71,18 @@ export default function PackageConfigurator() {
                     }}
                   >
                     <div className="card-bezel-inner p-5 relative">
+                      {/* Package image */}
+                      <div
+                        className="rounded-xl overflow-hidden mb-4"
+                        style={{ height: 120 }}
+                      >
+                        <img
+                          src={PACKAGE_IMAGES[pkg.id]}
+                          alt={pkg.name}
+                          style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center" }}
+                        />
+                      </div>
+
                       {pkg.badge && (
                         <span
                           className="eyebrow inline-block px-2.5 py-1 rounded-full mb-3 text-[var(--blue)]"
@@ -369,7 +387,7 @@ function StickyPanel({
             href="https://fareharbor.com/embeds/book/lasertag4hire/"
             target="_blank"
             rel="noopener noreferrer"
-            className="btn-orange w-full text-center py-3.5"
+            className="btn-crimson w-full text-center py-3.5"
           >
             Book this setup
             <span className="btn-icon-wrap">

@@ -16,10 +16,11 @@ const LEGAL_LINKS = [
 
 export default function Footer() {
   return (
-    <footer
-      className="section-dark text-white"
-      style={{ fontFamily: "var(--font-dm-sans)" }}
-    >
+    <footer style={{ fontFamily: "var(--font-dm-sans)", background: "transparent", padding: "0 clamp(12px,1.8vw,24px)" }}>
+      <div
+        className="text-white"
+        style={{ background: "var(--ink)", borderRadius: "2rem 2rem 0 0", overflow: "hidden" }}
+      >
       <div className="max-w-7xl mx-auto px-6 py-16 lg:py-20">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
           {/* Brand */}
@@ -91,7 +92,7 @@ export default function Footer() {
               href="https://fareharbor.com/embeds/book/lasertag4hire/"
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-orange inline-flex text-sm"
+              className="btn-crimson inline-flex text-sm"
             >
               Book now
               <span className="btn-icon-wrap ml-2">
@@ -118,6 +119,7 @@ export default function Footer() {
             ))}
           </div>
         </div>
+      </div>
       </div>
     </footer>
   );

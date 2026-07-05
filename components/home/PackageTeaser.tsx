@@ -5,9 +5,14 @@ import Link from "next/link";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { PACKAGES } from "@/lib/data";
-import type { Package } from "@/lib/types";
 
 gsap.registerPlugin(ScrollTrigger);
+
+const PACKAGE_IMAGES: Record<string, string> = {
+  "bolter-no-scope": "/images/packages_bolter_no_scope.jpg",
+  "bolter-scope":    "/images/packages_bolter_scopes.jpg",
+  "predator":        "/images/packages_predator.jpg",
+};
 
 export default function PackageTeaser() {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -17,287 +22,270 @@ export default function PackageTeaser() {
     if (!cards) return;
     cards.forEach((card, i) => {
       gsap.from(card, {
-        y: 36,
+        y: 48,
         opacity: 0,
-        duration: 0.7,
+        duration: 0.8,
         delay: i * 0.12,
         ease: "power3.out",
-        scrollTrigger: { trigger: sectionRef.current, start: "top 75%", once: true },
+        scrollTrigger: { trigger: sectionRef.current, start: "top 72%", once: true },
       });
     });
   }, []);
 
-  const featured = PACKAGES.find((p) => p.featured);
-  const rest = PACKAGES.filter((p) => !p.featured);
-
   return (
-    <section ref={sectionRef} className="section-cream py-24 lg:py-32">
-      <div className="max-w-7xl mx-auto px-6">
+    <section
+      ref={sectionRef}
+      style={{
+        background: "var(--cream)",
+        padding: "clamp(72px, 10vw, 128px) clamp(24px, 6vw, 96px)",
+        position: "relative",
+        overflow: "hidden",
+      }}
+    >
+
+<div style={{ maxWidth: 1200, margin: "0 auto", position: "relative", zIndex: 1 }}>
+
         {/* Header */}
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-12 gap-4">
+        <div
+          style={{
+            display: "flex",
+            alignItems: "flex-end",
+            justifyContent: "space-between",
+            gap: 24,
+            marginBottom: "clamp(40px, 6vw, 64px)",
+          }}
+        >
           <div>
-            <span
-              className="eyebrow inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-4 text-[var(--crimson)]"
-              style={{ background: "rgba(225,29,72,0.08)", border: "1px solid rgba(225,29,72,0.15)" }}
-            >
-              Packages
-            </span>
             <h2
-              className="section-heading text-[var(--ink)]"
-              style={{ fontSize: "clamp(1.875rem, 3.5vw, 2.75rem)" }}
+              style={{
+                fontFamily: "var(--font-syne)",
+                fontWeight: 700,
+                fontSize: "clamp(36px, 5vw, 64px)",
+                letterSpacing: "-0.025em",
+                lineHeight: 1.0,
+                color: "var(--ink)",
+                margin: 0,
+              }}
             >
-              Three setups. One mission.
+              Choose your<br />
+              <span style={{ color: "#E11D48" }}>weapon.</span>
             </h2>
           </div>
           <Link
             href="/packages"
-            className="btn-outline inline-flex self-start sm:self-auto text-sm"
+            style={{
+              fontFamily: "var(--font-dm-sans)",
+              fontSize: 14,
+              fontWeight: 600,
+              color: "var(--blue)",
+              textDecoration: "none",
+              letterSpacing: "-0.01em",
+              display: "flex",
+              alignItems: "center",
+              gap: 6,
+              flexShrink: 0,
+            }}
           >
-            Build your setup
-            <span className="btn-icon-wrap" style={{ background: "rgba(37,99,235,0.1)" }}>
-              <ArrowIcon />
-            </span>
+            See all options
+            <span style={{ fontSize: 18, lineHeight: 1 }}>→</span>
           </Link>
         </div>
 
-        {/* Bento grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-4">
-          {/* Featured — Predator */}
-          {featured && <FeaturedCard pkg={featured} />}
-
-          {/* Stacked smaller cards */}
-          <div className="flex flex-col gap-4">
-            {rest.map((pkg) => (
-              <CompactCard key={pkg.id} pkg={pkg} />
-            ))}
-          </div>
+        {/* Cards grid */}
+        <div
+          style={{
+            display: "grid",
+            gridTemplateColumns: "repeat(3, 1fr)",
+            gap: "clamp(10px, 1.5vw, 16px)",
+          }}
+        >
+          {PACKAGES.map((pkg) => (
+            <PackageCard key={pkg.id} pkg={pkg} />
+          ))}
         </div>
 
-        {/* Bottom CTA */}
-        <div className="mt-8 text-center">
+        {/* Footer */}
+        <div
+          style={{
+            marginTop: "clamp(24px, 3vw, 36px)",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            gap: 16,
+            paddingTop: "clamp(24px, 3vw, 36px)",
+            borderTop: "1px solid rgba(0,0,0,0.08)",
+          }}
+        >
           <p
-            className="text-[var(--muted)] text-sm mb-4"
-            style={{ fontFamily: "var(--font-dm-sans)" }}
+            style={{
+              fontFamily: "var(--font-dm-sans)",
+              fontSize: 13,
+              color: "var(--muted)",
+              margin: 0,
+            }}
           >
             Need more than 10 players? Add taggers in groups of 4.
           </p>
-          <Link href="/packages" className="btn-blue inline-flex">
+          <Link href="/packages" className="btn-blue">
             Customise your package
             <span className="btn-icon-wrap btn-icon-wrap-white">
               <ArrowIcon />
             </span>
           </Link>
         </div>
+
       </div>
     </section>
   );
 }
 
-function FeaturedCard({ pkg }: { pkg: Package }) {
+function PackageCard({ pkg }: { pkg: typeof PACKAGES[0] }) {
+  const featured = pkg.featured;
+
   return (
-    <div
-      className="pkg-card card-bezel-outer"
+    <Link
+      href="/packages"
+      className="pkg-card group"
+      style={{
+        textDecoration: "none",
+        display: "flex",
+        flexDirection: "column",
+        borderRadius: "1.25rem",
+        overflow: "hidden",
+        cursor: "pointer",
+        background: "white",
+        boxShadow: "0 2px 8px rgba(0,0,0,0.06), 0 8px 24px rgba(0,0,0,0.04)",
+      }}
     >
-      <div
-        className="card-bezel-inner relative overflow-hidden"
-        style={{ minHeight: "440px" }}
-      >
-        {/* Gradient bg */}
-        <div
-          className="absolute inset-0"
+      {/* ── Photo section — intrinsic ratio via paddingTop ── */}
+      <div style={{ position: "relative", paddingTop: "68%", overflow: "hidden", flexShrink: 0 }}>
+        <img
+          src={PACKAGE_IMAGES[pkg.id]}
+          alt={pkg.name}
+          className="group-hover:scale-105"
           style={{
-            background: "linear-gradient(145deg, #0C1B3A 0%, #09090B 100%)",
+            position: "absolute",
+            inset: 0,
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+            objectPosition: "center 15%",
+            transition: "transform 0.65s cubic-bezier(0.25,0.46,0.45,0.94)",
           }}
         />
-        <div
-          className="absolute inset-0"
-          style={{
-            background:
-              "radial-gradient(circle at 75% 30%, rgba(225,29,72,0.25) 0%, transparent 55%), radial-gradient(circle at 20% 70%, rgba(37,99,235,0.2) 0%, transparent 50%)",
-          }}
-        />
-
-        {/* Content */}
-        <div className="relative z-10 p-8 h-full flex flex-col justify-between" style={{ minHeight: "440px" }}>
-          <div>
-            {pkg.badge && (
-              <span
-                className="eyebrow inline-block px-3 py-1.5 rounded-full mb-6 text-white/80"
-                style={{ background: "rgba(225,29,72,0.25)", border: "1px solid rgba(225,29,72,0.4)" }}
-              >
-                {pkg.badge}
-              </span>
-            )}
-            <h3
-              className="display-heading text-white mb-1"
-              style={{ fontSize: "clamp(2rem, 4vw, 3rem)" }}
-            >
-              {pkg.name}
-            </h3>
-            <p
-              className="text-white/50 text-lg mb-6"
-              style={{ fontFamily: "var(--font-dm-sans)" }}
-            >
-              {pkg.tagline}
-            </p>
-
-            {/* Specs grid */}
-            <div className="grid grid-cols-3 gap-3 mb-8">
-              {[
-                { label: "Weight", value: pkg.weight },
-                { label: "Range", value: pkg.range },
-                { label: "Ages", value: pkg.ageRange },
-              ].map((spec) => (
-                <div
-                  key={spec.label}
-                  className="px-3 py-2 rounded-xl"
-                  style={{ background: "rgba(255,255,255,0.07)", border: "1px solid rgba(255,255,255,0.1)" }}
-                >
-                  <div
-                    className="text-xs text-white/40 mb-0.5"
-                    style={{ fontFamily: "var(--font-dm-sans)" }}
-                  >
-                    {spec.label}
-                  </div>
-                  <div
-                    className="text-sm font-semibold text-white"
-                    style={{ fontFamily: "var(--font-syne)" }}
-                  >
-                    {spec.value}
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            {/* Features list */}
-            <ul className="flex flex-col gap-2">
-              {pkg.features.slice(0, 5).map((f) => (
-                <li
-                  key={f}
-                  className="flex items-center gap-2 text-sm text-white/60"
-                  style={{ fontFamily: "var(--font-dm-sans)" }}
-                >
-                  <span
-                    className="w-4 h-4 rounded-full flex items-center justify-center flex-shrink-0"
-                    style={{ background: "rgba(225,29,72,0.3)" }}
-                  >
-                    <CheckIcon />
-                  </span>
-                  {f}
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div className="flex items-center justify-between mt-8">
-            <div>
-              <div className="text-white/40 text-xs mb-1" style={{ fontFamily: "var(--font-dm-sans)" }}>
-                From
-              </div>
-              <div
-                className="text-4xl font-bold text-white"
-                style={{ fontFamily: "var(--font-syne)", letterSpacing: "-0.02em" }}
-              >
-                ${pkg.price}
-              </div>
-            </div>
-            <Link
-              href="/packages"
-              className="btn-orange"
-            >
-              Book this
-              <span className="btn-icon-wrap">
-                <ArrowIcon />
-              </span>
-            </Link>
-          </div>
-        </div>
       </div>
-    </div>
-  );
-}
 
-function CompactCard({ pkg }: { pkg: Package }) {
-  return (
-    <div className="pkg-card card-bezel-outer flex-1">
-      <div className="card-bezel-inner p-6 flex flex-col sm:flex-row gap-4 justify-between">
-        <div className="flex-1">
-          {pkg.badge && (
-            <span
-              className="eyebrow inline-block px-2.5 py-1 rounded-full mb-3 text-[var(--blue)]"
-              style={{ background: "rgba(37,99,235,0.1)", border: "1px solid rgba(37,99,235,0.15)" }}
-            >
-              {pkg.badge}
-            </span>
-          )}
-          <h3
-            className="card-heading text-[var(--ink)] text-xl mb-0.5"
-          >
+      {/* ── Info panel ── */}
+      <div style={{
+        background: "white",
+        borderTop: "1px solid rgba(0,0,0,0.07)",
+        padding: "clamp(14px,1.8vw,20px)",
+        display: "flex",
+        flexDirection: "column",
+        gap: 12,
+      }}>
+
+        {/* Name + tagline */}
+        <div>
+          <h3 style={{
+            fontFamily: "var(--font-syne)",
+            fontWeight: 700,
+            fontSize: "clamp(18px,2vw,24px)",
+            letterSpacing: "-0.02em",
+            lineHeight: 1.1,
+            color: "var(--ink)",
+            margin: "0 0 3px",
+          }}>
             {pkg.name}
           </h3>
-          <p
-            className="text-[var(--muted)] text-sm mb-4"
-            style={{ fontFamily: "var(--font-dm-sans)" }}
-          >
-            {pkg.tagline}
+          <p style={{
+            fontFamily: "var(--font-dm-sans)",
+            fontSize: 12,
+            color: "var(--muted)",
+            margin: 0,
+            letterSpacing: "0.01em",
+          }}>
+            {pkg.tagline} · {pkg.ageRange}
           </p>
+        </div>
 
-          <div className="flex items-center gap-3 flex-wrap">
-            {[
-              { label: pkg.weight },
-              { label: pkg.range },
-              { label: pkg.ageRange },
-            ].map((spec) => (
-              <span
-                key={spec.label}
-                className="text-xs px-2.5 py-1 rounded-full text-[var(--muted)]"
-                style={{ background: "var(--sky)", fontFamily: "var(--font-dm-sans)" }}
-              >
-                {spec.label}
+        {/* Best for */}
+        <div>
+          <p style={{
+            fontFamily: "var(--font-dm-sans)",
+            fontSize: 9, fontWeight: 700,
+            letterSpacing: "0.15em", textTransform: "uppercase",
+            color: "rgba(0,0,0,0.3)",
+            margin: "0 0 7px",
+          }}>
+            Best for
+          </p>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: 5 }}>
+            {pkg.bestFor.map((label) => (
+              <span key={label} style={{
+                fontFamily: "var(--font-dm-sans)",
+                fontSize: 11, fontWeight: 500,
+                color: "var(--ink)",
+                background: "rgba(0,0,0,0.05)",
+                border: "1px solid rgba(0,0,0,0.08)",
+                borderRadius: 100, padding: "3px 10px",
+                whiteSpace: "nowrap",
+              }}>
+                {label}
               </span>
             ))}
           </div>
         </div>
 
-        <div className="flex flex-row sm:flex-col items-end justify-between sm:justify-between gap-4 sm:gap-2 sm:min-w-[100px]">
-          <div className="text-right">
-            <div
-              className="text-xs text-[var(--muted)] mb-0.5"
-              style={{ fontFamily: "var(--font-dm-sans)" }}
-            >
+        {/* Price + CTA */}
+        <div style={{
+          display: "flex", alignItems: "center",
+          justifyContent: "space-between", gap: 10,
+          borderTop: "1px solid rgba(0,0,0,0.06)",
+          paddingTop: 12,
+        }}>
+          <div>
+            <span style={{
+              fontFamily: "var(--font-dm-sans)",
+              fontSize: 10, letterSpacing: "0.1em", textTransform: "uppercase",
+              color: "rgba(0,0,0,0.3)", display: "block", marginBottom: 1,
+            }}>
               From
-            </div>
-            <div
-              className="text-2xl font-bold text-[var(--ink)]"
-              style={{ fontFamily: "var(--font-syne)", letterSpacing: "-0.02em" }}
-            >
+            </span>
+            <span style={{
+              fontFamily: "var(--font-syne)",
+              fontWeight: 700,
+              fontSize: "clamp(22px,2.4vw,30px)",
+              letterSpacing: "-0.03em",
+              color: "var(--ink)", lineHeight: 1,
+            }}>
               ${pkg.price}
-            </div>
+            </span>
           </div>
-          <Link
-            href="/packages"
-            className="btn-outline text-sm px-4 py-2 whitespace-nowrap"
-          >
-            Select
-          </Link>
+
+          <span style={{
+            fontFamily: "var(--font-dm-sans)",
+            fontSize: 13, fontWeight: 700,
+            color: featured ? "var(--crimson)" : "var(--blue)",
+            border: `1.5px solid ${featured ? "rgba(220,49,41,0.35)" : "rgba(26,95,180,0.35)"}`,
+            borderRadius: 100, padding: "8px 18px",
+            background: featured ? "rgba(220,49,41,0.06)" : "rgba(26,95,180,0.06)",
+            letterSpacing: "0.01em",
+            display: "flex", alignItems: "center", gap: 6,
+            flexShrink: 0,
+          }}>
+            Select <ArrowIcon />
+          </span>
         </div>
       </div>
-    </div>
+    </Link>
   );
 }
 
 function ArrowIcon() {
   return (
-    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M7 17L17 7M17 7H7M17 7v10" />
-    </svg>
-  );
-}
-
-function CheckIcon() {
-  return (
-    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-      <polyline points="20 6 9 17 4 12" />
+    <svg width="11" height="11" viewBox="0 0 12 12" fill="none">
+      <path d="M2.5 9.5L9.5 2.5M9.5 2.5H4M9.5 2.5V8" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   );
 }

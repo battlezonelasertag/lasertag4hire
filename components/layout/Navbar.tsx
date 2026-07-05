@@ -27,82 +27,86 @@ const itemVariants = {
   exit: { y: 8, opacity: 0, transition: { duration: 0.15 } },
 };
 
+export const NAV_HEIGHT = 68;
+
 export default function Navbar({ onQuoteClick }: { onQuoteClick?: () => void }) {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 24);
+    const handleScroll = () => setScrolled(window.scrollY > 16);
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   useEffect(() => {
-    if (menuOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
+    document.body.style.overflow = menuOpen ? "hidden" : "";
     return () => { document.body.style.overflow = ""; };
   }, [menuOpen]);
 
   return (
     <>
-      {/* Floating island navbar */}
       <header
-        className="fixed top-0 left-0 right-0 z-40 flex justify-center pt-5 px-4 pointer-events-none"
+        style={{
+          position: "fixed",
+          top: 0, left: 0, right: 0,
+          zIndex: 40,
+          height: NAV_HEIGHT,
+          background: scrolled ? "rgba(255,255,255,0.97)" : "rgba(255,255,255,0.88)",
+          backdropFilter: "blur(20px)",
+          WebkitBackdropFilter: "blur(20px)",
+          borderBottom: `1px solid ${scrolled ? "rgba(0,0,0,0.09)" : "rgba(0,0,0,0.05)"}`,
+          boxShadow: scrolled ? "0 2px 20px rgba(0,0,0,0.06)" : "none",
+          transition: "background 0.3s, border-color 0.3s, box-shadow 0.3s",
+        }}
       >
-        <nav
-          className="pointer-events-auto flex items-center gap-2 px-3 py-2 rounded-full transition-all duration-300"
-          style={{
-            background: scrolled ? "rgba(255,255,255,0.92)" : "rgba(255,255,255,0.82)",
-            backdropFilter: "blur(16px)",
-            WebkitBackdropFilter: "blur(16px)",
-            boxShadow: scrolled
-              ? "0 0 0 1px rgba(0,0,0,0.08), 0 4px 24px rgba(0,0,0,0.1)"
-              : "0 0 0 1px rgba(0,0,0,0.06), 0 2px 12px rgba(0,0,0,0.06)",
-          }}
-        >
+        <div style={{
+          height: "100%",
+          padding: "0 clamp(24px, 6vw, 80px)",
+          display: "flex",
+          alignItems: "center",
+          gap: 8,
+        }}>
           {/* Logo */}
-          <Link
-            href="/"
-            className="flex items-center gap-2 px-2 py-1 rounded-full hover:bg-black/5 transition-colors duration-200"
-          >
+          <Link href="/" style={{ display: "flex", alignItems: "center", gap: 10, textDecoration: "none", flexShrink: 0, marginRight: "auto" }}>
             <LogoMark />
-            <span
-              className="text-[15px] font-bold tracking-tight hidden sm:block"
-              style={{ fontFamily: "var(--font-syne)", color: "var(--ink)" }}
-            >
+            <span style={{ fontFamily: "var(--font-syne)", fontWeight: 700, fontSize: 16, color: "var(--ink)", letterSpacing: "-0.02em" }}>
               LT4H
             </span>
           </Link>
 
-          {/* Divider */}
-          <div className="w-px h-5 bg-black/10 hidden md:block" />
-
-          {/* Nav links */}
-          <div className="hidden md:flex items-center gap-1">
+          {/* Desktop nav links */}
+          <nav className="hidden md:contents">
             {NAV_LINKS.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
-                className="px-3 py-1.5 rounded-full text-[14px] font-medium text-[#374151] hover:bg-black/6 hover:text-[var(--ink)] transition-all duration-200"
-                style={{ fontFamily: "var(--font-dm-sans)" }}
+                className="hover:bg-black/6 hover:text-[var(--ink)]"
+                style={{
+                  fontFamily: "var(--font-dm-sans)", fontSize: 14, fontWeight: 500,
+                  color: "#374151", textDecoration: "none",
+                  padding: "6px 14px", borderRadius: 100,
+                  transition: "background 0.18s, color 0.18s",
+                  whiteSpace: "nowrap",
+                }}
               >
                 {link.label}
               </Link>
             ))}
-          </div>
+          </nav>
 
-          {/* Divider */}
-          <div className="w-px h-5 bg-black/10 hidden md:block" />
-
-          {/* CTAs */}
-          <div className="hidden md:flex items-center gap-2">
+          {/* Desktop divider + CTAs */}
+          <div className="hidden md:flex" style={{ alignItems: "center", gap: 8, marginLeft: 8, flexShrink: 0 }}>
+            <div style={{ width: 1, height: 20, background: "rgba(0,0,0,0.10)", marginRight: 4 }} />
             <button
               onClick={onQuoteClick}
-              className="px-4 py-1.5 rounded-full text-[14px] font-semibold transition-all duration-200 hover:bg-black/6"
-              style={{ fontFamily: "var(--font-dm-sans)", color: "var(--blue)" }}
+              className="hover:bg-black/6"
+              style={{
+                fontFamily: "var(--font-dm-sans)", fontSize: 14, fontWeight: 600,
+                color: "var(--blue)", background: "transparent", border: "none",
+                padding: "6px 14px", borderRadius: 100, cursor: "pointer",
+                transition: "background 0.18s", whiteSpace: "nowrap",
+              }}
             >
               Get a quote
             </button>
@@ -110,8 +114,8 @@ export default function Navbar({ onQuoteClick }: { onQuoteClick?: () => void }) 
               href="https://fareharbor.com/embeds/book/lasertag4hire/"
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-orange text-[14px] px-4 py-1.5"
-              style={{ fontFamily: "var(--font-dm-sans)" }}
+              className="btn-crimson"
+              style={{ fontSize: 13, padding: "8px 18px" }}
             >
               Book now
             </Link>
@@ -120,12 +124,16 @@ export default function Navbar({ onQuoteClick }: { onQuoteClick?: () => void }) 
           {/* Mobile hamburger */}
           <button
             onClick={() => setMenuOpen(!menuOpen)}
-            className="md:hidden w-9 h-9 flex items-center justify-center rounded-full hover:bg-black/6 transition-colors duration-200 ml-1"
+            className="flex md:hidden items-center justify-center"
             aria-label={menuOpen ? "Close menu" : "Open menu"}
+            style={{
+              width: 36, height: 36, borderRadius: 8, marginLeft: 8,
+              background: "transparent", border: "none", cursor: "pointer",
+            }}
           >
             <HamburgerIcon open={menuOpen} />
           </button>
-        </nav>
+        </div>
       </header>
 
       {/* Mobile fullscreen overlay */}
@@ -136,28 +144,31 @@ export default function Navbar({ onQuoteClick }: { onQuoteClick?: () => void }) 
             initial="hidden"
             animate="visible"
             exit="exit"
-            className="fixed inset-0 z-30 md:hidden"
             style={{
-              background: "rgba(250,250,245,0.96)",
+              position: "fixed", inset: 0, zIndex: 30,
+              background: "rgba(250,250,245,0.97)",
               backdropFilter: "blur(24px)",
               WebkitBackdropFilter: "blur(24px)",
             }}
+            className="md:hidden"
           >
-            <div className="flex flex-col items-center justify-center h-full gap-2 px-8">
+            <div style={{
+              display: "flex", flexDirection: "column",
+              alignItems: "center", justifyContent: "center",
+              height: "100%", gap: 4, padding: "0 32px",
+            }}>
               {NAV_LINKS.map((link, i) => (
-                <motion.div
-                  key={link.href}
-                  custom={i}
-                  variants={itemVariants}
-                  initial="hidden"
-                  animate="visible"
-                  exit="exit"
-                >
+                <motion.div key={link.href} custom={i} variants={itemVariants} initial="hidden" animate="visible" exit="exit">
                   <Link
                     href={link.href}
                     onClick={() => setMenuOpen(false)}
-                    className="block text-4xl font-bold tracking-tight py-3 hover:text-[var(--blue)] transition-colors duration-200"
-                    style={{ fontFamily: "var(--font-syne)", color: "var(--ink)" }}
+                    style={{
+                      display: "block",
+                      fontFamily: "var(--font-syne)", fontWeight: 700,
+                      fontSize: "clamp(32px,8vw,44px)", letterSpacing: "-0.025em",
+                      color: "var(--ink)", textDecoration: "none",
+                      padding: "10px 0",
+                    }}
                   >
                     {link.label}
                   </Link>
@@ -170,11 +181,12 @@ export default function Navbar({ onQuoteClick }: { onQuoteClick?: () => void }) 
                 initial="hidden"
                 animate="visible"
                 exit="exit"
-                className="flex flex-col gap-3 mt-8 w-full max-w-xs"
+                style={{ display: "flex", flexDirection: "column", gap: 10, marginTop: 28, width: "100%", maxWidth: 320 }}
               >
                 <button
                   onClick={() => { setMenuOpen(false); onQuoteClick?.(); }}
-                  className="btn-outline w-full py-3 text-base"
+                  className="btn-outline"
+                  style={{ width: "100%", padding: "14px", fontSize: 15, justifyContent: "center" }}
                 >
                   Get a quote
                 </button>
@@ -183,7 +195,8 @@ export default function Navbar({ onQuoteClick }: { onQuoteClick?: () => void }) 
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() => setMenuOpen(false)}
-                  className="btn-orange w-full py-3 text-base text-center"
+                  className="btn-crimson"
+                  style={{ width: "100%", padding: "14px", fontSize: 15, justifyContent: "center", textAlign: "center" }}
                 >
                   Book now
                 </Link>
@@ -200,20 +213,9 @@ function LogoMark() {
   return (
     <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
       <rect width="28" height="28" rx="8" fill="var(--crimson)" />
-      <path
-        d="M7 14L11 10L15 14L19 9"
-        stroke="white"
-        strokeWidth="2.2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
+      <path d="M7 14L11 10L15 14L19 9" stroke="white" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
       <circle cx="20" cy="18" r="2.5" fill="white" opacity="0.9" />
-      <path
-        d="M8 19h8"
-        stroke="white"
-        strokeWidth="2"
-        strokeLinecap="round"
-      />
+      <path d="M8 19h8" stroke="white" strokeWidth="2" strokeLinecap="round" />
     </svg>
   );
 }
@@ -221,24 +223,12 @@ function LogoMark() {
 function HamburgerIcon({ open }: { open: boolean }) {
   return (
     <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-      <motion.line
-        x1="3" y1="6" x2="17" y2="6"
-        stroke="var(--ink)"
-        strokeWidth="1.8"
-        strokeLinecap="round"
+      <motion.line x1="3" y1="6" x2="17" y2="6" stroke="var(--ink)" strokeWidth="1.8" strokeLinecap="round"
         animate={open ? { rotate: 45, y: 4 } : { rotate: 0, y: 0 }}
-        style={{ originX: "50%", originY: "50%" }}
-        transition={{ duration: 0.25, ease: [0.23, 1, 0.32, 1] }}
-      />
-      <motion.line
-        x1="3" y1="14" x2="17" y2="14"
-        stroke="var(--ink)"
-        strokeWidth="1.8"
-        strokeLinecap="round"
+        style={{ originX: "50%", originY: "50%" }} transition={{ duration: 0.25, ease: [0.23, 1, 0.32, 1] }} />
+      <motion.line x1="3" y1="14" x2="17" y2="14" stroke="var(--ink)" strokeWidth="1.8" strokeLinecap="round"
         animate={open ? { rotate: -45, y: -4 } : { rotate: 0, y: 0 }}
-        style={{ originX: "50%", originY: "50%" }}
-        transition={{ duration: 0.25, ease: [0.23, 1, 0.32, 1] }}
-      />
+        style={{ originX: "50%", originY: "50%" }} transition={{ duration: 0.25, ease: [0.23, 1, 0.32, 1] }} />
     </svg>
   );
 }

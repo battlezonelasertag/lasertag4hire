@@ -23,16 +23,10 @@ export default function Testimonials() {
 
   return (
     <section className="section-cream py-24 lg:py-32">
-      <div className="max-w-7xl mx-auto px-6">
+      <div className="max-w-7xl mx-auto px-6" style={{ position: "relative", zIndex: 1 }}>
         {/* Header */}
         <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-10 gap-6">
           <div>
-            <span
-              className="eyebrow inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-4 text-[var(--blue)]"
-              style={{ background: "rgba(37,99,235,0.08)", border: "1px solid rgba(37,99,235,0.15)" }}
-            >
-              Reviews
-            </span>
             <h2
               className="section-heading text-[var(--ink)]"
               style={{ fontSize: "clamp(1.875rem, 3.5vw, 2.75rem)" }}

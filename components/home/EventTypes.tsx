@@ -44,12 +44,6 @@ export default function EventTypes() {
         {/* Header */}
         <div ref={headRef} className="flex flex-col sm:flex-row sm:items-end justify-between mb-10 gap-4">
           <div>
-            <span
-              className="eyebrow inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-4 text-[var(--blue)]"
-              style={{ background: "rgba(37,99,235,0.1)", border: "1px solid rgba(37,99,235,0.15)" }}
-            >
-              Who books with us
-            </span>
             <h2
               className="section-heading text-[var(--ink)]"
               style={{ fontSize: "clamp(1.875rem, 3.5vw, 2.75rem)" }}
@@ -109,16 +103,6 @@ function EventCard({ event }: { event: typeof EVENT_TYPES[0] }) {
 
       {/* Content */}
       <div className="relative z-10 h-full flex flex-col justify-between p-6" style={{ minHeight: "380px" }}>
-        <div>
-          {/* Category pill */}
-          <span
-            className="eyebrow inline-block px-3 py-1 rounded-full text-white/70"
-            style={{ background: "rgba(255,255,255,0.15)", border: "1px solid rgba(255,255,255,0.2)" }}
-          >
-            {event.name}
-          </span>
-        </div>
-
         <div>
           <h3
             className="card-heading text-white text-xl mb-3"

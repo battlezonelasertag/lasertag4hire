@@ -97,6 +97,8 @@ export default function EnquiryModal({
             style={{ background: "rgba(9,9,11,0.6)", backdropFilter: "blur(4px)" }}
           />
 
+          {/* Centering wrapper — pointer-events-none lets clicks pass to backdrop */}
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 pointer-events-none">
           {/* Modal */}
           <motion.div
             key="modal"
@@ -104,12 +106,11 @@ export default function EnquiryModal({
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 8 }}
             transition={{ duration: 0.3, ease: [0.23, 1, 0.32, 1] }}
-            className="fixed inset-x-4 top-[5vh] bottom-[5vh] sm:inset-auto sm:top-[50%] sm:left-[50%] z-50 overflow-y-auto"
+            className="overflow-y-auto pointer-events-auto"
             style={{
               maxWidth: "560px",
               width: "100%",
               maxHeight: "90dvh",
-              transform: "translate(-50%, -50%)",
               willChange: "transform",
             }}
           >
@@ -320,7 +321,7 @@ export default function EnquiryModal({
                   <button
                     type="submit"
                     disabled={status === "sending"}
-                    className="btn-orange w-full py-3.5 mt-2 disabled:opacity-60"
+                    className="btn-crimson w-full py-3.5 mt-2 disabled:opacity-60"
                   >
                     {status === "sending" ? "Sending..." : "Send my quote request"}
                   </button>
@@ -335,6 +336,7 @@ export default function EnquiryModal({
               )}
             </div>
           </motion.div>
+          </div>
         </>
       )}
     </AnimatePresence>
