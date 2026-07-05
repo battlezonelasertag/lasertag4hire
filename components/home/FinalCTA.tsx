@@ -21,7 +21,7 @@ export default function FinalCTA({ onQuoteClick }: { onQuoteClick?: () => void }
       .from(el.querySelector(".cta-rule"), { scaleX: 0, duration: 0.75, transformOrigin: "left", ease: "power2.out" }, "-=0.3")
       .from(el.querySelectorAll(".cta-bot"), { y: 20, opacity: 0, duration: 0.6, stagger: 0.1 }, "-=0.4");
 
-    return () => tl.kill();
+    return () => { tl.kill(); };
   }, []);
 
   return (
