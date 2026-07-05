@@ -103,7 +103,7 @@ export default function PackagesPage() {
 
         {/* Package cards */}
         <div style={{ padding: "clamp(48px,7vw,96px) clamp(24px,6vw,96px)" }}>
-          <div style={{ maxWidth: 1200, margin: "0 auto" }}>
+          <div style={{ maxWidth: 1280, margin: "0 auto" }}>
             <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "clamp(12px,2vw,20px)" }}>
               {PACKAGES.map((pkg) => (
                 <Link
@@ -134,20 +134,6 @@ export default function PackagesPage() {
                         transition: "transform 0.65s cubic-bezier(0.25,0.46,0.45,0.94)",
                       }}
                     />
-                    {pkg.badge && (
-                      <span style={{
-                        position: "absolute", top: 14, left: 14,
-                        fontFamily: "var(--font-dm-sans)",
-                        fontSize: 10, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase",
-                        color: pkg.featured ? "var(--crimson)" : "var(--blue)",
-                        background: pkg.featured ? "rgba(220,49,41,0.1)" : "rgba(26,95,180,0.1)",
-                        border: `1px solid ${pkg.featured ? "rgba(220,49,41,0.25)" : "rgba(26,95,180,0.2)"}`,
-                        borderRadius: 100, padding: "4px 12px",
-                        backdropFilter: "blur(8px)",
-                      }}>
-                        {pkg.badge}
-                      </span>
-                    )}
                   </div>
 
                   {/* Info panel */}
@@ -231,7 +217,7 @@ export default function PackagesPage() {
 
         {/* Every package includes */}
         <section style={{ background: "white", padding: "clamp(72px,9vw,112px) clamp(24px,6vw,96px)" }}>
-          <div style={{ maxWidth: 1200, margin: "0 auto" }}>
+          <div style={{ maxWidth: 1280, margin: "0 auto" }}>
 
             {/* Header */}
             <div style={{ marginBottom: "clamp(40px,5vw,60px)" }}>
@@ -440,7 +426,7 @@ export default function PackagesPage() {
 
         {/* Equipment Technology Section */}
         <div style={{ background: "var(--cream)", padding: "clamp(72px,10vw,120px) clamp(24px,6vw,96px)", borderTop: "1px solid rgba(0,0,0,0.07)" }}>
-          <div style={{ maxWidth: 1200, margin: "0 auto" }}>
+          <div style={{ maxWidth: 1280, margin: "0 auto" }}>
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "clamp(32px,5vw,80px)", alignItems: "end", marginBottom: "clamp(64px,9vw,96px)" }}>
               <h2 style={{ fontFamily: "var(--font-syne)", fontWeight: 700, fontSize: "clamp(32px,4.5vw,56px)", letterSpacing: "-0.025em", lineHeight: 1.05, color: "var(--ink)", margin: 0 }}>
                 Not just lights<br />

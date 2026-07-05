@@ -331,7 +331,7 @@ export default function PackageDetailPage({ params }: { params: Promise<{ id: st
 
         {/* ── Book your date ── */}
         <div id="book" style={{ background: "white", padding: "clamp(56px,8vw,96px) clamp(24px,6vw,96px)" }}>
-          <div style={{ maxWidth: 1200, margin: "0 auto" }}>
+          <div style={{ maxWidth: 1280, margin: "0 auto" }}>
             <div style={{ display: "grid", gridTemplateColumns: "0.7fr clamp(14em, 37%, 24em) 1.3fr", gap: "clamp(32px,4vw,52px)", alignItems: "start" }}>
 
               {/* Left — context */}
@@ -400,7 +400,7 @@ export default function PackageDetailPage({ params }: { params: Promise<{ id: st
 
         {/* ── Add extras — Spotlight ── */}
         <div style={{ background: "#0d2b5e", padding: "clamp(56px,8vw,96px) clamp(24px,6vw,96px)" }}>
-          <div style={{ maxWidth: 1200, margin: "0 auto" }}>
+          <div style={{ maxWidth: 1280, margin: "0 auto" }}>
 
             {/* Header */}
             <div style={{
@@ -752,7 +752,7 @@ export default function PackageDetailPage({ params }: { params: Promise<{ id: st
 
         {/* ── Best for ── */}
         <div style={{ background: "white", borderTop: "1px solid rgba(0,0,0,0.07)", padding: "clamp(56px,8vw,96px) clamp(24px,6vw,96px)" }}>
-          <div style={{ maxWidth: 1200, margin: "0 auto" }}>
+          <div style={{ maxWidth: 1280, margin: "0 auto" }}>
 
             {/* Section header */}
             <div style={{
@@ -831,7 +831,7 @@ export default function PackageDetailPage({ params }: { params: Promise<{ id: st
 
         {/* ── Other packages ── */}
         <div style={{ background: "#09090B", padding: "clamp(48px,6vw,72px) clamp(24px,6vw,96px)" }}>
-          <div style={{ maxWidth: 1200, margin: "0 auto", display: "flex", alignItems: "center", justifyContent: "space-between", gap: 24 }}>
+          <div style={{ maxWidth: 1280, margin: "0 auto", display: "flex", alignItems: "center", justifyContent: "space-between", gap: 24 }}>
             <div>
               <h2 style={{ fontFamily: "var(--font-syne)", fontWeight: 700, fontSize: "clamp(20px,2.4vw,30px)", letterSpacing: "-0.02em", color: "white", margin: "0 0 6px" }}>
                 Not sure this is the right fit?
@@ -849,7 +849,7 @@ export default function PackageDetailPage({ params }: { params: Promise<{ id: st
         {/* ── CTA ── */}
         <div style={{ background: "var(--crimson)", position: "relative", overflow: "hidden", padding: "clamp(64px,9vw,96px) clamp(24px,6vw,96px) clamp(48px,6vw,72px)" }}>
           <div style={{ position: "absolute", inset: 0, backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1px)", backgroundSize: "40px 40px", pointerEvents: "none" }} />
-          <div style={{ maxWidth: 1200, margin: "0 auto", position: "relative", zIndex: 1, display: "grid", gridTemplateColumns: "1fr auto", gap: "clamp(24px,4vw,64px)", alignItems: "center" }}>
+          <div style={{ maxWidth: 1280, margin: "0 auto", position: "relative", zIndex: 1, display: "grid", gridTemplateColumns: "1fr auto", gap: "clamp(24px,4vw,64px)", alignItems: "center" }}>
             <div>
               <h2 style={{ fontFamily: "var(--font-syne)", fontWeight: 700, fontSize: "clamp(28px,4vw,52px)", letterSpacing: "-0.03em", lineHeight: 1.05, color: "white", margin: "0 0 12px" }}>
                 Ready to bring the battle to your backyard?
