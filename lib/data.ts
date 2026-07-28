@@ -52,7 +52,7 @@ export const PACKAGES: Package[] = [
     weight: "1.8kg",
     range: "100m",
     ageRange: "Ages 8+",
-    bestFor: ["Teens & adults", "Corporate events", "Large outdoor battles"],
+    bestFor: ["Teens & adults", "Corporate events", "Large battles"],
     features: [
       "10 Predator taggers",
       "Foregrip + red-dot scope",

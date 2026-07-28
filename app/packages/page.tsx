@@ -483,19 +483,19 @@ export default function PackagesPage() {
                 <MediaPlaceholder label="GIF: magazine being ejected from tagger and fresh mag slotted in — close-up, dramatic angle" type="gif" aspect="4/3" />
               </div>
 
-              {/* Row 3 — Tracking */}
+              {/* Row 3 — Vibration motor */}
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "clamp(32px,5vw,72px)", alignItems: "center" }}>
-                <MediaPlaceholder label="Photo or screen recording: post-game scoreboard showing player names, hits scored, eliminations, and accuracy %" type="photo" aspect="4/3" />
+                <MediaPlaceholder label="Close-up photo or slow-motion video: hands gripping tagger, trigger being pulled — emphasising tactile weight and feel" type="photo" aspect="4/3" />
                 <div>
-                  <p style={{ fontFamily: "var(--font-dm-sans)", fontSize: 10, fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase", color: "var(--muted)", marginBottom: 16 }}>Stats &amp; tracking</p>
+                  <p style={{ fontFamily: "var(--font-dm-sans)", fontSize: 10, fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase", color: "var(--muted)", marginBottom: 16 }}>Vibration motor</p>
                   <h3 style={{ fontFamily: "var(--font-syne)", fontWeight: 700, fontSize: "clamp(24px,2.8vw,38px)", letterSpacing: "-0.02em", lineHeight: 1.1, color: "var(--ink)", margin: "0 0 20px" }}>
-                    Know exactly who&apos;s running hot.
+                    You feel every shot you fire.
                   </h3>
                   <p style={{ fontFamily: "var(--font-dm-sans)", fontSize: "clamp(14px,1.15vw,16px)", lineHeight: 1.75, color: "var(--muted)", margin: "0 0 24px" }}>
-                    The system tracks every hit landed and every elimination scored across the session. At the end of each game, a full scoreboard settles the bragging rights — hits, kills, accuracy and more.
+                    Each tagger has a built-in vibration motor that fires on every trigger pull and incoming hit. It&apos;s a small detail that makes a big difference — the physical feedback makes every shot feel real, not digital.
                   </p>
                   <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: 10 }}>
-                    {["Hits scored and received tracked per player", "Eliminations and deaths counted automatically", "Accuracy percentage calculated per session"].map(f => (
+                    {["Motor pulses on every trigger pull", "Incoming hit vibration confirms damage", "Adds physical weight and presence to the game"].map(f => (
                       <li key={f} style={{ display: "flex", alignItems: "flex-start", gap: 12 }}>
                         <span style={{ width: 5, height: 5, borderRadius: "50%", background: "rgba(0,0,0,0.2)", flexShrink: 0, marginTop: 7 }} />
                         <span style={{ fontFamily: "var(--font-dm-sans)", fontSize: 13, color: "var(--muted)", lineHeight: 1.55 }}>{f}</span>

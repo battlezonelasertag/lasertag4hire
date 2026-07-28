@@ -72,7 +72,7 @@ const BESTFOR_DETAIL: Record<string, string> = {
   "School groups":         "Structured gameplay with minimal supervision required.",
   "Teens & adults":        "Full tactical experience with realistic range and reload mechanics.",
   "Corporate events":      "Gets teams competing and communicating without the awkwardness.",
-  "Large outdoor battles": "100m range means sprawling, tactical gameplay across large properties.",
+  "Large battles": "100m range means sprawling, tactical gameplay across large properties.",
 };
 
 /* ── Best-for icon ──────────────────────────────────────── */
@@ -98,7 +98,7 @@ function BestForIcon({ label, color }: { label: string; color: string }) {
       return <svg {...s}><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>;
     case "Corporate events":
       return <svg {...s}><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>;
-    case "Large outdoor battles":
+    case "Large battles":
       return <svg {...s}><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/><line x1="12" y1="2" x2="12" y2="4"/><line x1="12" y1="20" x2="12" y2="22"/><line x1="2" y1="12" x2="4" y2="12"/><line x1="20" y1="12" x2="22" y2="12"/></svg>;
     default:
       return <svg {...s}><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>;
