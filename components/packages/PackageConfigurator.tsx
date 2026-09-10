@@ -13,13 +13,13 @@ const PACKAGE_IMAGES: Record<string, string> = {
 import type { ConfiguratorState } from "@/lib/types";
 import EnquiryModal from "@/components/ui/EnquiryModal";
 
-const EXTRA_TAGGER_PRICE = 60;
+const EXTRA_TAGGER_PRICE = 84;
 const BUNKER_PRICE = 80;
 
 function calcTotal(state: ConfiguratorState): number {
   const pkg = PACKAGES.find((p) => p.id === state.packageId);
   if (!pkg) return 0;
-  const extraGroups = Math.max(0, Math.floor((state.taggerCount - 10) / 4));
+  const extraGroups = Math.max(0, Math.floor((state.taggerCount - 10) / 2));
   const bunker = state.addBunkers ? BUNKER_PRICE : 0;
   return pkg.price + extraGroups * EXTRA_TAGGER_PRICE + bunker;
 }
@@ -36,13 +36,13 @@ export default function PackageConfigurator() {
   const total = calcTotal(config);
 
   const increment = useCallback(() => {
-    setConfig((prev) => ({ ...prev, taggerCount: prev.taggerCount + 4 }));
+    setConfig((prev) => ({ ...prev, taggerCount: prev.taggerCount + 2 }));
   }, []);
 
   const decrement = useCallback(() => {
     setConfig((prev) => ({
       ...prev,
-      taggerCount: Math.max(10, prev.taggerCount - 4),
+      taggerCount: Math.max(10, prev.taggerCount - 2),
     }));
   }, []);
 
@@ -110,7 +110,7 @@ export default function PackageConfigurator() {
                       <h3 className="card-heading text-[var(--ink)] text-base mb-0.5">
                         {pkg.name}
                       </h3>
-                      <p className="text-[var(--muted)] text-xs mb-4" style={{ fontFamily: "var(--font-dm-sans)" }}>
+                      <p className="text-[var(--muted)] text-[13px] mb-4" style={{ fontFamily: "var(--font-dm-sans)" }}>
                         {pkg.tagline}
                       </p>
 
@@ -121,8 +121,8 @@ export default function PackageConfigurator() {
                           { label: "Best for", value: pkg.ageRange },
                         ].map((spec) => (
                           <div key={spec.label} className="flex items-center justify-between">
-                            <span className="text-xs text-[var(--muted)]" style={{ fontFamily: "var(--font-dm-sans)" }}>{spec.label}</span>
-                            <span className="text-xs font-semibold text-[var(--ink)]" style={{ fontFamily: "var(--font-dm-sans)" }}>{spec.value}</span>
+                            <span className="text-[13px] text-[var(--muted)]" style={{ fontFamily: "var(--font-dm-sans)" }}>{spec.label}</span>
+                            <span className="text-[13px] font-semibold text-[var(--ink)]" style={{ fontFamily: "var(--font-dm-sans)" }}>{spec.value}</span>
                           </div>
                         ))}
                       </div>
@@ -132,7 +132,7 @@ export default function PackageConfigurator() {
                         style={{ fontFamily: "var(--font-syne)", letterSpacing: "-0.02em" }}
                       >
                         ${pkg.price}
-                        <span className="text-xs font-normal text-[var(--muted)] ml-1" style={{ fontFamily: "var(--font-dm-sans)" }}>
+                        <span className="text-[13px] font-normal text-[var(--muted)] ml-1" style={{ fontFamily: "var(--font-dm-sans)" }}>
                           base
                         </span>
                       </div>
@@ -156,7 +156,7 @@ export default function PackageConfigurator() {
                       {config.taggerCount}
                     </div>
                     <div
-                      className="text-sm text-[var(--muted)]"
+                      className="text-base text-[var(--muted)]"
                       style={{ fontFamily: "var(--font-dm-sans)" }}
                     >
                       taggers
@@ -192,7 +192,7 @@ export default function PackageConfigurator() {
                 </div>
 
                 <div
-                  className="text-xs text-[var(--muted)] flex items-center gap-1.5"
+                  className="text-[13px] text-[var(--muted)] flex items-center gap-1.5"
                   style={{ fontFamily: "var(--font-dm-sans)" }}
                 >
                   <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -200,7 +200,7 @@ export default function PackageConfigurator() {
                     <line x1="12" y1="8" x2="12" y2="12" />
                     <line x1="12" y1="16" x2="12.01" y2="16" />
                   </svg>
-                  Minimum 10. Extra groups of 4 from ${EXTRA_TAGGER_PRICE} each.
+                  Minimum 10. Extra groups of 2 from ${EXTRA_TAGGER_PRICE} each.
                 </div>
               </div>
             </div>
@@ -210,7 +210,7 @@ export default function PackageConfigurator() {
           <ConfigStep number="03" title="Add inflatable bunkers?">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {[
-                { value: false, label: "No bunkers", description: "Use natural cover — furniture, trees, walls" },
+                { value: false, label: "No bunkers", description: "Use natural cover: furniture, trees, walls" },
                 { value: true, label: "Yes please", description: "Pop-up tactical bunkers delivered with your kit" },
               ].map((opt) => (
                 <button
@@ -242,12 +242,12 @@ export default function PackageConfigurator() {
                         )}
                       </div>
                       <div>
-                        <div className="card-heading text-[var(--ink)] text-sm mb-0.5">{opt.label}</div>
-                        <div className="text-xs text-[var(--muted)]" style={{ fontFamily: "var(--font-dm-sans)" }}>
+                        <div className="card-heading text-[var(--ink)] text-base mb-0.5">{opt.label}</div>
+                        <div className="text-[13px] text-[var(--muted)]" style={{ fontFamily: "var(--font-dm-sans)" }}>
                           {opt.description}
                         </div>
                         {opt.value && (
-                          <div className="text-xs font-semibold text-[var(--blue)] mt-1.5" style={{ fontFamily: "var(--font-dm-sans)" }}>
+                          <div className="text-[13px] font-semibold text-[var(--blue)] mt-1.5" style={{ fontFamily: "var(--font-dm-sans)" }}>
                             +${BUNKER_PRICE}
                           </div>
                         )}
@@ -257,8 +257,8 @@ export default function PackageConfigurator() {
                 </button>
               ))}
             </div>
-            <p className="text-xs text-[var(--muted)] mt-3" style={{ fontFamily: "var(--font-dm-sans)" }}>
-              Bunker pricing is indicative — final quote confirmed on enquiry.
+            <p className="text-[13px] text-[var(--muted)] mt-3" style={{ fontFamily: "var(--font-dm-sans)" }}>
+              Bunker pricing is indicative, final quote confirmed on enquiry.
             </p>
           </ConfigStep>
         </div>
@@ -291,7 +291,7 @@ function ConfigStep({
     <div>
       <div className="flex items-center gap-3 mb-5">
         <span
-          className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold text-white flex-shrink-0"
+          className="w-8 h-8 rounded-full flex items-center justify-center text-[13px] font-bold text-white flex-shrink-0"
           style={{ background: "var(--blue)", fontFamily: "var(--font-syne)" }}
         >
           {number}
@@ -323,7 +323,7 @@ function StickyPanel({
       <div className="card-bezel-inner p-6 flex flex-col gap-5">
         <div>
           <div
-            className="text-xs uppercase tracking-widest text-[var(--muted)] mb-3"
+            className="text-[13px] uppercase tracking-widest text-[var(--muted)] mb-3"
             style={{ fontFamily: "var(--font-dm-sans)" }}
           >
             Your setup
@@ -332,13 +332,13 @@ function StickyPanel({
           {/* Line items */}
           <div className="flex flex-col gap-3">
             <LineItem
-              label={`${pkg.name} — ${pkg.tagline}`}
+              label={`${pkg.name} · ${pkg.tagline}`}
               value={`$${pkg.price}`}
             />
             {config.taggerCount > 10 && (
               <LineItem
                 label={`+${config.taggerCount - 10} extra taggers`}
-                value={`$${Math.floor((config.taggerCount - 10) / 4) * 60}`}
+                value={`$${Math.floor((config.taggerCount - 10) / 2) * EXTRA_TAGGER_PRICE}`}
               />
             )}
             {config.addBunkers && (
@@ -360,7 +360,7 @@ function StickyPanel({
           {/* Total */}
           <div className="flex items-center justify-between">
             <span
-              className="text-sm font-semibold text-[var(--ink)]"
+              className="text-base font-semibold text-[var(--ink)]"
               style={{ fontFamily: "var(--font-dm-sans)" }}
             >
               Estimated total
@@ -403,10 +403,10 @@ function StickyPanel({
         </div>
 
         <p
-          className="text-xs text-[var(--muted)] text-center"
+          className="text-[13px] text-[var(--muted)] text-center"
           style={{ fontFamily: "var(--font-dm-sans)" }}
         >
-          *Bunker pricing confirmed on enquiry. No deposit to request a quote.
+          *Bunker pricing confirmed on enquiry.
         </p>
       </div>
     </div>
@@ -425,7 +425,7 @@ function LineItem({
   return (
     <div className="flex items-center justify-between gap-2">
       <span
-        className="text-sm text-[var(--muted)] flex items-center gap-1.5"
+        className="text-[15px] text-[var(--muted)] flex items-center gap-1.5"
         style={{ fontFamily: "var(--font-dm-sans)" }}
       >
         {isIncluded && (
@@ -441,7 +441,7 @@ function LineItem({
         {label}
       </span>
       <span
-        className="text-sm font-semibold whitespace-nowrap"
+        className="text-[15px] font-semibold whitespace-nowrap"
         style={{
           fontFamily: "var(--font-dm-sans)",
           color: isIncluded ? "var(--blue)" : "var(--ink)",

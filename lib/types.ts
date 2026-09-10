@@ -26,6 +26,7 @@ export interface EventType {
   name: string;
   description: string;
   gradient: string;
+  image: string;
   highlights: string[];
 }
 

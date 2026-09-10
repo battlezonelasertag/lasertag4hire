@@ -17,7 +17,7 @@ const WHY_US = [
   {
     icon: <HomeIcon />,
     heading: "Play in your own space",
-    body: "Backyards, parks, school ovals, corporate carparks. No travel, no venue booking, no minimum spend. The battle happens wherever you want it.",
+    body: "Backyards, parks, school ovals, corporate carparks. Wherever you're already going to be is usually the best spot for it, and there's no minimum spend to meet.",
   },
   {
     icon: <DollarIcon />,
@@ -27,7 +27,7 @@ const WHY_US = [
   {
     icon: <CheckCircleIcon />,
     heading: "We handle the rest",
-    body: "Equipment arrives fully charged, with setup guides and a direct line to us. Return is pre-booked. You're the host — not the coordinator.",
+    body: "Equipment arrives fully charged, with setup guides and a direct line to us. Return is pre-booked, so you can just be the host on the day.",
   },
 ];
 
@@ -35,22 +35,22 @@ const VALUES = [
   {
     icon: <ShieldIcon />,
     title: "Equipment-first",
-    body: "We invest in the best taggers available and keep them maintained. Every hire goes out fully charged, tested and packed — no exceptions.",
+    body: "We buy good taggers and we maintain them. Every hire is charged, tested and packed before it leaves us, and that check has never been optional.",
   },
   {
     icon: <TruckIcon />,
-    title: "Genuinely effortless",
-    body: "Delivery, setup guides, live phone support and return collection. We designed the model so you don't have to think about logistics once.",
+    title: "We handle the logistics",
+    body: "Delivery, setup guides, phone support and return collection are all part of the hire. The point is that you get to host your own event rather than run it.",
   },
   {
     icon: <SmileIcon />,
     title: "Safe for all ages",
-    body: "Infrared technology means no pain, no mess and no risk. Kids as young as 5 play happily alongside adults — no modifications needed.",
+    body: "The taggers use infrared light, the same thing your TV remote uses. Nothing is fired and nothing stings, so five-year-olds and adults play in the same game without anything being adjusted.",
   },
   {
     icon: <PhoneCallIcon />,
     title: "Always on call",
-    body: "We give you our number and we pick up. If something comes up mid-event, we're on the line within minutes — not in a ticket queue.",
+    body: "We give you our number and we pick up. If something comes up mid-event, you'll have us on the line within minutes.",
   },
 ];
 
@@ -65,7 +65,7 @@ export default function AboutPage() {
         {/* ── Hero ────────────────────────────────────── */}
         <div
           className="relative overflow-hidden flex items-end"
-          style={{ background: "#09090B", minHeight: "clamp(340px, 50vw, 520px)", paddingTop: 100 }}
+          style={{ background: "#09090B", minHeight: "clamp(340px, 50vw, 520px)", paddingTop: "calc(var(--nav-h-top, 116px) + 40px)" }}
         >
           <img
             src="/images/page_header_about.jpg"
@@ -75,19 +75,6 @@ export default function AboutPage() {
           />
           <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(9,9,11,0.9) 0%, rgba(9,9,11,0.4) 60%, rgba(9,9,11,0.2) 100%)", zIndex: 1 }} />
           <div className="max-w-7xl mx-auto px-6 pb-16 w-full" style={{ position: "relative", zIndex: 2 }}>
-            <span
-              style={{
-                display: "inline-flex", alignItems: "center",
-                fontFamily: "var(--font-dm-sans)", fontSize: 11, fontWeight: 600,
-                letterSpacing: "0.14em", textTransform: "uppercase",
-                color: "rgba(255,255,255,0.5)",
-                border: "1px solid rgba(255,255,255,0.12)",
-                background: "rgba(255,255,255,0.06)",
-                borderRadius: 100, padding: "4px 14px", marginBottom: 16,
-              }}
-            >
-              About us
-            </span>
             <h1
               style={{
                 fontFamily: "var(--font-syne)", fontWeight: 700,
@@ -126,8 +113,8 @@ export default function AboutPage() {
                 </div>
                 <div
                   style={{
-                    fontFamily: "var(--font-dm-sans)", fontSize: 12, fontWeight: 500,
-                    color: "rgba(255,255,255,0.4)", letterSpacing: "0.06em",
+                    fontFamily: "var(--font-dm-sans)", fontSize: 13, fontWeight: 500,
+                    color: "rgba(255,255,255,0.65)", letterSpacing: "0.06em",
                     textTransform: "uppercase", marginTop: 6,
                   }}
                 >
@@ -145,15 +132,6 @@ export default function AboutPage() {
 
               {/* Text */}
               <div>
-                <span
-                  style={{
-                    display: "inline-block", fontFamily: "var(--font-dm-sans)", fontSize: 11,
-                    fontWeight: 600, letterSpacing: "0.12em", textTransform: "uppercase",
-                    color: "var(--blue)", marginBottom: 16,
-                  }}
-                >
-                  Our story
-                </span>
                 <h2
                   style={{
                     fontFamily: "var(--font-syne)", fontWeight: 700,
@@ -171,19 +149,19 @@ export default function AboutPage() {
                   }}
                 >
                   <p>
-                    Laser Tag 4 Hire launched in 2007 out of Port Stephens, NSW — well before most of our customers were old enough to hold a tagger. Back then, if you didn&apos;t live near a dedicated venue, laser tag wasn&apos;t really an option.
+                    Laser Tag 4 Hire launched in 2007 out of Port Stephens, NSW, well before most of our customers were old enough to hold a tagger. Back then, if you didn&apos;t live near a dedicated venue, laser tag wasn&apos;t really an option.
                   </p>
                   <p>
-                    That bothered us. So we built a model where the equipment comes to you — fully charged, tested, and ready to go. No venue hire. No van. No complicated setup. Just bring your group and we handle the rest.
+                    So we built the business the other way around: the equipment comes to you, charged and tested, and you set it up yourself in about ten minutes. It turned out that most people would rather run a party in their own backyard than drive a group of kids across town to a venue.
                   </p>
                   <p>
-                    Five hundred events later, that idea hasn&apos;t changed. What has changed is the equipment — which is substantially better than anything we started with — and our coverage, which now spans NSW, VIC and beyond.
+                    Five hundred events later that hasn&apos;t changed, though almost everything else has. The taggers are far better than what we started with in 2007, and we now deliver right across Australia rather than just around Port Stephens.
                   </p>
                 </div>
               </div>
 
               {/* Pull quote card */}
-              <div style={{ position: "sticky", top: 100 }}>
+              <div style={{ position: "sticky", top: "calc(var(--nav-h, 72px) + 32px)" }}>
                 <div
                   style={{
                     background: "var(--ink)",
@@ -217,11 +195,11 @@ export default function AboutPage() {
                   </blockquote>
                   <div
                     style={{
-                      fontFamily: "var(--font-dm-sans)", fontSize: 13,
-                      color: "rgba(255,255,255,0.4)", fontStyle: "italic",
+                      fontFamily: "var(--font-dm-sans)", fontSize: 14,
+                      color: "rgba(255,255,255,0.65)", fontStyle: "italic",
                     }}
                   >
-                    — Founded 2007, Port Stephens NSW
+                    Founded 2007, Port Stephens NSW
                   </div>
                 </div>
 
@@ -254,7 +232,7 @@ export default function AboutPage() {
                     </div>
                     <div
                       style={{
-                        fontFamily: "var(--font-dm-sans)", fontSize: 12,
+                        fontFamily: "var(--font-dm-sans)", fontSize: 13,
                         color: "var(--muted)", marginTop: 3,
                       }}
                     >
@@ -272,15 +250,6 @@ export default function AboutPage() {
         <div style={{ background: "var(--sky)", padding: "clamp(56px,7vw,80px) clamp(24px,6vw,96px)" }}>
           <div className="max-w-7xl mx-auto">
             <div style={{ marginBottom: "clamp(32px,4vw,48px)", textAlign: "center" }}>
-              <span
-                style={{
-                  display: "inline-block", fontFamily: "var(--font-dm-sans)", fontSize: 11,
-                  fontWeight: 600, letterSpacing: "0.12em", textTransform: "uppercase",
-                  color: "var(--blue)", marginBottom: 12,
-                }}
-              >
-                Why hire?
-              </span>
               <h2
                 style={{
                   fontFamily: "var(--font-syne)", fontWeight: 700,
@@ -321,7 +290,7 @@ export default function AboutPage() {
                   </h3>
                   <p
                     style={{
-                      fontFamily: "var(--font-dm-sans)", fontSize: 14,
+                      fontFamily: "var(--font-dm-sans)", fontSize: 15,
                       color: "var(--muted)", lineHeight: 1.65, margin: 0,
                     }}
                   >
@@ -337,15 +306,6 @@ export default function AboutPage() {
         <div style={{ padding: "clamp(56px,7vw,80px) clamp(24px,6vw,96px)" }}>
           <div className="max-w-7xl mx-auto">
             <div style={{ marginBottom: "clamp(32px,4vw,48px)" }}>
-              <span
-                style={{
-                  display: "inline-block", fontFamily: "var(--font-dm-sans)", fontSize: 11,
-                  fontWeight: 600, letterSpacing: "0.12em", textTransform: "uppercase",
-                  color: "var(--blue)", marginBottom: 12,
-                }}
-              >
-                How we work
-              </span>
               <h2
                 style={{
                   fontFamily: "var(--font-syne)", fontWeight: 700,
@@ -387,7 +347,7 @@ export default function AboutPage() {
                     </h3>
                     <p
                       style={{
-                        fontFamily: "var(--font-dm-sans)", fontSize: 14,
+                        fontFamily: "var(--font-dm-sans)", fontSize: 15,
                         color: "var(--muted)", lineHeight: 1.65, margin: 0,
                       }}
                     >
@@ -433,15 +393,7 @@ export default function AboutPage() {
             >
               Ready to bring the battle to your backyard?
             </h2>
-            <p
-              style={{
-                fontFamily: "var(--font-dm-sans)", fontSize: 15, lineHeight: 1.65,
-                color: "rgba(255,255,255,0.5)", margin: "0 0 32px", maxWidth: "48ch",
-              }}
-            >
-              We&apos;ll reply within 24 hours. No commitment, no hard sell — just a straight answer on availability and pricing.
-            </p>
-            <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
+            <div style={{ display: "flex", gap: 12, flexWrap: "wrap", marginTop: 24 }}>
               <button
                 onClick={() => setQuoteOpen(true)}
                 className="btn-crimson"
@@ -472,19 +424,14 @@ export default function AboutPage() {
               }}
             >
               <ContactItem icon={<PhoneCallIcon color="rgba(255,255,255,0.35)" />}>
-                <a href="tel:1300661565" style={{ color: "rgba(255,255,255,0.55)", textDecoration: "none", fontFamily: "var(--font-dm-sans)", fontSize: 14 }}>
+                <a href="tel:1300661565" style={{ color: "rgba(255,255,255,0.55)", textDecoration: "none", fontFamily: "var(--font-dm-sans)", fontSize: 15 }}>
                   1300 661 565
                 </a>
               </ContactItem>
               <ContactItem icon={<MailIcon color="rgba(255,255,255,0.35)" />}>
-                <a href="mailto:info@lasertag4hire.com.au" style={{ color: "rgba(255,255,255,0.55)", textDecoration: "none", fontFamily: "var(--font-dm-sans)", fontSize: 14 }}>
+                <a href="mailto:info@lasertag4hire.com.au" style={{ color: "rgba(255,255,255,0.55)", textDecoration: "none", fontFamily: "var(--font-dm-sans)", fontSize: 15 }}>
                   info@lasertag4hire.com.au
                 </a>
-              </ContactItem>
-              <ContactItem icon={<LocationIcon color="rgba(255,255,255,0.35)" />}>
-                <span style={{ color: "rgba(255,255,255,0.55)", fontFamily: "var(--font-dm-sans)", fontSize: 14 }}>
-                  PO Box 417, Salamander Bay NSW 2317
-                </span>
               </ContactItem>
             </div>
           </div>
@@ -561,13 +508,6 @@ function MailIcon({ color = "var(--crimson)" }: { color?: string }) {
   return (
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
       <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>
-    </svg>
-  );
-}
-function LocationIcon({ color = "var(--crimson)" }: { color?: string }) {
-  return (
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/>
     </svg>
   );
 }

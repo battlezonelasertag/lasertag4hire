@@ -12,11 +12,8 @@ export default function Hero({ onQuoteClick }: { onQuoteClick?: () => void }) {
     if (!el) return;
 
     const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
-    tl.from(el.querySelector(".h-over"), { y: 12, opacity: 0, duration: 0.5 })
-      .from(el.querySelector(".h-line1"), { y: 32, opacity: 0, duration: 0.7 }, "-=0.2")
-      .from(el.querySelector(".h-sub"), { y: 20, opacity: 0, duration: 0.6 }, "-=0.4")
-      .from(el.querySelectorAll(".h-bot"), { y: 18, opacity: 0, duration: 0.5, stagger: 0.1 }, "-=0.3")
-      .from(el.querySelector(".h-trust"), { opacity: 0, duration: 0.7 }, "-=0.2");
+    tl.from(el.querySelector(".h-line1"), { y: 32, opacity: 0, duration: 0.7 })
+      .from(el.querySelectorAll(".h-bot"), { y: 18, opacity: 0, duration: 0.5, stagger: 0.1 }, "-=0.3");
 
     return () => { tl.kill(); };
   }, []);
@@ -88,31 +85,6 @@ export default function Hero({ onQuoteClick }: { onQuoteClick?: () => void }) {
           paddingBottom: "clamp(48px, 6vw, 80px)",
         }}
       >
-        {/* Overline */}
-        <div
-          className="h-over"
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: 12,
-            marginBottom: "clamp(18px, 2.5vw, 28px)",
-          }}
-        >
-          <span style={{ width: 24, height: 1, background: "rgba(255,255,255,0.25)", display: "block", flexShrink: 0 }} />
-          <span
-            style={{
-              fontFamily: "var(--font-dm-sans)",
-              fontSize: 11,
-              fontWeight: 500,
-              letterSpacing: "0.2em",
-              textTransform: "uppercase",
-              color: "rgba(255,255,255,0.4)",
-            }}
-          >
-            Laser Tag Equipment Hire · NSW
-          </span>
-        </div>
-
         {/* Headline */}
         <h1
           className="h-line1"
@@ -123,27 +95,12 @@ export default function Hero({ onQuoteClick }: { onQuoteClick?: () => void }) {
             letterSpacing: "-0.03em",
             lineHeight: 1.05,
             color: "white",
-            margin: "0 0 clamp(14px, 1.8vw, 22px)",
+            margin: "0 0 clamp(24px, 3vw, 40px)",
             maxWidth: "16ch",
           }}
         >
-          Premium laser tag,<br />delivered to your door.
+          Laser tag equipment,<br />delivered anywhere in Australia.
         </h1>
-
-        {/* Subtext */}
-        <p
-          className="h-sub"
-          style={{
-            fontFamily: "var(--font-dm-sans)",
-            fontSize: "clamp(14px, 1.2vw, 17px)",
-            lineHeight: 1.7,
-            color: "rgba(255,255,255,0.5)",
-            margin: "0 0 clamp(24px, 3vw, 40px)",
-            maxWidth: "46ch",
-          }}
-        >
-          Fully charged, programmed and ready to play. Perfect for birthdays, school events, vacation care and corporate days across NSW.
-        </p>
 
         {/* CTAs */}
         <div className="h-bot" style={{ display: "flex", gap: 10, alignItems: "center", flexWrap: "wrap" }}>
@@ -163,31 +120,6 @@ export default function Hero({ onQuoteClick }: { onQuoteClick?: () => void }) {
           </button>
         </div>
 
-        {/* Trust line */}
-        <div
-          className="h-trust"
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: "clamp(16px, 2.5vw, 32px)",
-            flexWrap: "wrap",
-            marginTop: "clamp(20px, 2.5vw, 36px)",
-          }}
-        >
-          {["500+ events run", "Operating since 2007", "Delivered across NSW", "4.9★ rated"].map((item) => (
-            <span
-              key={item}
-              style={{
-                fontFamily: "var(--font-dm-sans)",
-                fontSize: 11,
-                color: "rgba(255,255,255,0.22)",
-                letterSpacing: "0.05em",
-              }}
-            >
-              {item}
-            </span>
-          ))}
-        </div>
       </div>
     </section>
   );

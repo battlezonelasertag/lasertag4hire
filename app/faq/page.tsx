@@ -18,7 +18,7 @@ export default function FAQPage() {
         {/* Header */}
         <div
           className="relative overflow-hidden flex items-end"
-          style={{ background: "#09090B", minHeight: "clamp(340px, 50vw, 520px)", paddingTop: 100 }}
+          style={{ background: "#09090B", minHeight: "clamp(340px, 50vw, 520px)", paddingTop: "calc(var(--nav-h-top, 116px) + 40px)" }}
         >
           <img
             src="/images/page_header_faq.jpg"
@@ -28,12 +28,6 @@ export default function FAQPage() {
           />
           <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(9,9,11,0.9) 0%, rgba(9,9,11,0.4) 60%, rgba(9,9,11,0.2) 100%)", zIndex: 1 }} />
           <div className="max-w-7xl mx-auto px-6 pb-16 w-full" style={{ position: "relative", zIndex: 2 }}>
-            <span
-              className="eyebrow inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-4 text-white/50"
-              style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.1)" }}
-            >
-              FAQs
-            </span>
             <h1
               className="display-heading text-white mb-4"
               style={{ fontSize: "clamp(2.5rem, 5vw, 4rem)" }}
@@ -41,7 +35,7 @@ export default function FAQPage() {
               Common questions
             </h1>
             <p
-              className="text-white/50 leading-relaxed"
+              className="text-white/70 leading-relaxed"
               style={{ fontFamily: "var(--font-dm-sans)", fontSize: "1.0625rem" }}
             >
               Everything you need to know before booking. Still have questions?{" "}
@@ -64,7 +58,7 @@ export default function FAQPage() {
                     style={{ background: "transparent", border: "none", cursor: "pointer" }}
                   >
                     <span
-                      className="text-sm font-semibold text-[var(--ink)] pr-4"
+                      className="text-base font-semibold text-[var(--ink)] pr-4"
                       style={{ fontFamily: "var(--font-dm-sans)" }}
                     >
                       {faq.question}
@@ -93,7 +87,7 @@ export default function FAQPage() {
                         style={{ overflow: "hidden" }}
                       >
                         <div
-                          className="px-6 pb-5 text-sm text-[var(--muted)] leading-relaxed"
+                          className="px-6 pb-5 text-base text-[var(--muted)] leading-relaxed"
                           style={{ fontFamily: "var(--font-dm-sans)" }}
                         >
                           {faq.answer}
@@ -117,7 +111,7 @@ export default function FAQPage() {
               Still have questions?
             </h3>
             <p
-              className="text-[var(--muted)] text-sm mb-5"
+              className="text-[var(--muted)] text-base mb-5"
               style={{ fontFamily: "var(--font-dm-sans)" }}
             >
               We&apos;re happy to help. Give us a call or send a message and we&apos;ll reply within 24 hours.

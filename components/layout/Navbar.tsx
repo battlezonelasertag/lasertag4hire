@@ -27,7 +27,6 @@ const itemVariants = {
   exit: { y: 8, opacity: 0, transition: { duration: 0.15 } },
 };
 
-export const NAV_HEIGHT = 68;
 
 export default function Navbar({ onQuoteClick }: { onQuoteClick?: () => void }) {
   const [scrolled, setScrolled] = useState(false);
@@ -51,89 +50,120 @@ export default function Navbar({ onQuoteClick }: { onQuoteClick?: () => void }) 
           position: "fixed",
           top: 0, left: 0, right: 0,
           zIndex: 40,
-          height: NAV_HEIGHT,
-          background: scrolled ? "rgba(255,255,255,0.97)" : "rgba(255,255,255,0.88)",
-          backdropFilter: "blur(20px)",
-          WebkitBackdropFilter: "blur(20px)",
-          borderBottom: `1px solid ${scrolled ? "rgba(0,0,0,0.09)" : "rgba(0,0,0,0.05)"}`,
-          boxShadow: scrolled ? "0 2px 20px rgba(0,0,0,0.06)" : "none",
-          transition: "background 0.3s, border-color 0.3s, box-shadow 0.3s",
-        }}
-      >
-        <div style={{
-          height: "100%",
+          height: scrolled ? "var(--nav-h, 72px)" : "var(--nav-h-top, 116px)",
           padding: "0 clamp(24px, 6vw, 80px)",
           display: "flex",
           alignItems: "center",
           gap: 8,
-        }}>
-          {/* Logo */}
-          <Link href="/" style={{ display: "flex", alignItems: "center", gap: 10, textDecoration: "none", flexShrink: 0, marginRight: "auto" }}>
-            <LogoMark />
-            <span style={{ fontFamily: "var(--font-syne)", fontWeight: 700, fontSize: 16, color: "var(--ink)", letterSpacing: "-0.02em" }}>
-              LT4H
-            </span>
-          </Link>
+          background: scrolled ? "rgba(255,255,255,0.97)" : "transparent",
+          backdropFilter: scrolled ? "blur(20px)" : "none",
+          WebkitBackdropFilter: scrolled ? "blur(20px)" : "none",
+          borderBottom: `1px solid ${scrolled ? "rgba(0,0,0,0.09)" : "transparent"}`,
+          boxShadow: scrolled ? "0 2px 20px rgba(9,9,11,0.07)" : "none",
+          transition: "height 0.4s var(--ease-out-strong), background 0.3s, border-color 0.3s, box-shadow 0.3s",
+        }}
+      >
+        {/* Logo — large over the hero, shrinks into the bar on scroll */}
+        <Link
+          href="/"
+          aria-label="Laser Tag 4 Hire — home"
+          style={{
+            position: "relative",
+            display: "block",
+            flexShrink: 0,
+            marginRight: "auto",
+            height: scrolled ? 44 : 68,
+            transition: "height 0.4s var(--ease-out-strong)",
+          }}
+        >
+          <img
+            src="/images/LT4H_2024_dark.svg"
+            alt="Laser Tag 4 Hire"
+            style={{
+              height: "100%", width: "auto", display: "block",
+              opacity: scrolled ? 0 : 1,
+              transition: "opacity 0.3s",
+            }}
+          />
+          <img
+            src="/images/LT4H_2024_light.svg"
+            alt=""
+            aria-hidden="true"
+            style={{
+              position: "absolute", top: 0, left: 0,
+              height: "100%", width: "auto", display: "block",
+              opacity: scrolled ? 1 : 0,
+              transition: "opacity 0.3s",
+            }}
+          />
+        </Link>
 
-          {/* Desktop nav links */}
-          <nav className="hidden md:contents">
-            {NAV_LINKS.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="hover:bg-black/6 hover:text-[var(--ink)]"
-                style={{
-                  fontFamily: "var(--font-dm-sans)", fontSize: 14, fontWeight: 500,
-                  color: "#374151", textDecoration: "none",
-                  padding: "6px 14px", borderRadius: 100,
-                  transition: "background 0.18s, color 0.18s",
-                  whiteSpace: "nowrap",
-                }}
-              >
-                {link.label}
-              </Link>
-            ))}
-          </nav>
-
-          {/* Desktop divider + CTAs */}
-          <div className="hidden md:flex" style={{ alignItems: "center", gap: 8, marginLeft: 8, flexShrink: 0 }}>
-            <div style={{ width: 1, height: 20, background: "rgba(0,0,0,0.10)", marginRight: 4 }} />
-            <button
-              onClick={onQuoteClick}
-              className="hover:bg-black/6"
+        {/* Desktop nav links */}
+        <nav className="hidden md:contents">
+          {NAV_LINKS.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className={scrolled ? "hover:bg-black/6" : "hover:bg-white/15"}
               style={{
-                fontFamily: "var(--font-dm-sans)", fontSize: 14, fontWeight: 600,
-                color: "var(--blue)", background: "transparent", border: "none",
-                padding: "6px 14px", borderRadius: 100, cursor: "pointer",
-                transition: "background 0.18s", whiteSpace: "nowrap",
+                fontFamily: "var(--font-dm-sans)", fontSize: 15, fontWeight: 500,
+                color: scrolled ? "#374151" : "rgba(255,255,255,0.92)",
+                textShadow: scrolled ? "none" : "0 1px 12px rgba(0,0,0,0.45)",
+                textDecoration: "none",
+                padding: "6px 14px", borderRadius: 100,
+                transition: "background 0.18s, color 0.3s, text-shadow 0.3s",
+                whiteSpace: "nowrap",
               }}
             >
-              Get a quote
-            </button>
-            <Link
-              href="https://fareharbor.com/embeds/book/lasertag4hire/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-crimson"
-              style={{ fontSize: 13, padding: "8px 18px" }}
-            >
-              Book now
+              {link.label}
             </Link>
-          </div>
+          ))}
+        </nav>
 
-          {/* Mobile hamburger */}
+        {/* Desktop divider + CTAs */}
+        <div className="hidden md:flex" style={{ alignItems: "center", gap: 8, marginLeft: 8, flexShrink: 0 }}>
+          <div style={{
+            width: 1, height: 20, marginRight: 4,
+            background: scrolled ? "rgba(0,0,0,0.10)" : "rgba(255,255,255,0.3)",
+            transition: "background 0.3s",
+          }} />
           <button
-            onClick={() => setMenuOpen(!menuOpen)}
-            className="flex md:hidden items-center justify-center"
-            aria-label={menuOpen ? "Close menu" : "Open menu"}
+            onClick={onQuoteClick}
+            className={scrolled ? "hover:bg-black/6" : "hover:bg-white/15"}
             style={{
-              width: 36, height: 36, borderRadius: 8, marginLeft: 8,
-              background: "transparent", border: "none", cursor: "pointer",
+              fontFamily: "var(--font-dm-sans)", fontSize: 15, fontWeight: 600,
+              color: scrolled ? "var(--blue)" : "white",
+              textShadow: scrolled ? "none" : "0 1px 12px rgba(0,0,0,0.45)",
+              background: "transparent", border: "none",
+              padding: "6px 14px", borderRadius: 100, cursor: "pointer",
+              transition: "background 0.18s, color 0.3s, text-shadow 0.3s", whiteSpace: "nowrap",
             }}
           >
-            <HamburgerIcon open={menuOpen} />
+            Get a quote
           </button>
+          <Link
+            href="https://fareharbor.com/embeds/book/lasertag4hire/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-crimson"
+            style={{ fontSize: 14, padding: "8px 18px" }}
+          >
+            Book now
+          </Link>
         </div>
+
+        {/* Mobile hamburger */}
+        <button
+          onClick={() => setMenuOpen(!menuOpen)}
+          className="flex md:hidden items-center justify-center"
+          aria-label={menuOpen ? "Close menu" : "Open menu"}
+          style={{
+            width: 36, height: 36, borderRadius: 8, marginLeft: 8,
+            background: "transparent", border: "none", cursor: "pointer",
+          }}
+        >
+          <HamburgerIcon open={menuOpen} color={scrolled || menuOpen ? "var(--ink)" : "white"} />
+        </button>
       </header>
 
       {/* Mobile fullscreen overlay */}
@@ -209,24 +239,13 @@ export default function Navbar({ onQuoteClick }: { onQuoteClick?: () => void }) 
   );
 }
 
-function LogoMark() {
-  return (
-    <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <rect width="28" height="28" rx="8" fill="var(--crimson)" />
-      <path d="M7 14L11 10L15 14L19 9" stroke="white" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
-      <circle cx="20" cy="18" r="2.5" fill="white" opacity="0.9" />
-      <path d="M8 19h8" stroke="white" strokeWidth="2" strokeLinecap="round" />
-    </svg>
-  );
-}
-
-function HamburgerIcon({ open }: { open: boolean }) {
+function HamburgerIcon({ open, color = "var(--ink)" }: { open: boolean; color?: string }) {
   return (
     <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-      <motion.line x1="3" y1="6" x2="17" y2="6" stroke="var(--ink)" strokeWidth="1.8" strokeLinecap="round"
+      <motion.line x1="3" y1="6" x2="17" y2="6" stroke={color} strokeWidth="1.8" strokeLinecap="round"
         animate={open ? { rotate: 45, y: 4 } : { rotate: 0, y: 0 }}
         style={{ originX: "50%", originY: "50%" }} transition={{ duration: 0.25, ease: [0.23, 1, 0.32, 1] }} />
-      <motion.line x1="3" y1="14" x2="17" y2="14" stroke="var(--ink)" strokeWidth="1.8" strokeLinecap="round"
+      <motion.line x1="3" y1="14" x2="17" y2="14" stroke={color} strokeWidth="1.8" strokeLinecap="round"
         animate={open ? { rotate: -45, y: -4 } : { rotate: 0, y: 0 }}
         style={{ originX: "50%", originY: "50%" }} transition={{ duration: 0.25, ease: [0.23, 1, 0.32, 1] }} />
     </svg>

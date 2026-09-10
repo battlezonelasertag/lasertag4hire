@@ -17,17 +17,11 @@ export default function FAQPreview() {
           {/* Left: Header */}
           <div className="lg:sticky lg:top-32">
             <h2
-              className="section-heading text-[var(--ink)] mb-4"
+              className="section-heading text-[var(--ink)] mb-8"
               style={{ fontSize: "clamp(1.875rem, 3.5vw, 2.75rem)" }}
             >
-              Everything you need to know
+              Before you book
             </h2>
-            <p
-              className="text-[var(--muted)] leading-relaxed mb-8"
-              style={{ fontFamily: "var(--font-dm-sans)", fontSize: "1.0625rem" }}
-            >
-              We&apos;ve covered the most common questions below. Can&apos;t find what you&apos;re looking for? Give us a call.
-            </p>
             <div className="flex flex-col gap-3">
               <Link href="/faq" className="btn-outline inline-flex w-fit">
                 See all FAQs
@@ -37,7 +31,7 @@ export default function FAQPreview() {
               </Link>
               <a
                 href="tel:1300661565"
-                className="text-sm text-[var(--muted)] hover:text-[var(--blue)] transition-colors duration-200 flex items-center gap-2"
+                className="text-base text-[var(--muted)] hover:text-[var(--blue)] transition-colors duration-200 flex items-center gap-2"
                 style={{ fontFamily: "var(--font-dm-sans)" }}
               >
                 <PhoneIcon />
@@ -60,7 +54,7 @@ export default function FAQPreview() {
                     style={{ background: "transparent", border: "none", cursor: "pointer" }}
                   >
                     <span
-                      className="text-sm font-semibold text-[var(--ink)] pr-4"
+                      className="text-base font-semibold text-[var(--ink)] pr-4"
                       style={{ fontFamily: "var(--font-dm-sans)" }}
                     >
                       {faq.question}
@@ -87,7 +81,7 @@ export default function FAQPreview() {
                         style={{ overflow: "hidden" }}
                       >
                         <div
-                          className="px-6 pb-5 text-sm text-[var(--muted)] leading-relaxed"
+                          className="px-6 pb-5 text-base text-[var(--muted)] leading-relaxed"
                           style={{ fontFamily: "var(--font-dm-sans)" }}
                         >
                           {faq.answer}

@@ -29,7 +29,7 @@ const EVENT_TYPES = [
 ];
 
 const PACKAGE_OPTIONS = [
-  "Bolter — no scope ($549)", "Bolter — with scope ($599)",
+  "Bolter · no scope ($549)", "Bolter · with scope ($599)",
   "Predator ($649)", "Not sure yet",
 ];
 
@@ -64,7 +64,7 @@ export default function ContactPage() {
         {/* Header */}
         <div
           className="relative overflow-hidden flex items-end"
-          style={{ background: "#09090B", minHeight: "clamp(340px, 50vw, 520px)", paddingTop: 100 }}
+          style={{ background: "#09090B", minHeight: "clamp(340px, 50vw, 520px)", paddingTop: "calc(var(--nav-h-top, 116px) + 40px)" }}
         >
           <img
             src="/images/page_header_contact.jpg"
@@ -74,19 +74,13 @@ export default function ContactPage() {
           />
           <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(9,9,11,0.9) 0%, rgba(9,9,11,0.4) 60%, rgba(9,9,11,0.2) 100%)", zIndex: 1 }} />
           <div className="max-w-7xl mx-auto px-6 pb-16 w-full" style={{ position: "relative", zIndex: 2 }}>
-            <span
-              className="eyebrow inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-4 text-white/50"
-              style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.1)" }}
-            >
-              Contact
-            </span>
             <h1
               className="display-heading text-white mb-4"
               style={{ fontSize: "clamp(2.5rem, 5vw, 4rem)" }}
             >
               Get in touch
             </h1>
-            <p className="text-white/50 leading-relaxed" style={{ fontFamily: "var(--font-dm-sans)", fontSize: "1.0625rem" }}>
+            <p className="text-white/70 leading-relaxed" style={{ fontFamily: "var(--font-dm-sans)", fontSize: "1.0625rem" }}>
               We reply within 24 hours. For urgent enquiries, call{" "}
               <a href="tel:1300661565" className="text-white/80 underline hover:text-white">1300 661 565</a>.
             </p>
@@ -111,7 +105,7 @@ export default function ContactPage() {
                     </svg>
                   </div>
                   <h2 className="card-heading text-[var(--ink)] text-xl mb-2">Message sent!</h2>
-                  <p className="text-[var(--muted)] text-sm" style={{ fontFamily: "var(--font-dm-sans)" }}>
+                  <p className="text-[var(--muted)] text-base" style={{ fontFamily: "var(--font-dm-sans)" }}>
                     We&apos;ll be in touch within 24 hours. Check your inbox for a confirmation.
                   </p>
                 </div>
@@ -119,36 +113,36 @@ export default function ContactPage() {
                 <form onSubmit={handleSubmit} className="flex flex-col gap-4">
                   <div className="grid grid-cols-2 gap-3">
                     <label className="flex flex-col gap-1.5">
-                      <span className="text-xs font-semibold text-[var(--ink)]" style={{ fontFamily: "var(--font-dm-sans)" }}>First name *</span>
+                      <span className="text-[13px] font-semibold text-[var(--ink)]" style={{ fontFamily: "var(--font-dm-sans)" }}>First name *</span>
                       <input type="text" name="firstName" value={form.firstName} onChange={handleChange} required placeholder="Jane" className="form-input" />
                     </label>
                     <label className="flex flex-col gap-1.5">
-                      <span className="text-xs font-semibold text-[var(--ink)]" style={{ fontFamily: "var(--font-dm-sans)" }}>Last name *</span>
+                      <span className="text-[13px] font-semibold text-[var(--ink)]" style={{ fontFamily: "var(--font-dm-sans)" }}>Last name *</span>
                       <input type="text" name="lastName" value={form.lastName} onChange={handleChange} required placeholder="Smith" className="form-input" />
                     </label>
                   </div>
                   <div className="grid grid-cols-2 gap-3">
                     <label className="flex flex-col gap-1.5">
-                      <span className="text-xs font-semibold text-[var(--ink)]" style={{ fontFamily: "var(--font-dm-sans)" }}>Email *</span>
+                      <span className="text-[13px] font-semibold text-[var(--ink)]" style={{ fontFamily: "var(--font-dm-sans)" }}>Email *</span>
                       <input type="email" name="email" value={form.email} onChange={handleChange} required placeholder="jane@example.com" className="form-input" />
                     </label>
                     <label className="flex flex-col gap-1.5">
-                      <span className="text-xs font-semibold text-[var(--ink)]" style={{ fontFamily: "var(--font-dm-sans)" }}>Phone</span>
+                      <span className="text-[13px] font-semibold text-[var(--ink)]" style={{ fontFamily: "var(--font-dm-sans)" }}>Phone</span>
                       <input type="tel" name="phone" value={form.phone} onChange={handleChange} placeholder="04XX XXX XXX" className="form-input" />
                     </label>
                   </div>
                   <div className="grid grid-cols-2 gap-3">
                     <label className="flex flex-col gap-1.5">
-                      <span className="text-xs font-semibold text-[var(--ink)]" style={{ fontFamily: "var(--font-dm-sans)" }}>Event date *</span>
+                      <span className="text-[13px] font-semibold text-[var(--ink)]" style={{ fontFamily: "var(--font-dm-sans)" }}>Event date *</span>
                       <input type="date" name="eventDate" value={form.eventDate} onChange={handleChange} required className="form-input" />
                     </label>
                     <label className="flex flex-col gap-1.5">
-                      <span className="text-xs font-semibold text-[var(--ink)]" style={{ fontFamily: "var(--font-dm-sans)" }}>Postcode *</span>
+                      <span className="text-[13px] font-semibold text-[var(--ink)]" style={{ fontFamily: "var(--font-dm-sans)" }}>Postcode *</span>
                       <input type="text" name="postcode" value={form.postcode} onChange={handleChange} required maxLength={4} placeholder="2317" className="form-input" />
                     </label>
                   </div>
                   <label className="flex flex-col gap-1.5">
-                    <span className="text-xs font-semibold text-[var(--ink)]" style={{ fontFamily: "var(--font-dm-sans)" }}>Event type *</span>
+                    <span className="text-[13px] font-semibold text-[var(--ink)]" style={{ fontFamily: "var(--font-dm-sans)" }}>Event type *</span>
                     <select name="eventType" value={form.eventType} onChange={handleChange} required className="form-input">
                       <option value="">Select event type</option>
                       {EVENT_TYPES.map((t) => <option key={t} value={t}>{t}</option>)}
@@ -156,23 +150,23 @@ export default function ContactPage() {
                   </label>
                   <div className="grid grid-cols-2 gap-3">
                     <label className="flex flex-col gap-1.5">
-                      <span className="text-xs font-semibold text-[var(--ink)]" style={{ fontFamily: "var(--font-dm-sans)" }}>Package interest</span>
+                      <span className="text-[13px] font-semibold text-[var(--ink)]" style={{ fontFamily: "var(--font-dm-sans)" }}>Package interest</span>
                       <select name="packageInterest" value={form.packageInterest} onChange={handleChange} className="form-input">
                         <option value="">Not sure yet</option>
                         {PACKAGE_OPTIONS.map((p) => <option key={p} value={p}>{p}</option>)}
                       </select>
                     </label>
                     <label className="flex flex-col gap-1.5">
-                      <span className="text-xs font-semibold text-[var(--ink)]" style={{ fontFamily: "var(--font-dm-sans)" }}>Number of players</span>
+                      <span className="text-[13px] font-semibold text-[var(--ink)]" style={{ fontFamily: "var(--font-dm-sans)" }}>Number of players</span>
                       <input type="number" name="playerCount" value={form.playerCount} onChange={handleChange} min={1} placeholder="e.g. 14" className="form-input" />
                     </label>
                   </div>
                   <label className="flex flex-col gap-1.5">
-                    <span className="text-xs font-semibold text-[var(--ink)]" style={{ fontFamily: "var(--font-dm-sans)" }}>Message</span>
+                    <span className="text-[13px] font-semibold text-[var(--ink)]" style={{ fontFamily: "var(--font-dm-sans)" }}>Message</span>
                     <textarea name="message" value={form.message} onChange={handleChange} rows={4} placeholder="Tell us about your event..." className="form-input resize-none" />
                   </label>
                   {status === "error" && (
-                    <p className="text-sm text-red-600" style={{ fontFamily: "var(--font-dm-sans)" }}>
+                    <p className="text-[15px] text-red-600" style={{ fontFamily: "var(--font-dm-sans)" }}>
                       Something went wrong. Please try again or call 1300 661 565.
                     </p>
                   )}
@@ -188,22 +182,21 @@ export default function ContactPage() {
               {[
                 { icon: "📞", label: "Phone", value: "1300 661 565", href: "tel:1300661565" },
                 { icon: "✉️", label: "Email", value: "info@lasertag4hire.com.au", href: "mailto:info@lasertag4hire.com.au" },
-                { icon: "📮", label: "Postal address", value: "PO Box 417, Salamander Bay NSW 2317", href: null },
               ].map((item) => (
                 <div
                   key={item.label}
                   className="p-5 rounded-2xl"
                   style={{ background: "white", border: "1px solid rgba(0,0,0,0.07)" }}
                 >
-                  <div className="text-xs font-semibold text-[var(--muted)] mb-1 uppercase tracking-wide" style={{ fontFamily: "var(--font-dm-sans)" }}>
+                  <div className="text-[13px] font-semibold text-[var(--muted)] mb-1 uppercase tracking-wide" style={{ fontFamily: "var(--font-dm-sans)" }}>
                     {item.label}
                   </div>
                   {item.href ? (
-                    <a href={item.href} className="text-sm font-medium text-[var(--blue)] hover:underline" style={{ fontFamily: "var(--font-dm-sans)" }}>
+                    <a href={item.href} className="text-base font-medium text-[var(--blue)] hover:underline" style={{ fontFamily: "var(--font-dm-sans)" }}>
                       {item.value}
                     </a>
                   ) : (
-                    <p className="text-sm text-[var(--ink)]" style={{ fontFamily: "var(--font-dm-sans)" }}>{item.value}</p>
+                    <p className="text-base text-[var(--ink)]" style={{ fontFamily: "var(--font-dm-sans)" }}>{item.value}</p>
                   )}
                 </div>
               ))}
@@ -212,10 +205,10 @@ export default function ContactPage() {
                 className="p-5 rounded-2xl"
                 style={{ background: "rgba(37,99,235,0.06)", border: "1px solid rgba(37,99,235,0.15)" }}
               >
-                <div className="text-xs font-semibold text-[var(--blue)] mb-1" style={{ fontFamily: "var(--font-dm-sans)" }}>
+                <div className="text-[13px] font-semibold text-[var(--blue)] mb-1" style={{ fontFamily: "var(--font-dm-sans)" }}>
                   Response time
                 </div>
-                <p className="text-sm text-[var(--ink)]" style={{ fontFamily: "var(--font-dm-sans)" }}>
+                <p className="text-base text-[var(--ink)]" style={{ fontFamily: "var(--font-dm-sans)" }}>
                   We reply to all enquiries within 24 hours, usually much sooner on business days.
                 </p>
               </div>

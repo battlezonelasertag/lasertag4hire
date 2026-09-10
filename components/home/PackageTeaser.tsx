@@ -67,15 +67,15 @@ export default function PackageTeaser() {
                 margin: 0,
               }}
             >
-              Choose your<br />
-              <span style={{ color: "#E11D48" }}>weapon.</span>
+              Same kit,<br />
+              <span style={{ color: "#E11D48" }}>three different taggers.</span>
             </h2>
           </div>
           <Link
             href="/packages"
             style={{
               fontFamily: "var(--font-dm-sans)",
-              fontSize: 14,
+              fontSize: 15,
               fontWeight: 600,
               color: "var(--blue)",
               textDecoration: "none",
@@ -119,12 +119,12 @@ export default function PackageTeaser() {
           <p
             style={{
               fontFamily: "var(--font-dm-sans)",
-              fontSize: 13,
+              fontSize: 14,
               color: "var(--muted)",
               margin: 0,
             }}
           >
-            Need more than 10 players? Add taggers in groups of 4.
+            More than 10 players? Taggers are added in pairs, so tell us your numbers and we&apos;ll price it.
           </p>
           <Link href="/packages" className="btn-blue">
             Customise your package
@@ -200,7 +200,7 @@ function PackageCard({ pkg }: { pkg: typeof PACKAGES[0] }) {
           </h3>
           <p style={{
             fontFamily: "var(--font-dm-sans)",
-            fontSize: 12,
+            fontSize: 13,
             color: "var(--muted)",
             margin: 0,
             letterSpacing: "0.01em",
@@ -213,9 +213,9 @@ function PackageCard({ pkg }: { pkg: typeof PACKAGES[0] }) {
         <div>
           <p style={{
             fontFamily: "var(--font-dm-sans)",
-            fontSize: 9, fontWeight: 700,
+            fontSize: 12, fontWeight: 700,
             letterSpacing: "0.15em", textTransform: "uppercase",
-            color: "rgba(0,0,0,0.3)",
+            color: "var(--muted)",
             margin: "0 0 7px",
           }}>
             Best for
@@ -224,7 +224,7 @@ function PackageCard({ pkg }: { pkg: typeof PACKAGES[0] }) {
             {pkg.bestFor.map((label) => (
               <span key={label} style={{
                 fontFamily: "var(--font-dm-sans)",
-                fontSize: 11, fontWeight: 500,
+                fontSize: 12, fontWeight: 500,
                 color: "var(--ink)",
                 background: "rgba(0,0,0,0.05)",
                 border: "1px solid rgba(0,0,0,0.08)",
@@ -247,8 +247,8 @@ function PackageCard({ pkg }: { pkg: typeof PACKAGES[0] }) {
           <div>
             <span style={{
               fontFamily: "var(--font-dm-sans)",
-              fontSize: 10, letterSpacing: "0.1em", textTransform: "uppercase",
-              color: "rgba(0,0,0,0.3)", display: "block", marginBottom: 1,
+              fontSize: 12, letterSpacing: "0.1em", textTransform: "uppercase",
+              color: "var(--muted)", display: "block", marginBottom: 1,
             }}>
               From
             </span>

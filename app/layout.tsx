@@ -15,14 +15,15 @@ const dmSans = DM_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Laser Tag 4 Hire | Laser Tag Equipment Hire — Delivered to You",
+  title: "Laser Tag 4 Hire | Laser Tag Equipment Hire, Delivered to You",
   description:
-    "Hire laser tag equipment for birthdays, school events, corporate team days and more. Delivered to your door across NSW. Three packages from $549 — book online today.",
+    "Hire laser tag equipment for birthdays, school events, corporate team days and more. Delivered to your door across Australia. Three packages from $549, book online today.",
   keywords: [
     "laser tag hire",
     "laser tag rental",
     "laser tag equipment",
     "laser tag birthday party",
+    "laser tag hire Australia",
     "NSW laser tag",
     "Port Stephens laser tag",
     "mobile laser tag",
@@ -30,7 +31,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Laser Tag 4 Hire | Laser Tag. Delivered.",
     description:
-      "Equipment delivered, set up in minutes, returned with a prepaid courier. Epic battles for birthdays, school events and corporate days.",
+      "Equipment delivered charged, set up in about ten minutes, returned with a prepaid courier. Hired for birthdays, school events and corporate days since 2007.",
     siteName: "Laser Tag 4 Hire",
     locale: "en_AU",
     type: "website",

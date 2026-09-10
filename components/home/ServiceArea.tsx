@@ -89,36 +89,14 @@ export default function ServiceArea() {
       <div style={{ maxWidth: 1280, margin: "0 auto" }}>
 
         {/* Header */}
-        <div style={{
-          display: "flex", alignItems: "flex-end", justifyContent: "space-between",
-          flexWrap: "wrap", gap: 24, marginBottom: "clamp(32px,4vw,48px)",
-        }}>
-          <div>
-            <span style={{
-              display: "inline-flex", alignItems: "center",
-              fontFamily: "var(--font-dm-sans)", fontSize: 11, fontWeight: 600,
-              letterSpacing: "0.12em", textTransform: "uppercase" as const,
-              color: "var(--blue)",
-              border: "1px solid rgba(26,95,180,0.2)",
-              background: "rgba(26,95,180,0.05)",
-              borderRadius: 100, padding: "4px 12px", marginBottom: 12,
-            }}>
-              Service area
-            </span>
-            <h2 style={{
-              fontFamily: "var(--font-syne)", fontWeight: 700,
-              fontSize: "clamp(26px,3vw,42px)", letterSpacing: "-0.025em",
-              lineHeight: 1.1, color: "var(--ink)", margin: 0,
-            }}>
-              We cover NSW and beyond.
-            </h2>
-          </div>
-          <p style={{
-            fontFamily: "var(--font-dm-sans)", fontSize: 15, lineHeight: 1.7,
-            color: "var(--muted)", margin: 0, maxWidth: "42ch",
+        <div style={{ marginBottom: "clamp(32px,4vw,48px)" }}>
+          <h2 style={{
+            fontFamily: "var(--font-syne)", fontWeight: 700,
+            fontSize: "clamp(26px,3vw,42px)", letterSpacing: "-0.025em",
+            lineHeight: 1.1, color: "var(--ink)", margin: 0,
           }}>
-            Free delivery across the Hunter Valley, Port Stephens, Newcastle and surrounding areas. Regional deliveries available — enter your postcode to check.
-          </p>
+            We deliver Australia-wide.
+          </h2>
         </div>
 
         {/* Main grid: map left (wide), controls right */}
@@ -129,8 +107,8 @@ export default function ServiceArea() {
             height: "clamp(340px,50vw,560px)",
             borderRadius: "1.5rem",
             overflow: "hidden",
-            border: "1px solid rgba(0,0,0,0.07)",
-            boxShadow: "0 4px 24px rgba(0,0,0,0.06)",
+            border: "1px solid rgba(26,95,180,0.12)",
+            boxShadow: "0 12px 40px rgba(26,95,180,0.14)",
             position: "relative",
             zIndex: 0,
           }}>
@@ -144,7 +122,8 @@ export default function ServiceArea() {
             <div style={{
               background: "white",
               borderRadius: "1.25rem",
-              border: "1px solid rgba(0,0,0,0.07)",
+              border: "1px solid rgba(0,0,0,0.06)",
+              boxShadow: "0 4px 20px rgba(9,9,11,0.05)",
               padding: "clamp(20px,2.5vw,28px)",
             }}>
               <h3 style={{
@@ -154,10 +133,10 @@ export default function ServiceArea() {
                 Is my area covered?
               </h3>
               <p style={{
-                fontFamily: "var(--font-dm-sans)", fontSize: 13,
+                fontFamily: "var(--font-dm-sans)", fontSize: 14,
                 color: "var(--muted)", margin: "0 0 16px", lineHeight: 1.6,
               }}>
-                Enter your suburb or postcode — we&apos;ll drop a pin on the map.
+                Enter your suburb or postcode and we&apos;ll drop a pin on the map.
               </p>
 
               <div style={{ display: "flex", gap: 8, marginBottom: 12 }}>
@@ -234,19 +213,19 @@ export default function ServiceArea() {
                           ? "Suburb not found"
                           : "We can still help"}
                     </div>
-                    <p style={{ fontFamily: "var(--font-dm-sans)", fontSize: 12, color: "var(--muted)", margin: 0, lineHeight: 1.5 }}>
+                    <p style={{ fontFamily: "var(--font-dm-sans)", fontSize: 13, color: "var(--muted)", margin: 0, lineHeight: 1.5 }}>
                       {result === "covered"
                         ? `Postcode ${pinPostcode} is within our free delivery zone. Book online or get a quote.`
                         : result === "not-found"
                           ? "We couldn't find that location. Try a nearby suburb or enter your postcode directly."
-                          : `Postcode ${pinPostcode} is outside our free zone — we ship regionally. Contact us for a delivery quote.`}
+                          : `Postcode ${pinPostcode} is outside our free zone, but we ship Australia-wide. Contact us for a delivery quote.`}
                     </p>
                   </div>
                 </div>
               )}
 
               <div style={{ marginTop: 16, paddingTop: 16, borderTop: "1px solid rgba(0,0,0,0.06)", textAlign: "center" }}>
-                <p style={{ fontFamily: "var(--font-dm-sans)", fontSize: 12, color: "var(--muted)", margin: 0 }}>
+                <p style={{ fontFamily: "var(--font-dm-sans)", fontSize: 13, color: "var(--muted)", margin: 0 }}>
                   Or call{" "}
                   <a href="tel:1300661565" style={{ fontWeight: 600, color: "var(--blue)", textDecoration: "none" }}>
                     1300 661 565
@@ -258,30 +237,31 @@ export default function ServiceArea() {
             {/* Coverage area list */}
             <div style={{
               background: "white", borderRadius: "1.25rem",
-              border: "1px solid rgba(0,0,0,0.07)",
+              border: "1px solid rgba(0,0,0,0.06)",
+              boxShadow: "0 4px 20px rgba(9,9,11,0.05)",
               padding: "clamp(18px,2.5vw,24px)",
             }}>
               <p style={{
-                fontFamily: "var(--font-dm-sans)", fontSize: 11, fontWeight: 700,
+                fontFamily: "var(--font-dm-sans)", fontSize: 13, fontWeight: 700,
                 letterSpacing: "0.1em", textTransform: "uppercase" as const,
-                color: "var(--muted)", margin: "0 0 12px",
+                color: "var(--muted)", margin: "0 0 14px",
               }}>
                 Free delivery areas
               </p>
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "6px 12px" }}>
+              <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
                 {AREAS.map((area) => (
-                  <div key={area} style={{ display: "flex", alignItems: "center", gap: 7 }}>
-                    <span style={{
-                      width: 5, height: 5, borderRadius: "50%",
-                      background: "var(--blue)", flexShrink: 0,
-                    }} />
-                    <span style={{
-                      fontFamily: "var(--font-dm-sans)", fontSize: 13,
-                      color: "var(--ink)", lineHeight: 1.4,
-                    }}>
-                      {area}
+                  <span key={area} style={{
+                    display: "flex", alignItems: "center", gap: 6,
+                    padding: "6px 12px 6px 10px", borderRadius: "9999px",
+                    background: "rgba(26,95,180,0.07)",
+                    fontFamily: "var(--font-dm-sans)", fontSize: 14,
+                    color: "var(--ink)", lineHeight: 1.4,
+                  }}>
+                    <span style={{ display: "flex", flexShrink: 0 }}>
+                      <ChipPinIcon />
                     </span>
-                  </div>
+                    {area}
+                  </span>
                 ))}
               </div>
             </div>
@@ -307,6 +287,15 @@ function InfoIcon() {
     <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
       <line x1="12" y1="16" x2="12" y2="12" />
       <line x1="12" y1="8" x2="12.01" y2="8" />
+    </svg>
+  );
+}
+
+function ChipPinIcon() {
+  return (
+    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
+      <circle cx="12" cy="10" r="3" />
     </svg>
   );
 }

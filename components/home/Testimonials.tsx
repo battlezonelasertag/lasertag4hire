@@ -4,6 +4,7 @@ import { useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { TESTIMONIALS } from "@/lib/data";
 import type { Testimonial } from "@/lib/types";
+import ScrollArrows from "@/components/ui/ScrollArrows";
 
 const CATEGORIES = [
   { id: "all", label: "All" },
@@ -16,6 +17,7 @@ const CATEGORIES = [
 export default function Testimonials() {
   const [active, setActive] = useState<string>("all");
   const constraintsRef = useRef<HTMLDivElement>(null);
+  const stripWrapRef = useRef<HTMLDivElement>(null);
 
   const filtered = active === "all"
     ? TESTIMONIALS
@@ -31,7 +33,7 @@ export default function Testimonials() {
               className="section-heading text-[var(--ink)]"
               style={{ fontSize: "clamp(1.875rem, 3.5vw, 2.75rem)" }}
             >
-              Don&apos;t just take our word for it
+              4.9 stars across 500+ events
             </h2>
           </div>
 
@@ -55,7 +57,7 @@ export default function Testimonials() {
                 ))}
               </div>
               <div
-                className="text-xs text-[var(--muted)]"
+                className="text-[13px] text-[var(--muted)]"
                 style={{ fontFamily: "var(--font-dm-sans)" }}
               >
                 500+ events
@@ -70,7 +72,7 @@ export default function Testimonials() {
             <button
               key={cat.id}
               onClick={() => setActive(cat.id)}
-              className="px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-250"
+              className="px-4 py-1.5 rounded-full text-[15px] font-medium transition-all duration-250"
               style={{
                 fontFamily: "var(--font-dm-sans)",
                 background: active === cat.id ? "var(--blue)" : "rgba(0,0,0,0.05)",
@@ -83,22 +85,27 @@ export default function Testimonials() {
           ))}
         </div>
 
-        {/* Draggable carousel */}
-        <div ref={constraintsRef} className="overflow-hidden">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={active}
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -8 }}
-              transition={{ duration: 0.3, ease: [0.23, 1, 0.32, 1] }}
-              className="flex gap-4 overflow-x-auto scroll-strip pb-4"
-            >
-              {filtered.map((t, i) => (
-                <TestimonialCard key={t.id} t={t} index={i} />
-              ))}
-            </motion.div>
-          </AnimatePresence>
+        {/* Draggable carousel — arrows sit outside the overflow clip */}
+        <div ref={stripWrapRef} style={{ position: "relative" }}>
+          <div ref={constraintsRef} className="overflow-hidden">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={active}
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -8 }}
+                transition={{ duration: 0.3, ease: [0.23, 1, 0.32, 1] }}
+                className="flex gap-4 overflow-x-auto scroll-strip pb-4"
+              >
+                {filtered.map((t, i) => (
+                  <TestimonialCard key={t.id} t={t} index={i} />
+                ))}
+              </motion.div>
+            </AnimatePresence>
+          </div>
+
+          {/* resetKey re-binds listeners when the filter swaps the strip element */}
+          <ScrollArrows containerRef={stripWrapRef} resetKey={active} />
         </div>
       </div>
     </section>
@@ -130,7 +137,7 @@ function TestimonialCard({ t, index }: { t: Testimonial; index: number }) {
 
         {/* Quote */}
         <p
-          className="text-[var(--ink)] leading-relaxed text-sm mb-5"
+          className="text-[var(--ink)] leading-relaxed text-base mb-5"
           style={{ fontFamily: "var(--font-dm-sans)" }}
         >
           &ldquo;{t.quote}&rdquo;
@@ -150,13 +157,13 @@ function TestimonialCard({ t, index }: { t: Testimonial; index: number }) {
           </div>
           <div>
             <div
-              className="text-sm font-semibold text-[var(--ink)]"
+              className="text-base font-semibold text-[var(--ink)]"
               style={{ fontFamily: "var(--font-dm-sans)" }}
             >
               {t.name}
             </div>
             <div
-              className="text-xs text-[var(--muted)]"
+              className="text-[13px] text-[var(--muted)]"
               style={{ fontFamily: "var(--font-dm-sans)" }}
             >
               {t.role}
@@ -164,7 +171,7 @@ function TestimonialCard({ t, index }: { t: Testimonial; index: number }) {
           </div>
           <div className="ml-auto">
             <span
-              className="text-xs px-2 py-0.5 rounded-full"
+              className="text-[13px] px-2 py-0.5 rounded-full"
               style={{
                 background: "var(--sky)",
                 color: "var(--blue)",

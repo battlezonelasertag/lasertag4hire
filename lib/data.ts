@@ -29,7 +29,7 @@ export const PACKAGES: Package[] = [
     taggers: 10,
     weight: "1.6kg",
     range: "100m",
-    ageRange: "Ages 6+",
+    ageRange: "Ages 10+",
     bestFor: ["Birthday parties", "School groups", "Vacation care"],
     features: [
       "10 Bolter taggers",
@@ -51,7 +51,7 @@ export const PACKAGES: Package[] = [
     taggers: 10,
     weight: "1.8kg",
     range: "100m",
-    ageRange: "Ages 8+",
+    ageRange: "Ages 12+",
     bestFor: ["Teens & adults", "Corporate events", "Large battles"],
     features: [
       "10 Predator taggers",
@@ -72,14 +72,14 @@ export const ADD_ONS: AddOn[] = [
   {
     id: "extra-taggers",
     name: "Extra taggers",
-    description: "Add more players in groups of 4",
+    description: "Add more players in groups of 2",
     price: null,
-    priceLabel: "From $50 / group of 4",
+    priceLabel: "$84 / group of 2",
   },
   {
     id: "bunkers",
     name: "Inflatable bunkers",
-    description: "Pop-up cover for epic tactical battles",
+    description: "Pop-up cover for open spaces with nothing to hide behind",
     price: null,
     priceLabel: "Contact us for pricing",
   },
@@ -90,49 +90,58 @@ export const EVENT_TYPES: EventType[] = [
     id: "birthday",
     name: "Birthday parties",
     description:
-      "Make it a birthday they'll talk about for years. No venue hire, no travel — the battle comes to your backyard.",
+      "The gear turns up at the house, so there's no venue to book and nobody to drive anywhere. Works in most backyards.",
     gradient: "from-[#E11D48] to-[#9f0a2a]",
-    highlights: ["Ages 6+", "Works in any backyard", "No heavy vests"],
+    image: "/images/lt4h-popup-image.jpg",
+    highlights: ["Ages 5+", "Works in any backyard", "No heavy vests"],
   },
   {
     id: "vacation-care",
     name: "Vacation care",
     description:
-      "Keep kids engaged all day. One delivery, hours of structured gameplay with multiple game modes.",
+      "Keep kids engaged all day with enough different games to keep them playing for hours.",
     gradient: "from-[#2563EB] to-[#1e40af]",
-    highlights: ["Multiple game modes", "Easy staff setup", "All ages"],
+    image: "/images/inflatable-packages-image.jpg",
+    highlights: ["Several games to rotate through", "Staff can set it up", "All ages"],
   },
   {
     id: "corporate",
     name: "Corporate team days",
     description:
-      "Skip the trust-falls. Laser tag gets teams competing, laughing and communicating — fast.",
+      "Gets people competing and talking to each other without the awkwardness of a structured team-building exercise.",
     gradient: "from-[#E11D48] to-[#2563EB]",
+    image: "/images/page_header_about.jpg",
     highlights: ["No age limit", "Scales to large groups", "Includes support"],
   },
   {
     id: "school",
     name: "School fetes & camps",
     description:
-      "Add a crowd-puller to your next fete or end-of-term camp. Easy to run, impossible to ignore.",
+      "Popular for fetes and end-of-term camps. The risk assessment is included, which is usually the part that holds up approval.",
     gradient: "from-[#2563EB] to-[#0ea5e9]",
-    highlights: ["Low supervision needed", "Risk assessment included", "Safe IR tech"],
+    image: "/images/page_header_packages.jpg",
+    highlights: ["Sets up in 10 minutes", "Risk assessment included", "Safe IR tech"],
   },
   {
     id: "community",
     name: "Community events",
     description:
-      "Council days, sports carnivals, youth programs — we bring equipment that gets everyone moving.",
+      "Council days, sports carnivals and youth programs. It runs all day and handles a steady stream of people coming and going.",
     gradient: "from-[#7c3aed] to-[#E11D48]",
+    image: "/images/why-choose-us-setup.jpg",
     highlights: ["Scales to any size", "Includes setup guide", "All weather"],
   },
 ];
 
+// PLACEHOLDER CONTENT — NOT REAL CUSTOMERS. Every name, location, role and quote
+// below is invented. Publishing invented reviews as genuine breaches Australian
+// Consumer Law (ACCC), so these must be replaced with real, permissioned
+// testimonials or removed entirely before the site goes live.
 export const TESTIMONIALS: Testimonial[] = [
   {
     id: "t1",
     name: "Melissa K.",
-    role: "Mum — 11th birthday party",
+    role: "Mum, 11th birthday party",
     location: "Maitland, NSW",
     category: "birthday",
     rating: 5,
@@ -157,7 +166,7 @@ export const TESTIMONIALS: Testimonial[] = [
     category: "corporate",
     rating: 5,
     quote:
-      "Our team of 24 played for two hours straight. The Predator taggers were a massive hit — even the most reluctant team members got into it. Genuinely a great bonding activity.",
+      "Our team of 24 played for two hours straight. The Predator taggers were a massive hit, and even the most reluctant team members got into it. Genuinely a great bonding activity.",
   },
   {
     id: "t4",
@@ -172,12 +181,12 @@ export const TESTIMONIALS: Testimonial[] = [
   {
     id: "t5",
     name: "Ben R.",
-    role: "Dad — 14th birthday party",
+    role: "Dad, 14th birthday party",
     location: "Raymond Terrace, NSW",
     category: "birthday",
     rating: 5,
     quote:
-      "My son specifically asked for laser tag and I'm so glad I found this. Way better value than a venue — the kids had way more fun running around our yard for 4 hours.",
+      "My son specifically asked for laser tag and I'm so glad I found this. Way better value than a venue, and the kids had way more fun running around our yard for 4 hours.",
   },
   {
     id: "t6",
@@ -195,12 +204,12 @@ export const FAQS: FAQ[] = [
   {
     question: "How far in advance should I book?",
     answer:
-      "We recommend booking 2–3 weeks in advance, especially for popular weekend dates. That said, if you need something sooner, get in touch directly — we'll always try to help with shorter notice.",
+      "We recommend booking 2–3 weeks in advance, especially for popular weekend dates. That said, if you need something sooner, get in touch directly and we'll always try to help with shorter notice.",
   },
   {
     question: "Is the equipment safe for kids?",
     answer:
-      "Completely safe. Our taggers use infrared light — the same technology used in TV remotes and household appliances. There are no projectiles, no pain, and no mess. The equipment is suitable from age 6 up.",
+      "Completely safe. Our taggers use infrared light, the same technology used in TV remotes and household appliances. There are no projectiles, no pain, and no mess. Recommended minimum age varies by package, from 5+ for the Bolter (no scope) up to 12+ for the Predator.",
   },
   {
     question: "When does the equipment arrive?",
@@ -210,27 +219,27 @@ export const FAQS: FAQ[] = [
   {
     question: "How do I send the equipment back?",
     answer:
-      "We include everything you need in the box. Return paperwork is pre-filled, and we book the courier pickup for the business day after your event. You don't need to arrange anything — just pack it back up and leave it out for collection.",
+      "We include everything you need in the box. Return paperwork is pre-filled, and we book the courier pickup for the business day after your event. You don't need to arrange anything, just pack it back up and leave it out for collection.",
   },
   {
     question: "What if I need more than 10 taggers?",
     answer:
-      "No problem — you can add taggers in groups of 4. Just let us know how many players you're expecting when you book or enquire, and we'll sort the pricing for you.",
+      "No problem, you can add taggers in groups of 2. Just let us know how many players you're expecting when you book or enquire, and we'll sort the pricing for you.",
   },
   {
     question: "Does it work indoors and outdoors?",
     answer:
-      "Yes. Our equipment works in both environments. Outdoors, the Bolter and Predator taggers have a range of up to 100m. Indoors, you'll want some obstacles for cover — furniture, boxes or inflatable bunkers work great.",
+      "Yes. Our equipment works in both environments. Outdoors, the Bolter and Predator taggers have a range of up to 100m. Indoors, you'll want some obstacles for cover: furniture, boxes or inflatable bunkers work great.",
   },
   {
     question: "What's included in the Saturday booking deal?",
     answer:
-      "If your event is on a Saturday, Sunday is included at no extra cost. That means you get a two-day hire for the price of one — ideal if your party runs late or you want an extra day of play.",
+      "If your event is on a Saturday, Sunday is included at no extra cost. That means you get a two-day hire for the price of one, ideal if your party runs late or you want an extra day of play.",
   },
   {
     question: "What if there's a shipping delay?",
     answer:
-      "In the rare event of a courier delay, we'll work with you on a solution — whether that's a rental extension, partial refund, or expedited redelivery. We'll always be in contact and won't leave you without options.",
+      "In the rare event of a courier delay, we'll work with you on a solution, whether that's a rental extension, partial refund, or expedited redelivery. We'll always be in contact and won't leave you without options.",
   },
   {
     question: "What game modes are available?",
@@ -240,7 +249,7 @@ export const FAQS: FAQ[] = [
   {
     question: "What's your battery life?",
     answer:
-      "The taggers provide 12+ hours of continuous play on a full charge — we send them fully charged. Control units and medic boxes have comparable battery life, so you won't need to charge anything for a standard event.",
+      "The taggers provide 12+ hours of continuous play on a full charge, and we send them fully charged. Control units and medic boxes have comparable battery life, so you won't need to charge anything for a standard event.",
   },
 ];
 
@@ -257,7 +266,7 @@ export const HOW_IT_WORKS: HowItWorksStep[] = [
     number: "01",
     title: "Choose your setup",
     description:
-      "Pick a package, set your player count, and add any extras. Book online or send us a quote request — we'll confirm within 24 hours.",
+      "Pick a package, set your player count, and add any extras. Book online or send us a quote request, and we'll confirm within 24 hours.",
   },
   {
     number: "02",
@@ -267,15 +276,15 @@ export const HOW_IT_WORKS: HowItWorksStep[] = [
   },
   {
     number: "03",
-    title: "You run the battle",
+    title: "You run the day",
     description:
-      "Setup takes minutes. Game modes are all pre-configured. We're on the phone the whole time if you need us.",
+      "Setup takes about ten minutes and the game modes are already configured. We're on the phone through your hire period if something comes up.",
   },
   {
     number: "04",
     title: "We collect it",
     description:
-      "Pack everything back in the case. We've already booked the return courier — they'll pick it up the next business day. Done.",
+      "Pack everything back in the case and leave it out. The return courier is already booked and collects the next business day.",
   },
 ];
 
@@ -283,7 +292,7 @@ export const FEATURES: Feature[] = [
   {
     title: "Delivery included",
     description:
-      "Equipment arrives at your door, fully charged and ready to play. No pickup, no van hire.",
+      "Equipment arrives at your door fully charged, so there's nothing to collect and no van to hire.",
     icon: "truck",
   },
   {
@@ -307,7 +316,7 @@ export const FEATURES: Feature[] = [
   {
     title: "12+ hour battery",
     description:
-      "All equipment arrives fully charged. Enough power for the longest parties.",
+      "Everything arrives fully charged, which is more than enough for a full day of play.",
     icon: "battery",
   },
   {

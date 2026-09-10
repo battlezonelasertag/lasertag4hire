@@ -39,8 +39,8 @@ const EVENT_TYPES = [
 ];
 
 const PACKAGE_OPTIONS = [
-  "Bolter — no scope ($549)",
-  "Bolter — with scope ($599)",
+  "Bolter · no scope ($549)",
+  "Bolter · with scope ($599)",
   "Predator ($649)",
   "Not sure yet",
 ];
@@ -133,7 +133,7 @@ export default function EnquiryModal({
                     Get a free quote
                   </h2>
                   <p
-                    className="text-xs text-[var(--muted)]"
+                    className="text-[13px] text-[var(--muted)]"
                     style={{ fontFamily: "var(--font-dm-sans)" }}
                   >
                     We&apos;ll reply within 24 hours
@@ -168,10 +168,10 @@ export default function EnquiryModal({
                     Quote sent!
                   </h3>
                   <p
-                    className="text-[var(--muted)] text-sm leading-relaxed mb-6"
+                    className="text-[var(--muted)] text-base leading-relaxed mb-6"
                     style={{ fontFamily: "var(--font-dm-sans)" }}
                   >
-                    Thanks — we&apos;ll get back to you within 24 hours. Check your email for a confirmation.
+                    Thanks. We&apos;ll get back to you within 24 hours, and you&apos;ll also get a confirmation email.
                   </p>
                   <button onClick={onClose} className="btn-blue">
                     Close
@@ -311,7 +311,7 @@ export default function EnquiryModal({
 
                   {status === "error" && (
                     <p
-                      className="text-sm text-red-600"
+                      className="text-[15px] text-red-600"
                       style={{ fontFamily: "var(--font-dm-sans)" }}
                     >
                       Something went wrong. Please try again or call 1300 661 565.
@@ -327,7 +327,7 @@ export default function EnquiryModal({
                   </button>
 
                   <p
-                    className="text-center text-xs text-[var(--muted)]"
+                    className="text-center text-[13px] text-[var(--muted)]"
                     style={{ fontFamily: "var(--font-dm-sans)" }}
                   >
                     No commitment required. We&apos;ll reply within 24 hours.
@@ -355,7 +355,7 @@ function FormField({
   return (
     <label className="flex flex-col gap-1.5">
       <span
-        className="text-xs font-semibold text-[var(--ink)]"
+        className="text-[13px] font-semibold text-[var(--ink)]"
         style={{ fontFamily: "var(--font-dm-sans)" }}
       >
         {label}

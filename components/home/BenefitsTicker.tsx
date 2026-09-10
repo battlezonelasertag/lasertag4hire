@@ -1,6 +1,5 @@
 const BENEFITS = [
   "Delivery included",
-  "No deposit required",
   "Live phone support 7 days",
   "Ages 5 and up",
   "Saturday hire includes Sunday",
@@ -55,7 +54,7 @@ export default function BenefitsTicker() {
               style={{
                 fontFamily: "var(--font-syne)",
                 fontWeight: 500,
-                fontSize: "clamp(12px, 1vw, 14px)",
+                fontSize: "clamp(13px, 1vw, 15px)",
                 color: "var(--ink)",
                 letterSpacing: "-0.01em",
               }}

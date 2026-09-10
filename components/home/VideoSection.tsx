@@ -21,17 +21,11 @@ export default function VideoSection() {
       <div className="relative z-10 max-w-7xl mx-auto px-6">
         {/* Header */}
         <div className="text-center mb-12">
-          <span
-            className="eyebrow inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-4 text-white/50"
-            style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.1)" }}
-          >
-            See it in action
-          </span>
           <h2
             className="section-heading text-white"
             style={{ fontSize: "clamp(1.875rem, 3.5vw, 2.75rem)" }}
           >
-            Epic battles. Every time.
+            What it looks like on the day
           </h2>
         </div>
 

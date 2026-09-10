@@ -105,10 +105,10 @@ function zoneStyle(highlightPostcode: string) {
     const isHighlighted = feature?.properties?.postcode === highlightPostcode;
     return {
       color: "#1a5fb4",
-      weight: isHighlighted ? 2 : 0.8,
+      weight: isHighlighted ? 2.5 : 1.5,
       fillColor: "#1a5fb4",
-      fillOpacity: isHighlighted ? 0.25 : 0.12,
-      opacity: isHighlighted ? 1 : 0.5,
+      fillOpacity: isHighlighted ? 0.3 : 0.16,
+      opacity: isHighlighted ? 1 : 0.75,
     };
   };
 }

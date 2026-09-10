@@ -23,21 +23,21 @@ const PRODUCT_IMAGES: Record<string, string> = {
 };
 
 const DESCRIPTIONS: Record<string, string> = {
-  "bolter-no-scope": "Our lightest tagger — at just 1.4kg with a compact polycarbonate shell, it's comfortable for even young kids to hold for hours. Great for backyards, birthday parties and any event with a mixed age group.",
-  "bolter-scope":    "All the ergonomics of the Bolter with the addition of a real red-dot scope, doubling effective range to 100m and adding a whole new layer of precision to the game. Our most popular package.",
-  "predator":        "Our flagship tagger. The Predator features a foregrip, red-dot scope and full 100m range — built for serious battles. The go-to for teens, adults, corporate events and anyone who wants the full tactical experience.",
+  "bolter-no-scope": "Our lightest tagger, at just 1.4kg with a compact polycarbonate shell. It's comfortable for even young kids to hold for hours. Great for backyards, birthday parties and any event with a mixed age group.",
+  "bolter-scope":    "The same tagger as the Bolter, with a real red-dot scope fitted. That doubles the effective range to 100m and gives players something to aim with rather than point. It's the package we hire out most.",
+  "predator":        "The Predator adds a foregrip and red-dot scope to a heavier 1.8kg body, with the full 100m range. It suits teens, adults and corporate groups who want the gear to feel like proper equipment rather than a toy.",
 };
 
 const CHECKLIST: Record<string, string[]> = {
-  "bolter-no-scope": ["10 players at a time", "50m outdoor range", "Lightweight 1.4kg — ages 5+", "Saturday hire includes Sunday free"],
+  "bolter-no-scope": ["10 players at a time", "50m outdoor range", "Lightweight 1.4kg, ages 5+", "Saturday hire includes Sunday free"],
   "bolter-scope":    ["10 players at a time", "100m outdoor range", "Real red-dot scope", "Saturday hire includes Sunday free"],
   "predator":        ["10 players at a time", "100m outdoor range", "Foregrip + red-dot scope", "Saturday hire includes Sunday free"],
 };
 
 const TESTIMONIALS: Record<string, { quote: string; name: string; role: string; rating: number }[]> = {
   "bolter-no-scope": [
-    { quote: "The kids didn't stop playing for 3 hours straight. Setup was genuinely easy.", name: "Melissa K.", role: "Mum — 11th birthday party", rating: 5 },
-    { quote: "Arrived fully charged and ready to go. Dropped it back with the prepaid label — couldn't be simpler.", name: "Josh R.", role: "Dad — backyard party for 10", rating: 5 },
+    { quote: "The kids didn't stop playing for 3 hours straight. Setup was genuinely easy.", name: "Melissa K.", role: "Mum, 11th birthday party", rating: 5 },
+    { quote: "Arrived fully charged and ready to go. Dropped it back with the prepaid label, and that was that.", name: "Josh R.", role: "Dad, backyard party for 10", rating: 5 },
   ],
   "bolter-scope":    [
     { quote: "Perfect for our Year 6 camp. Equipment quality was excellent and approval was easy.", name: "Annette F.", role: "Primary school teacher", rating: 5 },
@@ -52,7 +52,6 @@ const TESTIMONIALS: Record<string, { quote: string; name: string; role: string; 
 const KIT_ITEMS = [
   { label: "Medic boxes ×2", desc: "For respawning eliminated players mid-game.", image: "/images/medic-box-image.jpg" },
   { label: "Master controller ×1", desc: "Manages game modes, teams and all tagger settings.", image: "/images/controller-image.jpg" },
-  { label: "Spare magazines", desc: "Physical reload mechanic — eject and slot a fresh mag when you run dry.", image: null },
   { label: "Setup guide", desc: "Step-by-step instructions. Up and running in under 10 minutes.", image: null },
   { label: "Carry case", desc: "Hard carry case keeps everything safe in transit.", image: null },
   { label: "Prepaid return courier", desc: "Return label and booking included. Just pack it up and leave it out.", image: null },
@@ -67,12 +66,12 @@ const FAREHARBOR_ITEMS: Record<string, string> = {
 const BESTFOR_DETAIL: Record<string, string> = {
   "Younger kids":          "Lightweight enough for ages 5+ to hold comfortably for hours.",
   "Backyard parties":      "Sets up in under 10 minutes on any outdoor surface.",
-  "Vacation care":         "Multiple game modes keep large groups engaged across a full day.",
-  "Birthday parties":      "No venue needed — the battle comes to your backyard.",
-  "School groups":         "Structured gameplay with minimal supervision required.",
-  "Teens & adults":        "Full tactical experience with realistic range and reload mechanics.",
-  "Corporate events":      "Gets teams competing and communicating without the awkwardness.",
-  "Large battles": "100m range means sprawling, tactical gameplay across large properties.",
+  "Vacation care":         "Enough different games to fill a full day without kids losing interest.",
+  "Birthday parties":      "Runs in the backyard, so there's no venue to book.",
+  "School groups":         "Games are short enough to rotate a whole class through.",
+  "Teens & adults":        "Realistic range and reload mechanics for players who want a challenge.",
+  "Corporate events":      "Gets people competing without the awkwardness of team-building.",
+  "Large battles": "The 100m range covers acreage and large open sites.",
 };
 
 /* ── Best-for icon ──────────────────────────────────────── */
@@ -173,7 +172,7 @@ export default function PackageDetailPage({ params }: { params: Promise<{ id: st
             position: "relative",
             zIndex: 10,
             minHeight: "88vh",
-            paddingTop: 92,
+            paddingTop: "calc(var(--nav-h-top, 116px) + 32px)",
             paddingRight: "clamp(24px, 6vw, 96px)",
             paddingBottom: 64,
             display: "flex", alignItems: "flex-start", justifyContent: "flex-end",
@@ -188,11 +187,11 @@ export default function PackageDetailPage({ params }: { params: Promise<{ id: st
           }}>
             {/* Breadcrumb */}
             <div style={{ display: "flex", alignItems: "center", gap: 6, marginBottom: 22 }}>
-              <Link href="/packages" style={{ fontFamily: "var(--font-dm-sans)", fontSize: 12, color: "var(--muted)", textDecoration: "none" }}>
+              <Link href="/packages" style={{ fontFamily: "var(--font-dm-sans)", fontSize: 13, color: "var(--muted)", textDecoration: "none" }}>
                 Packages
               </Link>
-              <span style={{ color: "rgba(0,0,0,0.2)", fontSize: 11 }}>›</span>
-              <span style={{ fontFamily: "var(--font-dm-sans)", fontSize: 12, color: "var(--ink)" }}>
+              <span style={{ color: "rgba(0,0,0,0.35)", fontSize: 12 }}>›</span>
+              <span style={{ fontFamily: "var(--font-dm-sans)", fontSize: 13, color: "var(--ink)" }}>
                 {pkg.name}
               </span>
             </div>
@@ -206,7 +205,7 @@ export default function PackageDetailPage({ params }: { params: Promise<{ id: st
               {pkg.name}
             </h1>
             <p style={{
-              fontFamily: "var(--font-dm-sans)", fontSize: 11, fontWeight: 700,
+              fontFamily: "var(--font-dm-sans)", fontSize: 13, fontWeight: 700,
               letterSpacing: "0.15em", textTransform: "uppercase",
               color: accentColor, margin: "0 0 20px",
             }}>
@@ -215,7 +214,7 @@ export default function PackageDetailPage({ params }: { params: Promise<{ id: st
 
             {/* Description */}
             <p style={{
-              fontFamily: "var(--font-dm-sans)", fontSize: "clamp(13px, 1.1vw, 15px)",
+              fontFamily: "var(--font-dm-sans)", fontSize: "clamp(14px, 1.1vw, 16px)",
               lineHeight: 1.7, color: "var(--muted)", margin: "0 0 24px",
             }}>
               {DESCRIPTIONS[pkg.id]}
@@ -234,7 +233,7 @@ export default function PackageDetailPage({ params }: { params: Promise<{ id: st
                       <polyline points="20 6 9 17 4 12" />
                     </svg>
                   </span>
-                  <span style={{ fontFamily: "var(--font-dm-sans)", fontSize: 14, fontWeight: 500, color: "var(--ink)" }}>
+                  <span style={{ fontFamily: "var(--font-dm-sans)", fontSize: 15, fontWeight: 500, color: "var(--ink)" }}>
                     {item}
                   </span>
                 </li>
@@ -246,14 +245,14 @@ export default function PackageDetailPage({ params }: { params: Promise<{ id: st
 
             {/* Price */}
             <div style={{ marginBottom: 20 }}>
-              <span style={{ fontFamily: "var(--font-dm-sans)", fontSize: 10, letterSpacing: "0.12em", textTransform: "uppercase", color: "rgba(0,0,0,0.3)", display: "block", marginBottom: 4 }}>
+              <span style={{ fontFamily: "var(--font-dm-sans)", fontSize: 12, letterSpacing: "0.12em", textTransform: "uppercase", color: "var(--muted)", display: "block", marginBottom: 4 }}>
                 From
               </span>
               <div style={{ display: "flex", alignItems: "baseline", gap: 6 }}>
                 <span style={{ fontFamily: "var(--font-syne)", fontWeight: 700, fontSize: "clamp(32px,3.5vw,48px)", letterSpacing: "-0.04em", color: "var(--ink)", lineHeight: 1 }}>
                   ${pkg.price}
                 </span>
-                <span style={{ fontFamily: "var(--font-dm-sans)", fontSize: 13, color: "var(--muted)" }}>AUD</span>
+                <span style={{ fontFamily: "var(--font-dm-sans)", fontSize: 14, color: "var(--muted)" }}>AUD</span>
               </div>
             </div>
 
@@ -282,13 +281,16 @@ export default function PackageDetailPage({ params }: { params: Promise<{ id: st
           </div>
           </div>
 
-          {/* Testimonial widgets — lower-left of the initial viewport */}
+          {/* Testimonial widgets — lower-left of the initial viewport; desktop only, no room for these beside the card on mobile */}
           {testimonials.length > 0 && (
-            <div style={{
-              position: "absolute", top: "clamp(480px, 68vh, 680px)", left: "clamp(24px, 6vw, 96px)",
-              zIndex: 10,
-              display: "flex", gap: 12,
-            }}>
+            <div
+              className="hidden lg:flex"
+              style={{
+                position: "absolute", top: "clamp(480px, 68vh, 680px)", left: "clamp(24px, 6vw, 96px)",
+                zIndex: 10,
+                gap: 12,
+              }}
+            >
               {testimonials.map((t, idx) => (
                 <div key={idx} style={{
                   width: "clamp(220px, 22vw, 300px)",
@@ -305,7 +307,7 @@ export default function PackageDetailPage({ params }: { params: Promise<{ id: st
                       </svg>
                     ))}
                   </div>
-                  <p style={{ fontFamily: "var(--font-dm-sans)", fontSize: 13, color: "var(--ink)", lineHeight: 1.55, margin: "0 0 12px" }}>
+                  <p style={{ fontFamily: "var(--font-dm-sans)", fontSize: 14, color: "var(--ink)", lineHeight: 1.55, margin: "0 0 12px" }}>
                     &ldquo;{t.quote}&rdquo;
                   </p>
                   <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
@@ -319,8 +321,8 @@ export default function PackageDetailPage({ params }: { params: Promise<{ id: st
                       {t.name.charAt(0)}
                     </div>
                     <div>
-                      <div style={{ fontFamily: "var(--font-dm-sans)", fontSize: 12, fontWeight: 600, color: "var(--ink)" }}>{t.name}</div>
-                      <div style={{ fontFamily: "var(--font-dm-sans)", fontSize: 11, color: "var(--muted)" }}>{t.role}</div>
+                      <div style={{ fontFamily: "var(--font-dm-sans)", fontSize: 13, fontWeight: 600, color: "var(--ink)" }}>{t.name}</div>
+                      <div style={{ fontFamily: "var(--font-dm-sans)", fontSize: 12, color: "var(--muted)" }}>{t.role}</div>
                     </div>
                   </div>
                 </div>
@@ -332,13 +334,13 @@ export default function PackageDetailPage({ params }: { params: Promise<{ id: st
         {/* ── Book your date ── */}
         <div id="book" style={{ background: "white", padding: "clamp(56px,8vw,96px) clamp(24px,6vw,96px)" }}>
           <div style={{ maxWidth: 1280, margin: "0 auto" }}>
-            <div style={{ display: "grid", gridTemplateColumns: "0.7fr clamp(14em, 37%, 24em) 1.3fr", gap: "clamp(32px,4vw,52px)", alignItems: "start" }}>
+            <div
+              className="grid grid-cols-1 lg:grid-cols-[0.7fr_clamp(14em,37%,24em)_1.3fr]"
+              style={{ gap: "clamp(32px,4vw,52px)", alignItems: "start" }}
+            >
 
               {/* Left — context */}
-              <div style={{ position: "sticky", top: 92 }}>
-                <p style={{ fontFamily: "var(--font-dm-sans)", fontSize: 10, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", color: "rgba(0,0,0,0.3)", margin: "0 0 10px" }}>
-                  Book online
-                </p>
+              <div className="lg:sticky lg:top-[calc(var(--nav-h,72px)+24px)]">
                 <h2 style={{ fontFamily: "var(--font-syne)", fontWeight: 700, fontSize: "clamp(22px,2.6vw,34px)", letterSpacing: "-0.025em", lineHeight: 1.1, color: "var(--ink)", margin: "0 0 16px" }}>
                   {pkg.name}
                 </h2>
@@ -346,9 +348,9 @@ export default function PackageDetailPage({ params }: { params: Promise<{ id: st
                   <span style={{ fontFamily: "var(--font-syne)", fontWeight: 700, fontSize: "clamp(28px,3vw,40px)", letterSpacing: "-0.04em", color: "var(--ink)", lineHeight: 1 }}>
                     ${pkg.price}
                   </span>
-                  <span style={{ fontFamily: "var(--font-dm-sans)", fontSize: 13, color: "var(--muted)" }}>AUD</span>
+                  <span style={{ fontFamily: "var(--font-dm-sans)", fontSize: 14, color: "var(--muted)" }}>AUD</span>
                 </div>
-                <p style={{ fontFamily: "var(--font-dm-sans)", fontSize: 14, lineHeight: 1.7, color: "var(--muted)", margin: "0 0 24px" }}>
+                <p style={{ fontFamily: "var(--font-dm-sans)", fontSize: 15, lineHeight: 1.7, color: "var(--muted)", margin: "0 0 24px" }}>
                   Select a date to see availability. You&apos;ll complete your booking securely through FareHarbor.
                 </p>
                 <div style={{ height: 1, background: "rgba(0,0,0,0.07)", marginBottom: 20 }} />
@@ -362,13 +364,13 @@ export default function PackageDetailPage({ params }: { params: Promise<{ id: st
               </div>
 
               {/* Centre — what happens next */}
-              <div style={{ position: "sticky", top: 92 }}>
-                <p style={{ fontFamily: "var(--font-dm-sans)", fontSize: 10, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", color: "rgba(0,0,0,0.3)", margin: "0 0 20px" }}>
+              <div className="lg:sticky lg:top-[calc(var(--nav-h,72px)+24px)]">
+                <h2 style={{ fontFamily: "var(--font-syne)", fontWeight: 700, fontSize: "clamp(22px,2.6vw,34px)", letterSpacing: "-0.025em", lineHeight: 1.1, color: "var(--ink)", margin: "0 0 20px" }}>
                   What happens next
-                </p>
+                </h2>
                 {[
                   { n: "1", title: "Pick a date", body: "Green dates are available. Grey dates are booked or unavailable." },
-                  { n: "2", title: "Complete your booking", body: "Pay securely through FareHarbor. No hidden fees, no deposit required to enquire." },
+                  { n: "2", title: "Complete your booking", body: "Pay securely through FareHarbor. No hidden fees." },
                   { n: "3", title: "We ship your kit", body: "Your gear arrives fully charged, pre-configured, and packed in a hard carry case." },
                   { n: "4", title: "Play, then return free", body: "A prepaid return courier label is included. Just pack it up and leave it out." },
                 ].map(({ n, title, body }) => (
@@ -377,13 +379,13 @@ export default function PackageDetailPage({ params }: { params: Promise<{ id: st
                       width: 26, height: 26, borderRadius: "50%", flexShrink: 0, marginTop: 1,
                       background: accentColor,
                       display: "flex", alignItems: "center", justifyContent: "center",
-                      fontFamily: "var(--font-syne)", fontWeight: 700, fontSize: 11, color: "white",
+                      fontFamily: "var(--font-syne)", fontWeight: 700, fontSize: 12, color: "white",
                     }}>
                       {n}
                     </div>
                     <div>
-                      <div style={{ fontFamily: "var(--font-syne)", fontSize: 14, fontWeight: 700, color: "var(--ink)", marginBottom: 4, lineHeight: 1.2 }}>{title}</div>
-                      <div style={{ fontFamily: "var(--font-dm-sans)", fontSize: 14, color: "var(--muted)", lineHeight: 1.65 }}>{body}</div>
+                      <div style={{ fontFamily: "var(--font-syne)", fontSize: 15, fontWeight: 700, color: "var(--ink)", marginBottom: 4, lineHeight: 1.2 }}>{title}</div>
+                      <div style={{ fontFamily: "var(--font-dm-sans)", fontSize: 15, color: "var(--muted)", lineHeight: 1.65 }}>{body}</div>
                     </div>
                   </div>
                 ))}
@@ -408,31 +410,13 @@ export default function PackageDetailPage({ params }: { params: Promise<{ id: st
               flexWrap: "wrap", gap: "clamp(16px,2vw,24px)",
               marginBottom: "clamp(32px,4vw,48px)",
             }}>
-              <div>
-                <span style={{
-                  display: "inline-flex", alignItems: "center",
-                  fontFamily: "var(--font-dm-sans)", fontSize: 11, fontWeight: 600,
-                  letterSpacing: "0.12em", textTransform: "uppercase" as const,
-                  color: "rgba(255,255,255,0.5)",
-                  border: "1px solid rgba(255,255,255,0.15)",
-                  borderRadius: 100, padding: "4px 12px", marginBottom: 12,
-                }}>
-                  Optional add-ons
-                </span>
-                <h2 style={{
-                  fontFamily: "var(--font-syne)", fontWeight: 700,
-                  fontSize: "clamp(26px,3vw,40px)", letterSpacing: "-0.025em",
-                  lineHeight: 1.1, color: "white", margin: 0,
-                }}>
-                  Scale it up.
-                </h2>
-              </div>
-              <p style={{
-                fontFamily: "var(--font-dm-sans)", fontSize: 15, lineHeight: 1.7,
-                color: "rgba(255,255,255,0.5)", margin: 0, maxWidth: "42ch",
+              <h2 style={{
+                fontFamily: "var(--font-syne)", fontWeight: 700,
+                fontSize: "clamp(26px,3vw,40px)", letterSpacing: "-0.025em",
+                lineHeight: 1.1, color: "white", margin: 0,
               }}>
-                Every package starts at 10 players. Add extra taggers or inflatable cover to turn a backyard into a full-scale battlefield.
-              </p>
+                Scale it up.
+              </h2>
             </div>
 
             {/* Spotlight cards */}
@@ -440,8 +424,8 @@ export default function PackageDetailPage({ params }: { params: Promise<{ id: st
               {[
                 {
                   title: "Additional taggers",
-                  desc: "Each add-on includes 2 extra laser taggers, letting more friends or family join the battle. Perfect for larger parties and team-building events — just select how many sets you need at booking.",
-                  note: "Subject to availability — book early.",
+                  desc: "Each add-on includes 2 extra laser taggers, letting more friends or family join the battle. Perfect for larger parties and team-building events. Just select how many sets you need at booking.",
+                  note: "Subject to availability, so book early.",
                   price: "$84 / 2 taggers",
                   cta: "Enquire about extras",
                   image: "/images/additional-taggers-image.jpg",
@@ -483,7 +467,7 @@ export default function PackageDetailPage({ params }: { params: Promise<{ id: st
                   <div style={{ position: "relative", padding: "clamp(24px,3vw,36px)" }}>
                     <span style={{
                       display: "inline-flex", alignItems: "center",
-                      fontFamily: "var(--font-dm-sans)", fontSize: 12, fontWeight: 700,
+                      fontFamily: "var(--font-dm-sans)", fontSize: 13, fontWeight: 700,
                       color: "white",
                       background: pkg.featured ? "var(--crimson)" : "var(--blue)",
                       borderRadius: 100, padding: "5px 14px",
@@ -499,8 +483,8 @@ export default function PackageDetailPage({ params }: { params: Promise<{ id: st
                       {addon.title}
                     </h3>
                     <p style={{
-                      fontFamily: "var(--font-dm-sans)", fontSize: 14,
-                      color: "rgba(255,255,255,0.65)", lineHeight: 1.6,
+                      fontFamily: "var(--font-dm-sans)", fontSize: 15,
+                      color: "rgba(255,255,255,0.72)", lineHeight: 1.6,
                       margin: "0 0 24px", maxWidth: "38ch",
                     }}>
                       {addon.desc}
@@ -509,7 +493,7 @@ export default function PackageDetailPage({ params }: { params: Promise<{ id: st
                       onClick={() => setQuoteOpen(true)}
                       style={{
                         display: "inline-flex", alignItems: "center", gap: 8,
-                        fontFamily: "var(--font-dm-sans)", fontWeight: 600, fontSize: 14,
+                        fontFamily: "var(--font-dm-sans)", fontWeight: 600, fontSize: 15,
                         color: "white",
                         background: "rgba(255,255,255,0.12)",
                         border: "1px solid rgba(255,255,255,0.25)",
@@ -534,8 +518,8 @@ export default function PackageDetailPage({ params }: { params: Promise<{ id: st
                     </button>
                     {addon.note && (
                       <p style={{
-                        fontFamily: "var(--font-dm-sans)", fontSize: 12,
-                        color: "rgba(255,255,255,0.35)", lineHeight: 1.5,
+                        fontFamily: "var(--font-dm-sans)", fontSize: 13,
+                        color: "rgba(255,255,255,0.62)", lineHeight: 1.5,
                         margin: "12px 0 0", fontStyle: "italic",
                       }}>
                         {addon.note}
@@ -559,32 +543,13 @@ export default function PackageDetailPage({ params }: { params: Promise<{ id: st
             display: "flex", alignItems: "flex-end", justifyContent: "space-between",
             flexWrap: "wrap", gap: "clamp(16px,3vw,40px)",
           }}>
-            <div>
-              <span style={{
-                display: "inline-flex",
-                fontFamily: "var(--font-dm-sans)", fontSize: 10, fontWeight: 700,
-                letterSpacing: "0.18em", textTransform: "uppercase",
-                color: accentColor,
-                background: pkg.featured ? "rgba(220,49,41,0.08)" : "rgba(26,95,180,0.08)",
-                border: `1px solid ${pkg.featured ? "rgba(220,49,41,0.14)" : "rgba(26,95,180,0.14)"}`,
-                borderRadius: 100, padding: "5px 14px", marginBottom: 14,
-              }}>
-                In the box
-              </span>
-              <h2 style={{
-                fontFamily: "var(--font-syne)", fontWeight: 700,
-                fontSize: "clamp(32px,4vw,54px)", letterSpacing: "-0.025em",
-                lineHeight: 1.05, color: "var(--ink)", margin: 0,
-              }}>
-                What comes<br />in the kit
-              </h2>
-            </div>
-            <p style={{
-              fontFamily: "var(--font-dm-sans)", fontSize: "clamp(13px,1.1vw,15px)",
-              lineHeight: 1.7, color: "var(--muted)", margin: 0, maxWidth: "40ch",
+            <h2 style={{
+              fontFamily: "var(--font-syne)", fontWeight: 700,
+              fontSize: "clamp(32px,4vw,54px)", letterSpacing: "-0.025em",
+              lineHeight: 1.05, color: "var(--ink)", margin: 0,
             }}>
-              Everything arrives fully charged, pre-configured and packed in a hard carry case — ready to play straight out of the box.
-            </p>
+              What comes<br />in the kit
+            </h2>
           </div>
 
           {/* Interactive split */}
@@ -592,7 +557,7 @@ export default function PackageDetailPage({ params }: { params: Promise<{ id: st
 
             {/* Left — sticky image stage */}
             <div style={{ padding: "0 clamp(24px,6vw,96px) clamp(32px,4vw,48px)" }} className="lg:pr-[clamp(12px,1.5vw,24px)] lg:pb-[clamp(64px,9vw,112px)]">
-              <div className="lg:sticky lg:top-[92px]">
+              <div className="lg:sticky lg:top-[calc(var(--nav-h,72px)+24px)]">
                 <div style={{
                   borderRadius: "1.5rem", overflow: "hidden",
                   background: "var(--cream)", position: "relative",
@@ -624,8 +589,7 @@ export default function PackageDetailPage({ params }: { params: Promise<{ id: st
 
                   {/* Typographic panels for accessory items (indices 3–6) */}
                   {([
-                    { label: "Spare\nmagazines",   iconPath: "M8 3h8a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H8a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zM9 7h6M9 11h6M9 15h4" },
-                    { label: "Setup\nguide",        iconPath: "M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" },
+                    { label: "Setup\nguide",        iconPath:"M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" },
                     { label: "Carry\ncase",         iconPath: "M6 2h12a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zM8 2v4M16 2v4M2 10h20" },
                     { label: "Prepaid\nreturn",     iconPath: "M1 4v6h6M3.51 15a9 9 0 1 0 .49-3.5" },
                   ] as { label: string; iconPath: string }[]).map((panel, panelIdx) => (
@@ -678,8 +642,8 @@ export default function PackageDetailPage({ params }: { params: Promise<{ id: st
                     pointerEvents: "none",
                   }}>
                     <span style={{
-                      fontFamily: "var(--font-dm-sans)", fontSize: 11, fontWeight: 600,
-                      letterSpacing: "0.1em", color: "rgba(255,255,255,0.75)",
+                      fontFamily: "var(--font-dm-sans)", fontSize: 12, fontWeight: 600,
+                      letterSpacing: "0.1em", color: "rgba(255,255,255,0.85)",
                     }}>
                       {String(activeKit + 1).padStart(2, "0")} / {String(KIT_ITEMS.length + 1).padStart(2, "0")}
                     </span>
@@ -714,7 +678,7 @@ export default function PackageDetailPage({ params }: { params: Promise<{ id: st
                       fontFamily: "var(--font-syne)", fontWeight: 700,
                       fontSize: "clamp(18px,2.2vw,28px)", letterSpacing: "-0.04em",
                       lineHeight: 1, flexShrink: 0, minWidth: "2ch",
-                      color: activeKit === i ? accentColor : "rgba(0,0,0,0.13)",
+                      color: activeKit === i ? accentColor : "var(--muted)",
                       transition: "color 280ms cubic-bezier(0.23,1,0.32,1)",
                     }}>
                       {String(i + 1).padStart(2, "0")}
@@ -724,16 +688,16 @@ export default function PackageDetailPage({ params }: { params: Promise<{ id: st
                     <div style={{ flex: 1, minWidth: 0 }}>
                       <div style={{
                         fontFamily: "var(--font-syne)", fontWeight: 700,
-                        fontSize: "clamp(13px,1.35vw,17px)", letterSpacing: "-0.015em",
+                        fontSize: "clamp(14px,1.35vw,18px)", letterSpacing: "-0.015em",
                         lineHeight: 1.25,
-                        color: activeKit === i ? "var(--ink)" : "rgba(0,0,0,0.5)",
+                        color: activeKit === i ? "var(--ink)" : "var(--muted)",
                         marginBottom: activeKit === i ? 7 : 0,
                         transition: "color 280ms cubic-bezier(0.23,1,0.32,1), margin 350ms cubic-bezier(0.23,1,0.32,1)",
                       }}>
                         {item.label}
                       </div>
                       <div style={{
-                        fontFamily: "var(--font-dm-sans)", fontSize: 13,
+                        fontFamily: "var(--font-dm-sans)", fontSize: 14,
                         color: "var(--muted)", lineHeight: 1.6,
                         maxHeight: activeKit === i ? "80px" : "0px",
                         opacity: activeKit === i ? 1 : 0,
@@ -760,32 +724,13 @@ export default function PackageDetailPage({ params }: { params: Promise<{ id: st
               flexWrap: "wrap", gap: "clamp(16px,2vw,24px)",
               marginBottom: "clamp(32px,4vw,52px)",
             }}>
-              <div>
-                <span style={{
-                  display: "inline-flex", alignItems: "center",
-                  fontFamily: "var(--font-dm-sans)", fontSize: 11, fontWeight: 600,
-                  letterSpacing: "0.12em", textTransform: "uppercase" as const,
-                  color: accentColor,
-                  border: `1px solid ${pkg.featured ? "rgba(220,49,41,0.2)" : "rgba(26,95,180,0.2)"}`,
-                  background: pkg.featured ? "rgba(220,49,41,0.05)" : "rgba(26,95,180,0.05)",
-                  borderRadius: 100, padding: "4px 12px", marginBottom: 12,
-                }}>
-                  {pkg.name}
-                </span>
-                <h2 style={{
-                  fontFamily: "var(--font-syne)", fontWeight: 700,
-                  fontSize: "clamp(26px,3vw,40px)", letterSpacing: "-0.025em",
-                  lineHeight: 1.1, color: "var(--ink)", margin: 0,
-                }}>
-                  Right for your event?
-                </h2>
-              </div>
-              <p style={{
-                fontFamily: "var(--font-dm-sans)", fontSize: 15, lineHeight: 1.7,
-                color: "var(--muted)", margin: 0, maxWidth: "38ch",
+              <h2 style={{
+                fontFamily: "var(--font-syne)", fontWeight: 700,
+                fontSize: "clamp(26px,3vw,40px)", letterSpacing: "-0.025em",
+                lineHeight: 1.1, color: "var(--ink)", margin: 0,
               }}>
-                The {pkg.name} works best for the following events and group types.
-              </p>
+                Right for your event?
+              </h2>
             </div>
 
             {/* Cards — column count matches item count so there are never orphans */}
@@ -817,7 +762,7 @@ export default function PackageDetailPage({ params }: { params: Promise<{ id: st
                     {label}
                   </h3>
                   <p style={{
-                    fontFamily: "var(--font-dm-sans)", fontSize: 13,
+                    fontFamily: "var(--font-dm-sans)", fontSize: 14,
                     color: "var(--muted)", lineHeight: 1.6, margin: 0,
                   }}>
                     {BESTFOR_DETAIL[label] ?? "A great fit for this type of event."}
@@ -836,7 +781,7 @@ export default function PackageDetailPage({ params }: { params: Promise<{ id: st
               <h2 style={{ fontFamily: "var(--font-syne)", fontWeight: 700, fontSize: "clamp(20px,2.4vw,30px)", letterSpacing: "-0.02em", color: "white", margin: "0 0 6px" }}>
                 Not sure this is the right fit?
               </h2>
-              <p style={{ fontFamily: "var(--font-dm-sans)", fontSize: 15, color: "rgba(255,255,255,0.4)", margin: 0 }}>
+              <p style={{ fontFamily: "var(--font-dm-sans)", fontSize: 16, color: "rgba(255,255,255,0.65)", margin: 0 }}>
                 Compare all three packages and find the one that suits your event.
               </p>
             </div>
@@ -849,23 +794,23 @@ export default function PackageDetailPage({ params }: { params: Promise<{ id: st
         {/* ── CTA ── */}
         <div style={{ background: "var(--crimson)", position: "relative", overflow: "hidden", padding: "clamp(64px,9vw,96px) clamp(24px,6vw,96px) clamp(48px,6vw,72px)" }}>
           <div style={{ position: "absolute", inset: 0, backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1px)", backgroundSize: "40px 40px", pointerEvents: "none" }} />
-          <div style={{ maxWidth: 1280, margin: "0 auto", position: "relative", zIndex: 1, display: "grid", gridTemplateColumns: "1fr auto", gap: "clamp(24px,4vw,64px)", alignItems: "center" }}>
+          <div
+            className="grid grid-cols-1 md:grid-cols-[1fr_auto] md:items-center"
+            style={{ maxWidth: 1280, margin: "0 auto", position: "relative", zIndex: 1, gap: "clamp(24px,4vw,64px)" }}
+          >
             <div>
-              <h2 style={{ fontFamily: "var(--font-syne)", fontWeight: 700, fontSize: "clamp(28px,4vw,52px)", letterSpacing: "-0.03em", lineHeight: 1.05, color: "white", margin: "0 0 12px" }}>
-                Ready to bring the battle to your backyard?
+              <h2 style={{ fontFamily: "var(--font-syne)", fontWeight: 700, fontSize: "clamp(28px,4vw,52px)", letterSpacing: "-0.03em", lineHeight: 1.05, color: "white", margin: 0 }}>
+                Ready to bring the {pkg.name} kit to your backyard?
               </h2>
-              <p style={{ fontFamily: "var(--font-dm-sans)", fontSize: "clamp(14px,1.2vw,16px)", color: "rgba(255,255,255,0.55)", margin: 0, lineHeight: 1.7 }}>
-                Equipment arrives ready to play. You run the game. No deposit required to enquire.
-              </p>
             </div>
-            <div style={{ display: "flex", flexDirection: "column", gap: 10, alignItems: "flex-end" }}>
+            <div className="flex flex-col gap-2.5 items-start md:items-end">
               <a
                 href="https://fareharbor.com/embeds/book/lasertag4hire/"
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{ display: "inline-flex", alignItems: "center", gap: 8, background: "white", color: "var(--crimson)", borderRadius: 100, padding: "14px 28px", fontFamily: "var(--font-dm-sans)", fontSize: 15, fontWeight: 700, textDecoration: "none", whiteSpace: "nowrap" }}
               >
-                Book now — from ${pkg.price}
+                Book the {pkg.name} kit · from ${pkg.price}
               </a>
               <button
                 onClick={() => setQuoteOpen(true)}
@@ -873,6 +818,9 @@ export default function PackageDetailPage({ params }: { params: Promise<{ id: st
               >
                 Get a free quote
               </button>
+              <p style={{ fontFamily: "var(--font-dm-sans)", fontSize: 13, color: "rgba(255,255,255,0.7)", margin: "2px 0 0", lineHeight: 1.5 }} className="text-left md:text-right">
+                {pkg.tagline} · {pkg.taggers} taggers · {pkg.ageRange} · prepaid return courier
+              </p>
             </div>
           </div>
         </div>

@@ -25,19 +25,17 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
           {/* Brand */}
           <div className="lg:col-span-2">
-            <div className="flex items-center gap-2 mb-4">
-              <FooterLogoMark />
-              <span
-                className="text-lg font-bold tracking-tight text-white"
-                style={{ fontFamily: "var(--font-syne)" }}
-              >
-                Laser Tag 4 Hire
-              </span>
+            <div className="mb-5">
+              <img
+                src="/images/LT4H_2024_dark.svg"
+                alt="Laser Tag 4 Hire"
+                style={{ height: 52, width: "auto", display: "block" }}
+              />
             </div>
-            <p className="text-[var(--muted)] leading-relaxed max-w-xs text-sm mb-6">
-              Laser tag equipment delivered to your door across NSW. Birthday parties, school events, corporate days and more. Operating since 2007.
+            <p className="text-[var(--muted-dark)] leading-relaxed max-w-xs text-base mb-6">
+              Laser tag equipment delivered to your door across Australia. Birthday parties, school events, corporate days and more. Operating since 2007.
             </p>
-            <div className="flex flex-col gap-2 text-sm text-[var(--muted)]">
+            <div className="flex flex-col gap-2 text-base text-[var(--muted-dark)]">
               <a
                 href="tel:1300661565"
                 className="hover:text-white transition-colors duration-200 flex items-center gap-2"
@@ -52,17 +50,13 @@ export default function Footer() {
                 <MailIcon />
                 info@lasertag4hire.com.au
               </a>
-              <span className="flex items-center gap-2">
-                <LocationIcon />
-                PO Box 417, Salamander Bay NSW 2317
-              </span>
             </div>
           </div>
 
           {/* Quick links */}
           <div>
             <h4
-              className="text-xs uppercase tracking-widest text-[var(--muted)] mb-4 font-semibold"
+              className="text-[13px] uppercase tracking-widest text-[var(--muted-dark)] mb-4 font-semibold"
             >
               Quick links
             </h4>
@@ -71,7 +65,7 @@ export default function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-sm text-[var(--muted)] hover:text-white transition-colors duration-200"
+                    className="text-base text-[var(--muted-dark)] hover:text-white transition-colors duration-200"
                   >
                     {link.label}
                   </Link>
@@ -82,17 +76,17 @@ export default function Footer() {
 
           {/* Book */}
           <div>
-            <h4 className="text-xs uppercase tracking-widest text-[var(--muted)] mb-4 font-semibold">
+            <h4 className="text-[13px] uppercase tracking-widest text-[var(--muted-dark)] mb-4 font-semibold">
               Ready to play?
             </h4>
-            <p className="text-sm text-[var(--muted)] mb-4 leading-relaxed">
+            <p className="text-base text-[var(--muted-dark)] mb-4 leading-relaxed">
               Book online in minutes or send us a quote request and we&apos;ll be in touch within 24 hours.
             </p>
             <Link
               href="https://fareharbor.com/embeds/book/lasertag4hire/"
               target="_blank"
               rel="noopener noreferrer"
-              className="btn-crimson inline-flex text-sm"
+              className="btn-crimson inline-flex text-base"
             >
               Book now
               <span className="btn-icon-wrap ml-2">
@@ -104,7 +98,7 @@ export default function Footer() {
 
         {/* Bottom bar */}
         <div className="border-t border-white/10 pt-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-          <p className="text-xs text-[var(--muted)]">
+          <p className="text-[13px] text-[var(--muted-dark)]">
             © {new Date().getFullYear()} Laser Tag 4 Hire. All rights reserved. ABN available on request.
           </p>
           <div className="flex items-center gap-4 flex-wrap">
@@ -112,7 +106,7 @@ export default function Footer() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="text-xs text-[var(--muted)] hover:text-white transition-colors duration-200"
+                className="text-[13px] text-[var(--muted-dark)] hover:text-white transition-colors duration-200"
               >
                 {link.label}
               </Link>
@@ -122,23 +116,6 @@ export default function Footer() {
       </div>
       </div>
     </footer>
-  );
-}
-
-function FooterLogoMark() {
-  return (
-    <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
-      <rect width="28" height="28" rx="8" fill="var(--crimson)" />
-      <path
-        d="M7 14L11 10L15 14L19 9"
-        stroke="white"
-        strokeWidth="2.2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <circle cx="20" cy="18" r="2.5" fill="white" opacity="0.9" />
-      <path d="M8 19h8" stroke="white" strokeWidth="2" strokeLinecap="round" />
-    </svg>
   );
 }
 
@@ -155,15 +132,6 @@ function MailIcon() {
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
       <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
       <polyline points="22,6 12,13 2,6" />
-    </svg>
-  );
-}
-
-function LocationIcon() {
-  return (
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
-      <circle cx="12" cy="10" r="3" />
     </svg>
   );
 }

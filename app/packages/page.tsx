@@ -36,9 +36,9 @@ function MediaPlaceholder({ label, type, aspect }: { label: string; type: "photo
       )}
       <span style={{
         fontFamily: "var(--font-dm-sans)",
-        fontSize: 11,
+        fontSize: 13,
         fontWeight: 500,
-        color: "rgba(0,0,0,0.35)",
+        color: "var(--muted)",
         textAlign: "center",
         lineHeight: 1.6,
         maxWidth: "32ch",
@@ -47,11 +47,11 @@ function MediaPlaceholder({ label, type, aspect }: { label: string; type: "photo
       </span>
       <span style={{
         fontFamily: "var(--font-dm-sans)",
-        fontSize: 9,
+        fontSize: 12,
         fontWeight: 700,
         letterSpacing: "0.14em",
         textTransform: "uppercase",
-        color: "rgba(0,0,0,0.25)",
+        color: "var(--muted)",
         border: "1px solid rgba(0,0,0,0.1)",
         borderRadius: 100,
         padding: "3px 10px",
@@ -87,17 +87,11 @@ export default function PackagesPage() {
           <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to right, rgba(9,9,11,0.85) 40%, rgba(9,9,11,0.4) 100%)", zIndex: 1 }} />
           <div className="max-w-7xl mx-auto" style={{ position: "relative", zIndex: 2 }}>
             <h1
-              className="display-heading text-white mb-4"
+              className="display-heading text-white"
               style={{ fontSize: "clamp(2.5rem, 5vw, 4rem)" }}
             >
               Choose your package
             </h1>
-            <p
-              className="text-white/50 max-w-xl leading-relaxed"
-              style={{ fontFamily: "var(--font-dm-sans)", fontSize: "1.0625rem" }}
-            >
-              Three tagger options, each suited to a different crowd. Compare below and click through for the full breakdown.
-            </p>
           </div>
         </div>
 
@@ -146,7 +140,7 @@ export default function PackagesPage() {
                       }}>
                         {pkg.name}
                       </h2>
-                      <p style={{ fontFamily: "var(--font-dm-sans)", fontSize: 13, color: "var(--muted)", margin: 0 }}>
+                      <p style={{ fontFamily: "var(--font-dm-sans)", fontSize: 14, color: "var(--muted)", margin: 0 }}>
                         {pkg.tagline} · {pkg.ageRange}
                       </p>
                     </div>
@@ -159,19 +153,19 @@ export default function PackagesPage() {
                         { label: "Players", value: `${pkg.taggers}+` },
                       ].map(s => (
                         <div key={s.label}>
-                          <div style={{ fontFamily: "var(--font-dm-sans)", fontSize: 9, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", color: "rgba(0,0,0,0.28)", marginBottom: 2 }}>{s.label}</div>
-                          <div style={{ fontFamily: "var(--font-syne)", fontSize: 13, fontWeight: 700, color: "var(--ink)" }}>{s.value}</div>
+                          <div style={{ fontFamily: "var(--font-dm-sans)", fontSize: 12, fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", color: "var(--muted)", marginBottom: 2 }}>{s.label}</div>
+                          <div style={{ fontFamily: "var(--font-syne)", fontSize: 14, fontWeight: 700, color: "var(--ink)" }}>{s.value}</div>
                         </div>
                       ))}
                     </div>
 
                     {/* Best for */}
                     <div>
-                      <p style={{ fontFamily: "var(--font-dm-sans)", fontSize: 9, fontWeight: 700, letterSpacing: "0.15em", textTransform: "uppercase", color: "rgba(0,0,0,0.3)", margin: "0 0 6px" }}>Best for</p>
+                      <p style={{ fontFamily: "var(--font-dm-sans)", fontSize: 12, fontWeight: 700, letterSpacing: "0.15em", textTransform: "uppercase", color: "var(--muted)", margin: "0 0 6px" }}>Best for</p>
                       <div style={{ display: "flex", flexWrap: "wrap", gap: 5 }}>
                         {pkg.bestFor.map(label => (
                           <span key={label} style={{
-                            fontFamily: "var(--font-dm-sans)", fontSize: 11, fontWeight: 500,
+                            fontFamily: "var(--font-dm-sans)", fontSize: 12, fontWeight: 500,
                             color: "var(--ink)", background: "rgba(0,0,0,0.05)",
                             border: "1px solid rgba(0,0,0,0.08)", borderRadius: 100,
                             padding: "3px 10px", whiteSpace: "nowrap",
@@ -188,7 +182,7 @@ export default function PackagesPage() {
                       borderTop: "1px solid rgba(0,0,0,0.06)", paddingTop: 12,
                     }}>
                       <div>
-                        <span style={{ fontFamily: "var(--font-dm-sans)", fontSize: 10, letterSpacing: "0.1em", textTransform: "uppercase", color: "rgba(0,0,0,0.3)", display: "block", marginBottom: 1 }}>From</span>
+                        <span style={{ fontFamily: "var(--font-dm-sans)", fontSize: 12, letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--muted)", display: "block", marginBottom: 1 }}>From</span>
                         <span style={{ fontFamily: "var(--font-syne)", fontWeight: 700, fontSize: "clamp(22px,2.4vw,28px)", letterSpacing: "-0.03em", color: "var(--ink)", lineHeight: 1 }}>
                           ${pkg.price}
                         </span>
@@ -221,16 +215,6 @@ export default function PackagesPage() {
 
             {/* Header */}
             <div style={{ marginBottom: "clamp(40px,5vw,60px)" }}>
-              <span style={{
-                display: "inline-flex", alignItems: "center",
-                fontFamily: "var(--font-dm-sans)", fontSize: 10, fontWeight: 700,
-                letterSpacing: "0.18em", textTransform: "uppercase",
-                color: "var(--blue)", background: "rgba(26,95,180,0.08)",
-                border: "1px solid rgba(26,95,180,0.14)",
-                borderRadius: 100, padding: "5px 14px", marginBottom: 18,
-              }}>
-                Every hire
-              </span>
               <h2 style={{
                 fontFamily: "var(--font-syne)", fontWeight: 700,
                 fontSize: "clamp(32px,4.5vw,58px)", letterSpacing: "-0.025em",
@@ -282,26 +266,13 @@ export default function PackagesPage() {
                 </div>
 
                 <div style={{ position: "relative", marginTop: "auto", paddingTop: "clamp(28px,3.5vw,48px)" }}>
-                  <p style={{
-                    fontFamily: "var(--font-dm-sans)", fontSize: 10, fontWeight: 700,
-                    letterSpacing: "0.18em", textTransform: "uppercase",
-                    color: "rgba(255,255,255,0.65)", margin: "0 0 14px",
-                  }}>
-                    Free delivery
-                  </p>
                   <h3 style={{
                     fontFamily: "var(--font-syne)", fontWeight: 700,
                     fontSize: "clamp(22px,2.8vw,36px)", letterSpacing: "-0.025em",
-                    lineHeight: 1.1, color: "white", margin: "0 0 16px",
+                    lineHeight: 1.1, color: "white", margin: "0 0 20px",
                   }}>
                     Arrives 2 days early.<br />Charged. Ready.
                   </h3>
-                  <p style={{
-                    fontFamily: "var(--font-dm-sans)", fontSize: "clamp(13px,1.1vw,15px)",
-                    lineHeight: 1.7, color: "rgba(255,255,255,0.72)", margin: "0 0 28px",
-                  }}>
-                    Your kit ships ahead of your event, pre-configured for the game modes you&apos;ve selected. It arrives in a hard carry case, fully charged — unbox and play. No setup, no surprises.
-                  </p>
                   <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
                     {[
                       "Delivered 2 business days before your event",
@@ -310,7 +281,7 @@ export default function PackagesPage() {
                     ].map(f => (
                       <div key={f} style={{ display: "flex", alignItems: "center", gap: 10 }}>
                         <div style={{ width: 4, height: 4, borderRadius: "50%", background: "rgba(255,255,255,0.5)", flexShrink: 0 }} />
-                        <span style={{ fontFamily: "var(--font-dm-sans)", fontSize: 13, color: "rgba(255,255,255,0.72)" }}>{f}</span>
+                        <span style={{ fontFamily: "var(--font-dm-sans)", fontSize: 14, color: "rgba(255,255,255,0.75)" }}>{f}</span>
                       </div>
                     ))}
                   </div>
@@ -339,9 +310,6 @@ export default function PackagesPage() {
                       <path d="M3.51 15a9 9 0 1 0 .49-3.5" />
                     </svg>
                   </div>
-                  <p style={{ fontFamily: "var(--font-dm-sans)", fontSize: 10, fontWeight: 700, letterSpacing: "0.16em", textTransform: "uppercase", color: "var(--blue)", margin: "0 0 8px" }}>
-                    Prepaid return
-                  </p>
                   <h3 style={{
                     fontFamily: "var(--font-syne)", fontWeight: 700,
                     fontSize: "clamp(17px,1.8vw,22px)", letterSpacing: "-0.02em",
@@ -349,8 +317,8 @@ export default function PackagesPage() {
                   }}>
                     Pack it up. Leave it out.
                   </h3>
-                  <p style={{ fontFamily: "var(--font-dm-sans)", fontSize: 13, lineHeight: 1.65, color: "var(--muted)", margin: 0 }}>
-                    A prepaid return label ships inside the case. Once you&apos;re done, pack everything in and leave it at the door — we arrange collection. No drop-offs, no fees.
+                  <p style={{ fontFamily: "var(--font-dm-sans)", fontSize: 14, lineHeight: 1.65, color: "var(--muted)", margin: 0 }}>
+                    A prepaid return label ships inside the case. Once you&apos;re done, pack everything in and leave it at the door. We arrange collection, no drop-offs and no fees.
                   </p>
                 </div>
 
@@ -381,7 +349,7 @@ export default function PackagesPage() {
                     }}>
                       Live phone support
                     </h3>
-                    <p style={{ fontFamily: "var(--font-dm-sans)", fontSize: 12, lineHeight: 1.6, color: "var(--muted)", margin: 0 }}>
+                    <p style={{ fontFamily: "var(--font-dm-sans)", fontSize: 13, lineHeight: 1.6, color: "var(--muted)", margin: 0 }}>
                       A real person on the line while your event runs.
                     </p>
                   </div>
@@ -413,7 +381,7 @@ export default function PackagesPage() {
                     }}>
                       Sat + Sun<br />same price
                     </h3>
-                    <p style={{ fontFamily: "var(--font-dm-sans)", fontSize: 12, lineHeight: 1.6, color: "var(--muted)", margin: 0 }}>
+                    <p style={{ fontFamily: "var(--font-dm-sans)", fontSize: 13, lineHeight: 1.6, color: "var(--muted)", margin: 0 }}>
                       Book Saturday, keep it through Sunday at no extra cost.
                     </p>
                   </div>
@@ -427,78 +395,72 @@ export default function PackagesPage() {
         {/* Equipment Technology Section */}
         <div style={{ background: "var(--cream)", padding: "clamp(72px,10vw,120px) clamp(24px,6vw,96px)", borderTop: "1px solid rgba(0,0,0,0.07)" }}>
           <div style={{ maxWidth: 1280, margin: "0 auto" }}>
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "clamp(32px,5vw,80px)", alignItems: "end", marginBottom: "clamp(64px,9vw,96px)" }}>
+            <div style={{ marginBottom: "clamp(64px,9vw,96px)" }}>
               <h2 style={{ fontFamily: "var(--font-syne)", fontWeight: 700, fontSize: "clamp(32px,4.5vw,56px)", letterSpacing: "-0.025em", lineHeight: 1.05, color: "var(--ink)", margin: 0 }}>
-                Not just lights<br />
-                <span style={{ color: "var(--crimson)" }}>and sounds.</span>
+                What separates this<br />
+                <span style={{ color: "var(--crimson)" }}>from a toy.</span>
               </h2>
-              <p style={{ fontFamily: "var(--font-dm-sans)", fontSize: "clamp(14px,1.2vw,16px)", lineHeight: 1.75, color: "var(--muted)", margin: 0, alignSelf: "end" }}>
-                Our taggers run a professional-grade hit system — real health, real ammo, real consequences. Every shot and every kill is tracked automatically so you can focus on the game.
-              </p>
             </div>
 
             <div style={{ display: "flex", flexDirection: "column", gap: "clamp(64px,8vw,96px)" }}>
 
-              {/* Row 1 — Hit points */}
+              {/* Row 1 — Colour display */}
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "clamp(32px,5vw,72px)", alignItems: "center" }}>
-                <MediaPlaceholder label="Close-up photo: tagger display screen showing live HP and current game mode" type="photo" aspect="4/3" />
+                <MediaPlaceholder label="Close-up photo: tagger colour display screen showing health, ammo count and game mode" type="photo" aspect="4/3" />
                 <div>
-                  <p style={{ fontFamily: "var(--font-dm-sans)", fontSize: 10, fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase", color: "var(--crimson)", marginBottom: 16 }}>Hit points</p>
                   <h3 style={{ fontFamily: "var(--font-syne)", fontWeight: 700, fontSize: "clamp(24px,2.8vw,38px)", letterSpacing: "-0.02em", lineHeight: 1.1, color: "var(--ink)", margin: "0 0 20px" }}>
-                    Every hit actually hurts.
+                    A screen on every tagger, so nobody has to ask
                   </h3>
                   <p style={{ fontFamily: "var(--font-dm-sans)", fontSize: "clamp(14px,1.15vw,16px)", lineHeight: 1.75, color: "var(--muted)", margin: "0 0 24px" }}>
-                    Each player starts with a set HP pool displayed live on the tagger&apos;s built-in screen. Incoming shots chip away at your health — take enough hits and you&apos;re eliminated. No honour system, no arguments. The hardware decides.
+                    Health, ammo, reloads and running stats are all displayed on the tagger itself. Players can see where they stand without stopping to ask, which matters more than it sounds when you have ten kids mid-game.
                   </p>
                   <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: 10 }}>
-                    {["HP displayed in real time on the tagger screen", "Configurable starting health per game mode", "Auto-respawn or single-life modes available"].map(f => (
+                    {["Live health and ammo count on every tagger", "Reloads and remaining mags tracked on screen", "Running stats follow each player through the game"].map(f => (
                       <li key={f} style={{ display: "flex", alignItems: "flex-start", gap: 12 }}>
                         <span style={{ width: 5, height: 5, borderRadius: "50%", background: "var(--crimson)", flexShrink: 0, marginTop: 7 }} />
-                        <span style={{ fontFamily: "var(--font-dm-sans)", fontSize: 13, color: "var(--muted)", lineHeight: 1.55 }}>{f}</span>
+                        <span style={{ fontFamily: "var(--font-dm-sans)", fontSize: 14, color: "var(--muted)", lineHeight: 1.55 }}>{f}</span>
                       </li>
                     ))}
                   </ul>
                 </div>
               </div>
 
-              {/* Row 2 — Magazines (flipped) */}
+              {/* Row 2 — Real-time hit feedback (flipped) */}
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "clamp(32px,5vw,72px)", alignItems: "center" }}>
                 <div>
-                  <p style={{ fontFamily: "var(--font-dm-sans)", fontSize: 10, fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase", color: "var(--blue)", marginBottom: 16 }}>Ammunition</p>
                   <h3 style={{ fontFamily: "var(--font-syne)", fontWeight: 700, fontSize: "clamp(24px,2.8vw,38px)", letterSpacing: "-0.02em", lineHeight: 1.1, color: "var(--ink)", margin: "0 0 20px" }}>
-                    Run dry. Reload. Re-engage.
+                    The taggers settle the arguments
                   </h3>
                   <p style={{ fontFamily: "var(--font-dm-sans)", fontSize: "clamp(14px,1.15vw,16px)", lineHeight: 1.75, color: "var(--muted)", margin: "0 0 24px" }}>
-                    Each tagger ships with spare magazines. When your mag runs dry, you physically eject it and slot in a fresh one — just like the real thing. That moment of vulnerability mid-battle completely changes how you play.
+                    When a shot connects, both taggers register it and tell their players straight away. The hardware keeps score, which settles the arguments about who tagged who before they start.
                   </p>
                   <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: 10 }}>
-                    {["Each magazine holds a set number of rounds", "Spare mags included in every kit", "Physical reload mechanics add real tactical pressure"].map(f => (
+                    {["Confirmation the moment you score a hit", "Eliminations register for both players at once"].map(f => (
                       <li key={f} style={{ display: "flex", alignItems: "flex-start", gap: 12 }}>
                         <span style={{ width: 5, height: 5, borderRadius: "50%", background: "var(--blue)", flexShrink: 0, marginTop: 7 }} />
-                        <span style={{ fontFamily: "var(--font-dm-sans)", fontSize: 13, color: "var(--muted)", lineHeight: 1.55 }}>{f}</span>
+                        <span style={{ fontFamily: "var(--font-dm-sans)", fontSize: 14, color: "var(--muted)", lineHeight: 1.55 }}>{f}</span>
                       </li>
                     ))}
                   </ul>
                 </div>
-                <MediaPlaceholder label="GIF: magazine being ejected from tagger and fresh mag slotted in — close-up, dramatic angle" type="gif" aspect="4/3" />
+                <MediaPlaceholder label="Photo or GIF: player reacting as their tagger screen flashes a confirmed hit, mid-game" type="gif" aspect="4/3" />
               </div>
 
-              {/* Row 3 — Vibration motor */}
+              {/* Row 3 — Vibration + simulated recoil */}
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "clamp(32px,5vw,72px)", alignItems: "center" }}>
-                <MediaPlaceholder label="Close-up photo or slow-motion video: hands gripping tagger, trigger being pulled — emphasising tactile weight and feel" type="photo" aspect="4/3" />
+                <MediaPlaceholder label="Close-up photo or slow-motion video: hands gripping tagger, trigger being pulled, emphasising tactile weight and feel" type="photo" aspect="4/3" />
                 <div>
-                  <p style={{ fontFamily: "var(--font-dm-sans)", fontSize: 10, fontWeight: 700, letterSpacing: "0.18em", textTransform: "uppercase", color: "var(--muted)", marginBottom: 16 }}>Vibration motor</p>
                   <h3 style={{ fontFamily: "var(--font-syne)", fontWeight: 700, fontSize: "clamp(24px,2.8vw,38px)", letterSpacing: "-0.02em", lineHeight: 1.1, color: "var(--ink)", margin: "0 0 20px" }}>
-                    You feel every shot you fire.
+                    It kicks when you fire
                   </h3>
                   <p style={{ fontFamily: "var(--font-dm-sans)", fontSize: "clamp(14px,1.15vw,16px)", lineHeight: 1.75, color: "var(--muted)", margin: "0 0 24px" }}>
-                    Each tagger has a built-in vibration motor that fires on every trigger pull and incoming hit. It&apos;s a small detail that makes a big difference — the physical feedback makes every shot feel real, not digital.
+                    A motor inside each tagger produces recoil when you fire and vibration when you&apos;re tagged. It&apos;s the difference between playing laser tag and pointing a torch at someone, and it works without anything leaving the tagger.
                   </p>
                   <ul style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: 10 }}>
-                    {["Motor pulses on every trigger pull", "Incoming hit vibration confirms damage", "Adds physical weight and presence to the game"].map(f => (
+                    {["Recoil pulse on every trigger pull", "Vibration when you're tagged", "Infrared only, so nothing is ever fired"].map(f => (
                       <li key={f} style={{ display: "flex", alignItems: "flex-start", gap: 12 }}>
                         <span style={{ width: 5, height: 5, borderRadius: "50%", background: "rgba(0,0,0,0.2)", flexShrink: 0, marginTop: 7 }} />
-                        <span style={{ fontFamily: "var(--font-dm-sans)", fontSize: 13, color: "var(--muted)", lineHeight: 1.55 }}>{f}</span>
+                        <span style={{ fontFamily: "var(--font-dm-sans)", fontSize: 14, color: "var(--muted)", lineHeight: 1.55 }}>{f}</span>
                       </li>
                     ))}
                   </ul>

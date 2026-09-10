@@ -9,7 +9,8 @@
   --cream:   #f7f9fb;
   --sky:     #dce8f5;
   --rose:    #FFF1F2;
-  --muted:   #94A3B8;
+  --muted:      #5B6472; /* secondary text on light backgrounds — 5.7:1+ on cream/white/sky */
+  --muted-dark: #94A3B8; /* secondary text on dark backgrounds (--ink) — 7.76:1 */
   --white:   #FFFFFF;
 
   /* Custom easing curves */
@@ -19,6 +20,11 @@
 
   --font-display: var(--font-syne);
   --font-body:    var(--font-dm-sans);
+
+  /* Fixed header. Transparent and tall over a hero, shrinking to --nav-h once
+     scrolled. Page-top padding uses --nav-h-top; sticky offsets use --nav-h. */
+  --nav-h:     72px;
+  --nav-h-top: 116px;
 }
 
 /* ─── Base ───────────────────────────────────────────────────────── */
@@ -64,7 +70,7 @@ body {
 .eyebrow {
   font-family: var(--font-body);
   font-weight: 600;
-  font-size: 0.65rem;
+  font-size: 0.8125rem;
   letter-spacing: 0.15em;
   text-transform: uppercase;
 }

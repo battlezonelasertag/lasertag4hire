@@ -46,21 +46,13 @@ export default function Gallery() {
     <section ref={sectionRef} className="section-cream py-24 lg:py-32">
       <div className="max-w-7xl mx-auto px-6" style={{ position: "relative", zIndex: 1 }}>
         {/* Header */}
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-10 gap-4">
-          <div>
-            <h2
-              className="section-heading text-[var(--ink)]"
-              style={{ fontSize: "clamp(1.875rem, 3.5vw, 2.75rem)" }}
-            >
-              Battles worth remembering
-            </h2>
-          </div>
-          <p
-            className="text-[var(--muted)] text-sm max-w-xs leading-relaxed"
-            style={{ fontFamily: "var(--font-dm-sans)" }}
+        <div className="mb-10">
+          <h2
+            className="section-heading text-[var(--ink)]"
+            style={{ fontSize: "clamp(1.875rem, 3.5vw, 2.75rem)" }}
           >
-            Real events. Real battles. Real fun.
-          </p>
+            From recent events
+          </h2>
         </div>
 
         {/* Masonry-style grid */}

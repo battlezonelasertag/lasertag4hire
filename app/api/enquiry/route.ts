@@ -38,7 +38,7 @@ export async function POST(req: NextRequest) {
     await resend.emails.send({
       from: "LT4H Website <noreply@lasertag4hire.com.au>",
       to: [CONTACT_EMAIL],
-      subject: `New quote request — ${firstName} ${lastName} (${eventType})`,
+      subject: `New quote request: ${firstName} ${lastName} (${eventType})`,
       html: buildBusinessEmail({ firstName, lastName, email, phone, eventDate, eventType, postcode, packageInterest, playerCount, message }),
     });
 
@@ -46,7 +46,7 @@ export async function POST(req: NextRequest) {
     await resend.emails.send({
       from: "Laser Tag 4 Hire <noreply@lasertag4hire.com.au>",
       to: [email],
-      subject: "We got your quote request — Laser Tag 4 Hire",
+      subject: "We got your quote request | Laser Tag 4 Hire",
       html: buildConfirmEmail({ firstName }),
     });
 
@@ -108,13 +108,13 @@ function buildConfirmEmail({ firstName }: { firstName: string }) {
       </div>
       <div style="background: white; padding: 32px; border: 1px solid #e5e7eb; border-top: none; border-radius: 0 0 12px 12px;">
         <p style="font-size: 15px; line-height: 1.6; margin-bottom: 16px;">
-          Thanks for your quote request — we'll get back to you within 24 hours (usually much sooner).
+          Thanks for your quote request. We'll get back to you within 24 hours (usually much sooner).
         </p>
         <p style="font-size: 15px; line-height: 1.6; margin-bottom: 24px;">
           In the meantime, if you have any questions you can call us on <strong>1300 661 565</strong>.
         </p>
         <p style="font-size: 13px; color: #6b7280;">
-          — The LT4H team<br/>
+          The LT4H team<br/>
           <a href="https://www.lasertag4hire.com.au" style="color: #2563EB;">lasertag4hire.com.au</a>
         </p>
       </div>

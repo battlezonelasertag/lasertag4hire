@@ -9,8 +9,6 @@ import HowItWorks from "@/components/home/HowItWorks";
 import EventTypes from "@/components/home/EventTypes";
 import PackageTeaser from "@/components/home/PackageTeaser";
 import WhyChooseUs from "@/components/home/WhyChooseUs";
-import Gallery from "@/components/home/Gallery";
-import VideoSection from "@/components/home/VideoSection";
 import Testimonials from "@/components/home/Testimonials";
 import ServiceArea from "@/components/home/ServiceArea";
 import FAQPreview from "@/components/home/FAQPreview";
@@ -39,10 +37,6 @@ export default function HomePage() {
         <SectionDivider from={CREAM} to={DARK} variant="splash" flip />
         <WhyChooseUs />
         <SectionDivider from={DARK} to={CREAM} variant="organic" />
-        <Gallery />
-        <SectionDivider from={CREAM} to={DARK} variant="wave" />
-        <VideoSection />
-        <SectionDivider from={DARK} to={CREAM} variant="splash" flip />
         <Testimonials />
         <SectionDivider from={CREAM} to={SKY} variant="organic" flip />
         <ServiceArea />

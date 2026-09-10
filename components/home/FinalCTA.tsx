@@ -60,7 +60,7 @@ export default function FinalCTA({ onQuoteClick }: { onQuoteClick?: () => void }
               maxWidth: "18ch",
             }}
           >
-            Ready to bring the battle to your backyard?
+            Pick a date and we&apos;ll get the gear to you.
           </h2>
         </div>
 
@@ -77,27 +77,11 @@ export default function FinalCTA({ onQuoteClick }: { onQuoteClick?: () => void }
         {/* Bottom row */}
         <div
           style={{
-            display: "grid",
-            gridTemplateColumns: "1fr auto",
-            gap: "clamp(20px, 4vw, 64px)",
+            display: "flex",
             padding: "0 clamp(24px, 6vw, 96px)",
             alignItems: "center",
           }}
         >
-          <p
-            className="cta-bot"
-            style={{
-              fontFamily: "var(--font-dm-sans)",
-              fontSize: "clamp(15px, 1.35vw, 18px)",
-              lineHeight: 1.65,
-              color: "rgba(255,255,255,0.55)",
-              margin: 0,
-              maxWidth: "48ch",
-            }}
-          >
-            Equipment arrives ready to play. You run the game. We handle the rest. No deposit required to enquire.
-          </p>
-
           <div className="cta-bot" style={{ display: "flex", gap: 10, alignItems: "center" }}>
             <Link
               href="https://fareharbor.com/embeds/book/lasertag4hire/"
@@ -119,7 +103,7 @@ export default function FinalCTA({ onQuoteClick }: { onQuoteClick?: () => void }
                 transition: "transform 160ms",
               }}
             >
-              Book now — from $549
+              Book now, from $549
             </Link>
             <button
               onClick={onQuoteClick}
@@ -149,13 +133,13 @@ export default function FinalCTA({ onQuoteClick }: { onQuoteClick?: () => void }
           className="cta-bot"
           style={{
             fontFamily: "var(--font-dm-sans)",
-            fontSize: 11,
-            color: "rgba(255,255,255,0.3)",
+            fontSize: 13,
+            color: "rgba(255,255,255,0.92)",
             margin: "clamp(28px, 3vw, 44px) clamp(24px, 6vw, 96px) 0",
             letterSpacing: "0.04em",
           }}
         >
-          No deposit required · Reply within 24 hours · 4.9★ rated
+          Reply within 24 hours · 4.9★ rated
         </p>
       </div>
     </section>
