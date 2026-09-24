@@ -32,11 +32,14 @@ export interface EventType {
 
 export interface Testimonial {
   id: string;
+  /** First name and surname initial, as the reviewer appears on Google. */
   name: string;
-  role: string;
-  location: string;
-  category: "birthday" | "school" | "corporate" | "community";
+  /** What they hired the gear for, taken from the review. */
+  event: string;
+  category: "birthday" | "school" | "community" | "groups";
   rating: number;
+  source: "Google";
+  /** The reviewer's exact words, pasted from Google. Empty shows a "Read on Google" card instead. */
   quote: string;
 }
 

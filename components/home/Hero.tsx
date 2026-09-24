@@ -6,10 +6,14 @@ import { gsap } from "gsap";
 
 export default function Hero({ onQuoteClick }: { onQuoteClick?: () => void }) {
   const rootRef = useRef<HTMLDivElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
     const el = rootRef.current;
     if (!el) return;
+
+    // Hold on the poster frame for reduced-motion users.
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) videoRef.current?.pause();
 
     const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
     tl.from(el.querySelector(".h-line1"), { y: 32, opacity: 0, duration: 0.7 })
@@ -49,6 +53,7 @@ export default function Hero({ onQuoteClick }: { onQuoteClick?: () => void }) {
 
       {/* Video background (overlays image when available) */}
       <video
+        ref={videoRef}
         autoPlay
         muted
         loop

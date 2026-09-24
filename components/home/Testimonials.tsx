@@ -1,17 +1,17 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useLayoutEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { TESTIMONIALS } from "@/lib/data";
+import { GOOGLE_REVIEWS, TESTIMONIALS } from "@/lib/data";
 import type { Testimonial } from "@/lib/types";
 import ScrollArrows from "@/components/ui/ScrollArrows";
 
 const CATEGORIES = [
   { id: "all", label: "All" },
-  { id: "birthday", label: "Birthday" },
-  { id: "school", label: "School" },
-  { id: "corporate", label: "Corporate" },
-  { id: "community", label: "Community" },
+  { id: "birthday", label: "Birthdays" },
+  { id: "school", label: "Schools & vac care" },
+  { id: "community", label: "Youth groups" },
+  { id: "groups", label: "Families & groups" },
 ] as const;
 
 export default function Testimonials() {
@@ -33,20 +33,23 @@ export default function Testimonials() {
               className="section-heading text-[var(--ink)]"
               style={{ fontSize: "clamp(1.875rem, 3.5vw, 2.75rem)" }}
             >
-              4.9 stars across 500+ events
+              {GOOGLE_REVIEWS.rating} stars from {GOOGLE_REVIEWS.count} Google reviews
             </h2>
           </div>
 
           {/* Rating aggregate */}
-          <div
-            className="flex items-center gap-3 px-5 py-3 rounded-2xl self-start sm:self-auto"
-            style={{ background: "white", border: "1px solid rgba(0,0,0,0.06)" }}
+          <a
+            href={GOOGLE_REVIEWS.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-3 px-5 py-3 rounded-2xl self-start sm:self-auto transition-transform duration-150 active:scale-[0.97]"
+            style={{ background: "white", border: "1px solid rgba(0,0,0,0.06)", textDecoration: "none" }}
           >
             <div
               className="text-3xl font-bold text-[var(--ink)]"
               style={{ fontFamily: "var(--font-syne)", letterSpacing: "-0.02em" }}
             >
-              4.9
+              {GOOGLE_REVIEWS.rating}
             </div>
             <div>
               <div className="flex gap-0.5 mb-0.5">
@@ -60,10 +63,10 @@ export default function Testimonials() {
                 className="text-[13px] text-[var(--muted)]"
                 style={{ fontFamily: "var(--font-dm-sans)" }}
               >
-                500+ events
+                {GOOGLE_REVIEWS.count} reviews on Google
               </div>
             </div>
-          </div>
+          </a>
         </div>
 
         {/* Filter tabs */}
@@ -127,21 +130,44 @@ function TestimonialCard({ t, index }: { t: Testimonial; index: number }) {
     >
       <div className="card-bezel-inner p-6">
         {/* Stars */}
-        <div className="flex gap-0.5 mb-4">
-          {Array.from({ length: t.rating }).map((_, i) => (
-            <svg key={i} width="14" height="14" viewBox="0 0 24 24" fill="var(--orange)">
+        <div className="flex gap-0.5 mb-4" aria-label={`${t.rating} out of 5 stars`} role="img">
+          {Array.from({ length: 5 }).map((_, i) => (
+            <svg key={i} width="14" height="14" viewBox="0 0 24 24" fill={i < t.rating ? "var(--orange)" : "rgba(0,0,0,0.12)"}>
               <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
             </svg>
           ))}
         </div>
 
-        {/* Quote */}
-        <p
-          className="text-[var(--ink)] leading-relaxed text-base mb-5"
-          style={{ fontFamily: "var(--font-dm-sans)" }}
-        >
-          &ldquo;{t.quote}&rdquo;
-        </p>
+        {/* Quote once pasted from Google; until then, what they hired for and a link to read it */}
+        {t.quote ? (
+          <>
+            <p
+              className="text-[13px] font-semibold uppercase tracking-[0.12em] text-[var(--muted)] mb-2"
+              style={{ fontFamily: "var(--font-dm-sans)" }}
+            >
+              {t.event}
+            </p>
+            <ReviewText quote={t.quote} />
+          </>
+        ) : (
+          <div className="mb-5">
+            <p
+              className="card-heading text-[var(--ink)] text-xl mb-2"
+              style={{ lineHeight: 1.2 }}
+            >
+              {t.event}
+            </p>
+            <a
+              href={GOOGLE_REVIEWS.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[15px] font-semibold text-[var(--blue)]"
+              style={{ fontFamily: "var(--font-dm-sans)", textDecoration: "none" }}
+            >
+              Read {t.name.split(" ")[0]}&apos;s review on Google ↗
+            </a>
+          </div>
+        )}
 
         {/* Author */}
         <div className="flex items-center gap-3">
@@ -166,7 +192,7 @@ function TestimonialCard({ t, index }: { t: Testimonial; index: number }) {
               className="text-[13px] text-[var(--muted)]"
               style={{ fontFamily: "var(--font-dm-sans)" }}
             >
-              {t.role}
+              {t.rating}-star review
             </div>
           </div>
           <div className="ml-auto">
@@ -178,11 +204,52 @@ function TestimonialCard({ t, index }: { t: Testimonial; index: number }) {
                 fontFamily: "var(--font-dm-sans)",
               }}
             >
-              {t.location}
+              {t.source}
             </span>
           </div>
         </div>
       </div>
     </motion.div>
+  );
+}
+
+/* Full review text, clamped to six lines with an in-place "Read more" when it runs longer. */
+function ReviewText({ quote }: { quote: string }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [expanded, setExpanded] = useState(false);
+  const [overflows, setOverflows] = useState(false);
+  const paragraphs = quote.split(/\n\s*\n/);
+
+  useLayoutEffect(() => {
+    const el = ref.current;
+    if (el) setOverflows(el.scrollHeight > el.clientHeight + 1);
+  }, [quote]);
+
+  return (
+    <div className="mb-5">
+      <div
+        ref={ref}
+        className={`text-[var(--ink)] leading-relaxed text-base ${expanded ? "" : "line-clamp-6"}`}
+        style={{ fontFamily: "var(--font-dm-sans)", whiteSpace: "pre-line" }}
+      >
+        {paragraphs.map((para, i) => (
+          <p key={i} className={i > 0 ? "mt-3" : ""}>
+            {i === 0 && "\u201C"}
+            {para}
+            {i === paragraphs.length - 1 && "\u201D"}
+          </p>
+        ))}
+      </div>
+      {(overflows || expanded) && (
+        <button
+          onClick={() => setExpanded((v) => !v)}
+          className="mt-2 text-[15px] font-semibold text-[var(--blue)] transition-transform duration-150 active:scale-[0.97]"
+          style={{ fontFamily: "var(--font-dm-sans)", background: "none", border: "none", padding: 0, cursor: "pointer" }}
+          aria-expanded={expanded}
+        >
+          {expanded ? "Show less" : "Read more"}
+        </button>
+      )}
+    </div>
   );
 }

@@ -101,7 +101,7 @@ export const EVENT_TYPES: EventType[] = [
     description:
       "Keep kids engaged all day with enough different games to keep them playing for hours.",
     gradient: "from-[#2563EB] to-[#1e40af]",
-    image: "/images/inflatable-packages-image.jpg",
+    image: "/images/event-vacation-care.jpg",
     highlights: ["Several games to rotate through", "Staff can set it up", "All ages"],
   },
   {
@@ -110,7 +110,7 @@ export const EVENT_TYPES: EventType[] = [
     description:
       "Gets people competing and talking to each other without the awkwardness of a structured team-building exercise.",
     gradient: "from-[#E11D48] to-[#2563EB]",
-    image: "/images/page_header_about.jpg",
+    image: "/images/event-corporate.jpg",
     highlights: ["No age limit", "Scales to large groups", "Includes support"],
   },
   {
@@ -119,7 +119,7 @@ export const EVENT_TYPES: EventType[] = [
     description:
       "Popular for fetes and end-of-term camps. The risk assessment is included, which is usually the part that holds up approval.",
     gradient: "from-[#2563EB] to-[#0ea5e9]",
-    image: "/images/page_header_packages.jpg",
+    image: "/images/event-school.jpg",
     highlights: ["Sets up in 10 minutes", "Risk assessment included", "Safe IR tech"],
   },
   {
@@ -128,75 +128,117 @@ export const EVENT_TYPES: EventType[] = [
     description:
       "Council days, sports carnivals and youth programs. It runs all day and handles a steady stream of people coming and going.",
     gradient: "from-[#7c3aed] to-[#E11D48]",
-    image: "/images/why-choose-us-setup.jpg",
+    image: "/images/event-community.jpg",
     highlights: ["Scales to any size", "Includes setup guide", "All weather"],
   },
 ];
 
-// PLACEHOLDER CONTENT — NOT REAL CUSTOMERS. Every name, location, role and quote
-// below is invented. Publishing invented reviews as genuine breaches Australian
-// Consumer Law (ACCC), so these must be replaced with real, permissioned
-// testimonials or removed entirely before the site goes live.
+// Google Business Profile for Laser Tag 4 Hire (84 Salamander Way, Salamander Bay).
+// Checked 24 Sep 2026: 24 reviews, 22 five-star and 2 four-star (4.92 average, shown by Google as 4.9).
+// Update the rating and count here when new reviews come in; every rating on the site reads from this.
+export const GOOGLE_REVIEWS = {
+  rating: 4.9,
+  count: 24,
+  url: "https://search.google.com/local/reviews?placeid=ChIJufPFzW2Cc2sRisRKDSAXQEE",
+};
+
+// Real reviews from the Google profile above, supplied by the owner and copied word for word
+// (spelling, emoji and line breaks included). The two 4-star reviews (Lauren N., Joel M.) stay
+// for authenticity but sit lower so they never lead. Reviews from the same household (Lukas and
+// Penny D.) are kept apart. Not included: one review that reads as an owner reply.
+// New review? Add it here with the reviewer's exact words, then update GOOGLE_REVIEWS above.
 export const TESTIMONIALS: Testimonial[] = [
   {
-    id: "t1",
-    name: "Melissa K.",
-    role: "Mum, 11th birthday party",
-    location: "Maitland, NSW",
-    category: "birthday",
-    rating: 5,
-    quote:
-      "Honestly the best party we've ever thrown. The equipment arrived perfectly packed, set up took 10 minutes, and the kids didn't stop playing for 3 hours straight. Will absolutely book again.",
+    id: "murray-m", name: "Murray M.", event: "Bucks party", category: "groups", rating: 5, source: "Google",
+    quote: "The best of fun. Hired this for a bucks party and all the guys loved it! Quality gear (with surprising accuracy). The red dot scopes really are worth it for more advanced players. Would recommend to anyone.\n\nTop-tier customer service. We actually had a couple issues with the courier but Joyce and the team were quick to problem solve and support (even though it wasn't their fault). Very much appreciate that and our event was all the better for it.",
   },
   {
-    id: "t2",
-    name: "Jordan T.",
-    role: "Vacation care coordinator",
-    location: "Nelson Bay, NSW",
-    category: "school",
-    rating: 5,
-    quote:
-      "We've used Laser Tag 4 Hire twice now for vac care. The kids love it, the staff can actually manage it without stress, and the return process couldn't be simpler. Can't fault it.",
+    id: "becki-t", name: "Becki T.", event: "Boys' 11th birthday party", category: "birthday", rating: 5, source: "Google",
+    quote: "Great idea for a boys 11th birthday party - boys thought it was awesome and way better not having to wear a vest! It was fun to run our own party because we let the boys run wild. There was no rules!",
   },
   {
-    id: "t3",
-    name: "Daniel W.",
-    role: "HR Manager, corporate team day",
-    location: "Newcastle, NSW",
-    category: "corporate",
-    rating: 5,
-    quote:
-      "Our team of 24 played for two hours straight. The Predator taggers were a massive hit, and even the most reluctant team members got into it. Genuinely a great bonding activity.",
+    id: "rebecca-m", name: "Rebecca M.", event: "Family Christmas, ages 12 to 65+", category: "groups", rating: 5, source: "Google",
+    quote: "I hired a set of 10 guns for Christmas...the result is I am now \"The aunt of the Century\"!! and we have a Miss 12yo, who is quote: \" I fear I am awesome at this!!\" Everyone (12yo to 65yo+) including the spectators, were so involved it was the best Christmas ever! -thank you Laser Tag 4 Hire.",
   },
   {
-    id: "t4",
-    name: "Sarah G.",
-    role: "Events coordinator, community fair",
-    location: "Cessnock, NSW",
-    category: "community",
-    rating: 5,
-    quote:
-      "Set up a laser tag zone at our community fair and it was one of the most popular attractions on the day. Simple to organise, great phone support on the day. Highly recommend.",
+    id: "lukas-d", name: "Lukas D.", event: "Kids' party, second time hiring", category: "birthday", rating: 5, source: "Google",
+    quote: "This was our second time hiring from Laser Tag 4 Hire, and once again they didn't disappoint. The equipment arrived with plenty of time to spare, and the kids had an absolute blast—as did the adults! Highly recommend for a fun-filled party that gets everyone involved.",
   },
   {
-    id: "t5",
-    name: "Ben R.",
-    role: "Dad, 14th birthday party",
-    location: "Raymond Terrace, NSW",
-    category: "birthday",
-    rating: 5,
-    quote:
-      "My son specifically asked for laser tag and I'm so glad I found this. Way better value than a venue, and the kids had way more fun running around our yard for 4 hours.",
+    id: "jucinda-s", name: "Jucinda S.", event: "Vacation care", category: "school", rating: 5, source: "Google",
+    quote: "We hired the laser tag kit for our vacation care service.\nThe updated laser tag equipment was easy to use and very straight forward.\nOur children had a lot of fun with this experience, and it is something we will hire again in the future.",
   },
   {
-    id: "t6",
-    name: "Annette F.",
-    role: "Primary school teacher, end-of-year camp",
-    location: "Port Stephens, NSW",
-    category: "school",
-    rating: 5,
-    quote:
-      "Perfect for our Year 6 camp. The risk assessment was already included which made getting approval easy, and the kids absolutely loved it. Equipment quality was excellent.",
+    id: "stuart-j", name: "Stuart J.", event: "Weekend hire, players aged 4 to 65", category: "groups", rating: 5, source: "Google",
+    quote: "We had a great weekend with our hired taggers. The gear arrived on time and was of great quality. We had everyone from the ages of 4 to 65 using it comfortably and having a blast. This gears software is phenomenal being able to know when you’ve hit someone a hundred meters away, and team scores and stats for bragging rights. The whole process was great and we will be hiring from Laser Tag 4 Hire again.",
+  },
+  {
+    id: "erin-m", name: "Erin M.", event: "University student event", category: "school", rating: 5, source: "Google",
+    quote: "We held a laser tag event at our university and our students absolutely loved it! Joyce and Craig went above and beyond to ensure our event was a success. The whole process was super easy and very cost efficient. They were amazing with communication and really lovely to work with. We will definitely be using Laser Tag 4 Hire in the future.",
+  },
+  {
+    id: "pip-m", name: "Pip M.", event: "Kids' birthday party", category: "birthday", rating: 5, source: "Google",
+    quote: "Kids had an absolute ball. 'Best party ever' apparently! Simple to use, but so much fun. The team at Laser Tag 4 Hire went above and beyond to make it all possible, especially considering our complicated logistics requirements. Highly recommended.",
+  },
+  {
+    id: "sereena-k", name: "Sereena K.", event: "Boys' party, played into the night", category: "birthday", rating: 5, source: "Google",
+    quote: "Hi Joyce, Craig and Alison\nSaturday's laser tag party was epic!! Boys loved it and even more at night. They were on them for 5 hours straight except to eat of course. They were communicating and problem- solving. Such a fun-time had by all. THANK YOU :-)",
+  },
+  {
+    id: "arielle-b", name: "Arielle B.", event: "Youth group and a party", category: "community", rating: 5, source: "Google",
+    quote: "Genuinely was so impressed by the entire experience. Joyce was so friendly and accomodating, made the entire process so smooth and easy. Delivery and pickup was simple, all the instructions super straight forward. The quality of the gear was actually so amazing, everyone commented on how it was nicer than most they had ever seen and/or used. We played inside and outside and found it great in both spaces. Only issue was occasionally the range. The game wouldn't start for people too far from the controller, but that was easily managed and people didn't disconnect during the game. I hired for youth group and a party and great fun was had at both.",
+  },
+  {
+    id: "madeline-c", name: "Madeline C.", event: "OOSH vacation care program", category: "school", rating: 5, source: "Google",
+    quote: "We used Laser Tag 4 Hire as part of an OOSH vacation care program. The speed of communication, equipment and service were all top notch. Will be using them again!",
+  },
+  {
+    id: "harrison-l", name: "Harrison L.", event: "Ordering, delivery and return", category: "groups", rating: 5, source: "Google",
+    quote: "The ease of ordering, receiving and sending our laser tag hire was very easy and smooth. The initial set up was a little tricky but worked fine shortly after. Great customer service and will definitely hire again",
+  },
+  {
+    id: "lauren-n", name: "Lauren N.", event: "Youth ministry", category: "community", rating: 4, source: "Google",
+    quote: "Super easy to set up and use on your own. Some of the triggers were a little bit faulty but overall our youth ministry loved it!",
+  },
+  {
+    id: "kerrie-c", name: "Kerrie C.", event: "Kids' party", category: "birthday", rating: 5, source: "Google",
+    quote: "We had the best time using Laser Tag 4 Hire for our party. The kids absolutely loved it and played non stop. Even the adults joined in! The guns were more hi-tech than I imagined!! Plus, service was great :) Highly recommend.",
+  },
+  {
+    id: "jesse-i", name: "Jesse I.", event: "Group of 60 people", category: "groups", rating: 5, source: "Google",
+    quote: "So much fun had an absolute ball with my crew of 60 people, easy to use as well!",
+  },
+  {
+    id: "fathan-f", name: "Fathan F.", event: "College event", category: "school", rating: 5, source: "Google",
+    quote: "Hosted a Fun College event with the lasertags, shipped quickly and set up was easy and seamless 👍",
+  },
+  {
+    id: "andrew-ko", name: "Andrew Ko.", event: "School end-of-year event", category: "school", rating: 5, source: "Google",
+    quote: "We had an awesome time hiring the equipment for our end of year event. Our students loved the team challenges. Thanks Bluey and Craig.",
+  },
+  {
+    id: "paul-g", name: "Paul G.", event: "Full day of play", category: "groups", rating: 5, source: "Google",
+    quote: "Easy to organise. All the equipment arrived directly by post and worked perfectly. A great price for a full day of fun. Totally recommended",
+  },
+  {
+    id: "joel-m", name: "Joel M.", event: "8th birthday, in a hall and a park", category: "birthday", rating: 4, source: "Google",
+    quote: "We had an amazing 8 year old bday party and played rounds inside a hall and outside in a park, with absolute success",
+  },
+  {
+    id: "penny-d", name: "Penny D.", event: "Kids and adults", category: "groups", rating: 5, source: "Google",
+    quote: "Hiring the laser tag gear was a great option for us. Communication was simple and the gear arrived nice and early as promised. Kids and adults alike had a great time!",
+  },
+  {
+    id: "chris-k", name: "Chris K.", event: "Night game", category: "groups", rating: 5, source: "Google",
+    quote: "Just used these guys, What an awesome night it was💯 Great service, the laser gear is next level, you can shoot someone from 30m easy. Highly recommended.",
+  },
+  {
+    id: "andrew-kr", name: "Andrew Kr.", event: "Equipment hire", category: "groups", rating: 5, source: "Google",
+    quote: "Great, friendly service. We had a fantastic time with the equipment!",
+  },
+  {
+    id: "lisa-k", name: "Lisa K.", event: "Equipment hire", category: "groups", rating: 5, source: "Google",
+    quote: "So much fun 🤩 amazing service",
   },
 ];
 
@@ -258,7 +300,7 @@ export const STATS: Stat[] = [
   { value: "18", suffix: "", label: "Years in business", numeric: 18 },
   { value: "12", suffix: "hr", label: "Battery life", numeric: 12 },
   { value: "100", suffix: "m", label: "Outdoor range", numeric: 100 },
-  { value: "4.9", suffix: "★", label: "Customer rating", numeric: 4.9 },
+  { value: "4.9", suffix: "★", label: "Google rating", numeric: 4.9 },
 ];
 
 export const HOW_IT_WORKS: HowItWorksStep[] = [

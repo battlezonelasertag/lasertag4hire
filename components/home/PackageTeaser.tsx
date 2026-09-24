@@ -10,7 +10,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 const PACKAGE_IMAGES: Record<string, string> = {
   "bolter-no-scope": "/images/packages_bolter_no_scope.jpg",
-  "bolter-scope":    "/images/packages_bolter_scopes.jpg",
+  "bolter-scope":    "/images/package-card-bolter-scope.jpg",
   "predator":        "/images/packages_predator.jpg",
 };
 

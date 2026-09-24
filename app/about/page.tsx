@@ -5,11 +5,12 @@ import Link from "next/link";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import EnquiryModal from "@/components/ui/EnquiryModal";
+import { GOOGLE_REVIEWS } from "@/lib/data";
 
 const STATS = [
   { value: "18", suffix: "yrs", label: "In business" },
   { value: "500", suffix: "+", label: "Events delivered" },
-  { value: "4.9", suffix: "★", label: "Customer rating" },
+  { value: String(GOOGLE_REVIEWS.rating), suffix: "★", label: "Google rating" },
   { value: "Age 5", suffix: "+", label: "Safe for all ages" },
 ];
 
@@ -228,7 +229,7 @@ export default function AboutPage() {
                         fontSize: "1.5rem", color: "var(--ink)", lineHeight: 1,
                       }}
                     >
-                      4.9 / 5
+                      {GOOGLE_REVIEWS.rating} / 5
                     </div>
                     <div
                       style={{
@@ -236,7 +237,7 @@ export default function AboutPage() {
                         color: "var(--muted)", marginTop: 3,
                       }}
                     >
-                      Average customer rating across 500+ events
+                      From {GOOGLE_REVIEWS.count} reviews on Google
                     </div>
                   </div>
                 </div>

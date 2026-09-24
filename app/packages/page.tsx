@@ -5,66 +5,29 @@ import Link from "next/link";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import EnquiryModal from "@/components/ui/EnquiryModal";
+import LoopVideo from "@/components/ui/LoopVideo";
 import { PACKAGES } from "@/lib/data";
 
-function MediaPlaceholder({ label, type, aspect }: { label: string; type: "photo" | "gif"; aspect: string }) {
+function MediaClip({ src, label }: { src: string; label: string }) {
   return (
-    <div style={{
-      aspectRatio: aspect,
-      borderRadius: "1.25rem",
-      border: "1.5px dashed rgba(0,0,0,0.1)",
-      background: "rgba(0,0,0,0.03)",
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "center",
-      justifyContent: "center",
-      gap: 14,
-      padding: "clamp(24px,3vw,40px)",
-    }}>
-      {type === "gif" ? (
-        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-          <rect x="2" y="6" width="28" height="20" rx="3" stroke="rgba(0,0,0,0.2)" strokeWidth="1.5" />
-          <circle cx="11" cy="16" r="4" stroke="rgba(0,0,0,0.2)" strokeWidth="1.5" />
-          <path d="M19 14h4M19 16h3M19 18h4" stroke="rgba(0,0,0,0.2)" strokeWidth="1.5" strokeLinecap="round" />
-        </svg>
-      ) : (
-        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-          <rect x="2" y="5" width="28" height="22" rx="3" stroke="rgba(0,0,0,0.2)" strokeWidth="1.5" />
-          <circle cx="16" cy="16" r="5" stroke="rgba(0,0,0,0.2)" strokeWidth="1.5" />
-          <circle cx="24" cy="9" r="1.5" fill="rgba(0,0,0,0.2)" />
-        </svg>
-      )}
-      <span style={{
-        fontFamily: "var(--font-dm-sans)",
-        fontSize: 13,
-        fontWeight: 500,
-        color: "var(--muted)",
-        textAlign: "center",
-        lineHeight: 1.6,
-        maxWidth: "32ch",
-      }}>
-        {label}
-      </span>
-      <span style={{
-        fontFamily: "var(--font-dm-sans)",
-        fontSize: 12,
-        fontWeight: 700,
-        letterSpacing: "0.14em",
-        textTransform: "uppercase",
-        color: "var(--muted)",
-        border: "1px solid rgba(0,0,0,0.1)",
-        borderRadius: 100,
-        padding: "3px 10px",
-      }}>
-        {type === "gif" ? "GIF placeholder" : "Photo placeholder"}
-      </span>
-    </div>
+    <LoopVideo
+      src={src}
+      label={label}
+      style={{
+        display: "block",
+        width: "100%",
+        aspectRatio: "4/3",
+        objectFit: "cover",
+        borderRadius: "1.25rem",
+        background: "#e5e5e5",
+      }}
+    />
   );
 }
 
 const PACKAGE_IMAGES: Record<string, string> = {
   "bolter-no-scope": "/images/packages_bolter_no_scope.jpg",
-  "bolter-scope":    "/images/packages_bolter_scopes.jpg",
+  "bolter-scope":    "/images/package-card-bolter-scope.jpg",
   "predator":        "/images/packages_predator.jpg",
 };
 
@@ -79,7 +42,7 @@ export default function PackagesPage() {
         {/* Hero */}
         <div className="pt-36 pb-16 px-6 relative overflow-hidden" style={{ background: "#09090B" }}>
           <img
-            src="/images/page_header_packages.jpg"
+            src="/images/packages-hero.jpg"
             alt=""
             aria-hidden="true"
             style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", objectPosition: "center", opacity: 0.35, zIndex: 0 }}
@@ -406,7 +369,7 @@ export default function PackagesPage() {
 
               {/* Row 1 — Colour display */}
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "clamp(32px,5vw,72px)", alignItems: "center" }}>
-                <MediaPlaceholder label="Close-up photo: tagger colour display screen showing health, ammo count and game mode" type="photo" aspect="4/3" />
+                <MediaClip src="/video/tagger-display" label="Close-up of a tagger display showing fire mode, health and ammo as the mode button is pressed" />
                 <div>
                   <h3 style={{ fontFamily: "var(--font-syne)", fontWeight: 700, fontSize: "clamp(24px,2.8vw,38px)", letterSpacing: "-0.02em", lineHeight: 1.1, color: "var(--ink)", margin: "0 0 20px" }}>
                     A screen on every tagger, so nobody has to ask
@@ -443,12 +406,12 @@ export default function PackagesPage() {
                     ))}
                   </ul>
                 </div>
-                <MediaPlaceholder label="Photo or GIF: player reacting as their tagger screen flashes a confirmed hit, mid-game" type="gif" aspect="4/3" />
+                <MediaClip src="/video/tagger-hit-sensors" label="Tagger hit lights flashing red, then the hit sensors on the front, top and sides being pointed out" />
               </div>
 
               {/* Row 3 — Vibration + simulated recoil */}
               <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "clamp(32px,5vw,72px)", alignItems: "center" }}>
-                <MediaPlaceholder label="Close-up photo or slow-motion video: hands gripping tagger, trigger being pulled, emphasising tactile weight and feel" type="photo" aspect="4/3" />
+                <MediaClip src="/video/tagger-trigger" label="Hand gripping a tagger and pulling the trigger repeatedly as the ammo count drops" />
                 <div>
                   <h3 style={{ fontFamily: "var(--font-syne)", fontWeight: 700, fontSize: "clamp(24px,2.8vw,38px)", letterSpacing: "-0.02em", lineHeight: 1.1, color: "var(--ink)", margin: "0 0 20px" }}>
                     It kicks when you fire

@@ -6,7 +6,9 @@ import { notFound } from "next/navigation";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import EnquiryModal from "@/components/ui/EnquiryModal";
-import { PACKAGES } from "@/lib/data";
+import LoopVideo from "@/components/ui/LoopVideo";
+import { PACKAGES, TESTIMONIALS } from "@/lib/data";
+import type { Testimonial } from "@/lib/types";
 
 /* ── Static data ─────────────────────────────────────────── */
 
@@ -19,7 +21,7 @@ const HERO_IMAGES: Record<string, string> = {
 const PRODUCT_IMAGES: Record<string, string> = {
   "bolter-no-scope": "/images/package-option-bolter-no-scope.jpg",
   "bolter-scope":    "/images/package-option-bolter-scope.jpg",
-  "predator":        "/images/package-option-predator.jpg",
+  "predator":        "/images/product-predator.jpg",
 };
 
 const DESCRIPTIONS: Record<string, string> = {
@@ -34,19 +36,12 @@ const CHECKLIST: Record<string, string[]> = {
   "predator":        ["10 players at a time", "100m outdoor range", "Foregrip + red-dot scope", "Saturday hire includes Sunday free"],
 };
 
-const TESTIMONIALS: Record<string, { quote: string; name: string; role: string; rating: number }[]> = {
-  "bolter-no-scope": [
-    { quote: "The kids didn't stop playing for 3 hours straight. Setup was genuinely easy.", name: "Melissa K.", role: "Mum, 11th birthday party", rating: 5 },
-    { quote: "Arrived fully charged and ready to go. Dropped it back with the prepaid label, and that was that.", name: "Josh R.", role: "Dad, backyard party for 10", rating: 5 },
-  ],
-  "bolter-scope":    [
-    { quote: "Perfect for our Year 6 camp. Equipment quality was excellent and approval was easy.", name: "Annette F.", role: "Primary school teacher", rating: 5 },
-    { quote: "Kids were completely engaged for three hours. The red-dot scopes added a whole new level of fun.", name: "Chris M.", role: "Community sports coach", rating: 5 },
-  ],
-  "predator":        [
-    { quote: "Our team of 24 played for two hours straight. Genuinely a great bonding activity.", name: "Daniel W.", role: "HR Manager, corporate team day", rating: 5 },
-    { quote: "The inflatable bunkers made the space look incredible. Our clients were genuinely impressed.", name: "Sarah T.", role: "Events Coordinator", rating: 5 },
-  ],
+// Real Google reviews from audiences that suit each package (reviews don't name the tagger model).
+// Only reviews with a pasted quote are shown; see TESTIMONIALS in lib/data.ts.
+const PACKAGE_REVIEW_IDS: Record<string, string[]> = {
+  "bolter-no-scope": ["becki-t", "lukas-d"],
+  "bolter-scope":    ["jucinda-s", "andrew-ko"],
+  "predator":        ["murray-m", "jesse-i"],
 };
 
 const KIT_ITEMS = [
@@ -138,7 +133,9 @@ export default function PackageDetailPage({ params }: { params: Promise<{ id: st
   const [quoteOpen, setQuoteOpen] = useState(false);
   const [activeKit, setActiveKit] = useState(0);
   const accentColor = pkg.featured ? "var(--crimson)" : "var(--blue)";
-  const testimonials = TESTIMONIALS[pkg.id] ?? [];
+  const testimonials = (PACKAGE_REVIEW_IDS[pkg.id] ?? [])
+    .map((id) => TESTIMONIALS.find((t) => t.id === id))
+    .filter((t): t is Testimonial => !!t?.quote);
 
   return (
     <>
@@ -301,14 +298,15 @@ export default function PackageDetailPage({ params }: { params: Promise<{ id: st
                 }}>
                   {/* Stars */}
                   <div style={{ display: "flex", gap: 3, marginBottom: 10 }}>
-                    {Array.from({ length: t.rating }).map((_, i) => (
-                      <svg key={i} width="14" height="14" viewBox="0 0 24 24" fill="#F59E0B">
+                    {Array.from({ length: 5 }).map((_, i) => (
+                      <svg key={i} width="14" height="14" viewBox="0 0 24 24" fill={i < t.rating ? "#F59E0B" : "rgba(0,0,0,0.12)"}>
                         <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
                       </svg>
                     ))}
                   </div>
-                  <p style={{ fontFamily: "var(--font-dm-sans)", fontSize: 14, color: "var(--ink)", lineHeight: 1.55, margin: "0 0 12px" }}>
-                    &ldquo;{t.quote}&rdquo;
+                  {/* Compact spot over the hero: first paragraph, clamped to four lines (full text is on the homepage) */}
+                  <p className="line-clamp-4" style={{ fontFamily: "var(--font-dm-sans)", fontSize: 14, color: "var(--ink)", lineHeight: 1.55, margin: "0 0 12px" }}>
+                    &ldquo;{t.quote.split(/\n\s*\n/)[0]}&rdquo;
                   </p>
                   <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
                     <div style={{
@@ -322,7 +320,7 @@ export default function PackageDetailPage({ params }: { params: Promise<{ id: st
                     </div>
                     <div>
                       <div style={{ fontFamily: "var(--font-dm-sans)", fontSize: 13, fontWeight: 600, color: "var(--ink)" }}>{t.name}</div>
-                      <div style={{ fontFamily: "var(--font-dm-sans)", fontSize: 12, color: "var(--muted)" }}>{t.role}</div>
+                      <div style={{ fontFamily: "var(--font-dm-sans)", fontSize: 12, color: "var(--muted)" }}>{t.event} · Google review</div>
                     </div>
                   </div>
                 </div>
@@ -428,7 +426,8 @@ export default function PackageDetailPage({ params }: { params: Promise<{ id: st
                   note: "Subject to availability, so book early.",
                   price: "$84 / 2 taggers",
                   cta: "Enquire about extras",
-                  image: "/images/additional-taggers-image.jpg",
+                  image: "/images/additional-taggers-image.jpg" as string | null,
+                  video: null as string | null,
                 },
                 {
                   title: "Inflatable obstacles",
@@ -436,7 +435,8 @@ export default function PackageDetailPage({ params }: { params: Promise<{ id: st
                   note: null as string | null,
                   price: "$78 / 2 bunkers",
                   cta: "Enquire about obstacles",
-                  image: "/images/inflatable-packages-image.jpg",
+                  image: null,
+                  video: "/video/addon-bunkers",
                 },
               ].map((addon) => (
                 <div
@@ -451,15 +451,27 @@ export default function PackageDetailPage({ params }: { params: Promise<{ id: st
                     justifyContent: "flex-end",
                   }}
                 >
-                  <img
-                    src={addon.image}
-                    alt={addon.title}
-                    style={{
-                      position: "absolute", inset: 0,
-                      width: "100%", height: "100%",
-                      objectFit: "cover", display: "block",
-                    }}
-                  />
+                  {addon.video ? (
+                    <LoopVideo
+                      src={addon.video}
+                      label="Players ducking behind red and blue inflatable bunkers mid-game"
+                      style={{
+                        position: "absolute", inset: 0,
+                        width: "100%", height: "100%",
+                        objectFit: "cover", display: "block",
+                      }}
+                    />
+                  ) : addon.image && (
+                    <img
+                      src={addon.image}
+                      alt={addon.title}
+                      style={{
+                        position: "absolute", inset: 0,
+                        width: "100%", height: "100%",
+                        objectFit: "cover", display: "block",
+                      }}
+                    />
+                  )}
                   <div style={{
                     position: "absolute", inset: 0,
                     background: "linear-gradient(to top, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.45) 50%, rgba(0,0,0,0.05) 100%)",
@@ -571,21 +583,33 @@ export default function PackageDetailPage({ params }: { params: Promise<{ id: st
                     transition: "opacity 600ms cubic-bezier(0.23,1,0.32,1)",
                   }} />
 
-                  {/* Photo: medic boxes (index 1) */}
-                  <img src="/images/medic-box-image.jpg" alt="Medic boxes" style={{
-                    position: "absolute", inset: 0, width: "100%", height: "100%",
-                    objectFit: "cover", objectPosition: "center",
-                    opacity: activeKit === 1 ? 1 : 0,
-                    transition: "opacity 600ms cubic-bezier(0.23,1,0.32,1)",
-                  }} />
+                  {/* Clip: medic box respawning a tagger (index 1) — plays from the start each time it's selected */}
+                  <LoopVideo
+                    src="/video/kit-medic-respawn"
+                    label="A tagger being held against a medic box to respawn"
+                    active={activeKit === 1}
+                    restartOnActive
+                    style={{
+                      position: "absolute", inset: 0, width: "100%", height: "100%",
+                      objectFit: "cover", objectPosition: "center",
+                      opacity: activeKit === 1 ? 1 : 0,
+                      transition: "opacity 600ms cubic-bezier(0.23,1,0.32,1)",
+                    }}
+                  />
 
-                  {/* Photo: master controller (index 2) */}
-                  <img src="/images/controller-image.jpg" alt="Master controller" style={{
-                    position: "absolute", inset: 0, width: "100%", height: "100%",
-                    objectFit: "cover", objectPosition: "center",
-                    opacity: activeKit === 2 ? 1 : 0,
-                    transition: "opacity 600ms cubic-bezier(0.23,1,0.32,1)",
-                  }} />
+                  {/* Clip: master controller starting and stopping a game (index 2) */}
+                  <LoopVideo
+                    src="/video/kit-controller"
+                    label="The master controller's green button starting a game and red button ending it"
+                    active={activeKit === 2}
+                    restartOnActive
+                    style={{
+                      position: "absolute", inset: 0, width: "100%", height: "100%",
+                      objectFit: "cover", objectPosition: "center",
+                      opacity: activeKit === 2 ? 1 : 0,
+                      transition: "opacity 600ms cubic-bezier(0.23,1,0.32,1)",
+                    }}
+                  />
 
                   {/* Typographic panels for accessory items (indices 3–6) */}
                   {([
