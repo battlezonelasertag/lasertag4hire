@@ -58,7 +58,8 @@ function FitToZone({ zoneData }: { zoneData: FeatureCollection | null }) {
       const layer = L.geoJSON(zoneData as GeoJsonObject);
       const bounds = layer.getBounds();
       if (bounds.isValid()) {
-        map.fitBounds(bounds, { padding: [20, 20] });
+        // maxZoom guards against a zero-size container (e.g. a hidden tab) zooming to street level
+        map.fitBounds(bounds, { padding: [20, 20], maxZoom: 10 });
       }
     } catch { /* ignore */ }
   // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -144,9 +145,12 @@ export default function ServiceAreaMapInner({ pinCoords, pinType, pinPostcode }:
         scrollWheelZoom={false}
         style={{ width: "100%", height: "100%", borderRadius: "inherit" }}
       >
+        {/* Standard OSM tiles (no key needed), greyed out in globals.css so the blue zones stand out */}
         <TileLayer
-          url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions">CARTO</a>'
+          url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          className="map-tiles-muted"
+          maxZoom={19}
         />
 
         {zoneData && (

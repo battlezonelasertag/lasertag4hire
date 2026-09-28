@@ -305,3 +305,8 @@ body {
 .clip-angled-bottom {
   clip-path: polygon(0 0, 100% 0, 100% 94%, 0 100%);
 }
+
+/* Delivery map: mute the colourful OSM tiles to a light grey base */
+.map-tiles-muted {
+  filter: grayscale(1) brightness(1.18) contrast(0.72);
+}

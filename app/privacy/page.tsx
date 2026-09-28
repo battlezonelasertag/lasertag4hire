@@ -91,7 +91,7 @@ const POLICY: LegalSection[] = [
         "Our accounting software, which holds invoices and payment records.",
         "Social media platforms such as Facebook and Instagram, when you contact us through them. Those messages are also handled under the platform's own privacy policy.",
         "Our website host (Vercel), which runs this site and keeps server logs.",
-        "Map and location services (OpenStreetMap and CARTO), which receive your IP address when the delivery map loads, and any postcode or suburb you type into the postcode checker.",
+        "Map and location services (OpenStreetMap), which receive your IP address when the delivery map loads, and any postcode or suburb you type into the postcode checker.",
         "Professional advisers such as our accountant, and government agencies or authorities when the law requires it.",
       ],
     }],

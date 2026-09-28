@@ -1,18 +1,22 @@
 import type { Metadata } from "next";
-import { Space_Grotesk, DM_Sans } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 import { SITE_URL } from "@/lib/data";
 
-const spaceGrotesk = Space_Grotesk({
+// Self-hosted (latin variable files from Google Fonts, OFL). next/font/google fetches from Google
+// at build time and intermittently fails the build on Vercel, so the files live in the repo.
+const spaceGrotesk = localFont({
+  src: "./fonts/space-grotesk-latin-var.woff2",
   variable: "--font-syne",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: "400 700",
+  display: "swap",
 });
 
-const dmSans = DM_Sans({
+const dmSans = localFont({
+  src: "./fonts/dm-sans-latin-var.woff2",
   variable: "--font-dm-sans",
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
+  weight: "300 700",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
