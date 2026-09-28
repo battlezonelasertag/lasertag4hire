@@ -136,12 +136,10 @@ export const EVENT_TYPES: EventType[] = [
 // Google Business Profile for Laser Tag 4 Hire (84 Salamander Way, Salamander Bay).
 // Checked 24 Sep 2026: 24 reviews, 22 five-star and 2 four-star (4.92 average, shown by Google as 4.9).
 // Update the rating and count here when new reviews come in; every rating on the site reads from this.
-// Canonical address for sitemaps, social previews and canonical links. On Vercel this follows the
-// project's production domain (currently lasertag4hire.vercel.app; switches automatically once
-// lasertag4hire.com.au is added to the project), so links never point at the old site.
-export const SITE_URL = process.env.VERCEL_PROJECT_PRODUCTION_URL
-  ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
-  : "https://www.lasertag4hire.com.au";
+// Canonical address for sitemaps, social previews and canonical links. Fixed to the www domain Google
+// has always indexed; don't derive it from VERCEL_PROJECT_PRODUCTION_URL, which picks the shortest
+// custom domain (the bare lasertag4hire.com.au, which only redirects to www).
+export const SITE_URL = "https://www.lasertag4hire.com.au";
 
 // The team has run laser tag since 2011: Battlezone Laser Tag first, with Laser Tag 4 Hire growing
 // out of it later (see the About story; the risk assessment dates from July 2011). Years copy is
