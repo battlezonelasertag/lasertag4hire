@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import Link from "next/link";
+import { useState, useRef } from "react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 
@@ -36,6 +37,7 @@ const PACKAGE_OPTIONS = [
 export default function ContactPage() {
   const [form, setForm] = useState<FormData>(EMPTY_FORM);
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
+  const honeypotRef = useRef<HTMLInputElement>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -48,7 +50,7 @@ export default function ContactPage() {
       const res = await fetch("/api/enquiry", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
+        body: JSON.stringify({ ...form, company: honeypotRef.current?.value ?? "" }),
       });
       setStatus(res.ok ? "success" : "error");
       if (res.ok) setForm(EMPTY_FORM);
@@ -111,6 +113,8 @@ export default function ContactPage() {
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+                  {/* Honeypot: hidden from people and screen readers; bots that fill it are dropped by the API */}
+                  <input ref={honeypotRef} type="text" name="company" tabIndex={-1} autoComplete="off" aria-hidden="true" style={{ position: "absolute", left: "-10000px", width: 1, height: 1, opacity: 0 }} />
                   <div className="grid grid-cols-2 gap-3">
                     <label className="flex flex-col gap-1.5">
                       <span className="text-[13px] font-semibold text-[var(--ink)]" style={{ fontFamily: "var(--font-dm-sans)" }}>First name *</span>
@@ -173,6 +177,10 @@ export default function ContactPage() {
                   <button type="submit" disabled={status === "sending"} className="btn-orange py-3.5 disabled:opacity-60">
                     {status === "sending" ? "Sending..." : "Send message"}
                   </button>
+                  <p className="text-center text-[13px] text-[var(--muted)]" style={{ fontFamily: "var(--font-dm-sans)" }}>
+                    We only use these details to reply to your enquiry.{" "}
+                    <Link href="/privacy" className="underline hover:text-[var(--ink)]">Privacy policy</Link>
+                  </p>
                 </form>
               )}
             </div>
@@ -182,6 +190,7 @@ export default function ContactPage() {
               {[
                 { icon: "📞", label: "Phone", value: "1300 661 565", href: "tel:1300661565" },
                 { icon: "✉️", label: "Email", value: "info@lasertag4hire.com.au", href: "mailto:info@lasertag4hire.com.au" },
+                { icon: "", label: "Postal address", value: "PO Box 417, Salamander Bay NSW 2317", href: "" },
               ].map((item) => (
                 <div
                   key={item.label}
@@ -200,6 +209,21 @@ export default function ContactPage() {
                   )}
                 </div>
               ))}
+
+              <div
+                className="p-5 rounded-2xl"
+                style={{ background: "white", border: "1px solid rgba(0,0,0,0.07)" }}
+              >
+                <div className="text-[13px] font-semibold text-[var(--muted)] mb-2 uppercase tracking-wide" style={{ fontFamily: "var(--font-dm-sans)" }}>
+                  Enquiry hours
+                </div>
+                <dl className="grid grid-cols-[auto_1fr] gap-x-4 gap-y-1 text-base text-[var(--ink)]" style={{ fontFamily: "var(--font-dm-sans)" }}>
+                  <dt className="text-[var(--muted)]">Mon – Fri</dt>
+                  <dd>8:30am – 3:30pm</dd>
+                  <dt className="text-[var(--muted)]">Weekends &amp; holidays</dt>
+                  <dd>9:00am – 4:00pm</dd>
+                </dl>
+              </div>
 
               <div
                 className="p-5 rounded-2xl"

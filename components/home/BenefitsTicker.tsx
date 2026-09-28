@@ -7,7 +7,7 @@ const BENEFITS = [
   "Set up in under 10 minutes",
   "100m outdoor range",
   "12hr battery life",
-  "500+ events since 2007",
+  "500+ events",
   "Free return courier",
   "10 taggers per kit",
 ];

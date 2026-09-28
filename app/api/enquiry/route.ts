@@ -3,27 +3,65 @@ import { Resend } from "resend";
 
 const CONTACT_EMAIL = process.env.CONTACT_EMAIL ?? "info@lasertag4hire.com.au";
 
+// Basic abuse protection. The limit is per server instance, so it slows bursts rather than
+// guaranteeing a global cap, but it stops a bot using the form to spam confirmation emails.
+const RATE_LIMIT = 5;
+const RATE_WINDOW_MS = 10 * 60 * 1000;
+const recent = new Map<string, number[]>();
+
+function isRateLimited(ip: string) {
+  const now = Date.now();
+  const hits = (recent.get(ip) ?? []).filter((t) => now - t < RATE_WINDOW_MS);
+  hits.push(now);
+  recent.set(ip, hits);
+  return hits.length > RATE_LIMIT;
+}
+
+const LIMITS: Record<string, number> = {
+  firstName: 80, lastName: 80, email: 200, phone: 40, eventDate: 20, eventType: 80,
+  postcode: 10, packageInterest: 80, playerCount: 20, message: 2000,
+};
+
+function clean(value: unknown, max: number) {
+  return typeof value === "string" ? value.trim().slice(0, max) : "";
+}
+
+function escapeHtml(value: string) {
+  return value
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const {
-      firstName,
-      lastName,
-      email,
-      phone,
-      eventDate,
-      eventType,
-      postcode,
-      packageInterest,
-      playerCount,
-      message,
-    } = body;
+
+    // Honeypot: a hidden field real visitors never see. Bots fill it; pretend success and drop it.
+    if (typeof body?.company === "string" && body.company.trim() !== "") {
+      return NextResponse.json({ success: true });
+    }
+
+    const ip = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
+    if (isRateLimited(ip)) {
+      return NextResponse.json({ error: "Too many requests" }, { status: 429 });
+    }
+
+    const f = Object.fromEntries(
+      Object.entries(LIMITS).map(([key, max]) => [key, clean(body?.[key], max)]),
+    ) as Record<keyof typeof LIMITS, string>;
+    const { firstName, lastName, email, phone, eventDate, eventType, postcode, packageInterest, playerCount, message } = f;
 
     if (!firstName || !email || !eventDate || !eventType || !postcode) {
       return NextResponse.json(
         { error: "Missing required fields" },
         { status: 400 }
       );
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      return NextResponse.json({ error: "Invalid email" }, { status: 400 });
     }
 
     const apiKey = process.env.RESEND_API_KEY;
@@ -34,21 +72,30 @@ export async function POST(req: NextRequest) {
 
     const resend = new Resend(apiKey);
 
-    // Send to business
-    await resend.emails.send({
+    // Send to business. Resend reports failures in the result rather than throwing,
+    // so check it: otherwise a failed send would tell the visitor it worked.
+    const sent = await resend.emails.send({
       from: "LT4H Website <noreply@lasertag4hire.com.au>",
       to: [CONTACT_EMAIL],
-      subject: `New quote request: ${firstName} ${lastName} (${eventType})`,
-      html: buildBusinessEmail({ firstName, lastName, email, phone, eventDate, eventType, postcode, packageInterest, playerCount, message }),
+      subject: `New quote request: ${firstName} ${lastName} (${eventType})`.replace(/[\r\n]+/g, " "),
+      html: buildBusinessEmail(
+        Object.fromEntries(Object.entries(f).map(([k, v]) => [k, escapeHtml(v)])) as Parameters<typeof buildBusinessEmail>[0],
+      ),
+      replyTo: email,
     });
+    if (sent.error) {
+      console.error("Enquiry email failed:", sent.error);
+      return NextResponse.json({ error: "Failed to send" }, { status: 502 });
+    }
 
-    // Auto-confirm to customer
-    await resend.emails.send({
+    // Auto-confirm to customer. The enquiry has already reached us, so a failure here is logged, not surfaced.
+    const confirmation = await resend.emails.send({
       from: "Laser Tag 4 Hire <noreply@lasertag4hire.com.au>",
       to: [email],
       subject: "We got your quote request | Laser Tag 4 Hire",
-      html: buildConfirmEmail({ firstName }),
+      html: buildConfirmEmail({ firstName: escapeHtml(firstName) }),
     });
+    if (confirmation.error) console.error("Confirmation email failed:", confirmation.error);
 
     return NextResponse.json({ success: true });
   } catch (err) {
@@ -84,7 +131,7 @@ function buildBusinessEmail(data: {
           ${buildRow("Postcode", data.postcode)}
           ${buildRow("Package interest", data.packageInterest || "Not specified")}
           ${buildRow("Number of players", data.playerCount || "Not specified")}
-          ${buildRow("Message", data.message || "—")}
+          ${buildRow("Message", (data.message || "—").replace(/\n/g, "<br/>"))}
         </table>
       </div>
     </div>

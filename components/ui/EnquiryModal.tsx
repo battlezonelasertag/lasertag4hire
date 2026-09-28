@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import Link from "next/link";
+import { useState, useRef } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 
 interface FormData {
@@ -54,6 +55,7 @@ export default function EnquiryModal({
 }) {
   const [form, setForm] = useState<FormData>(EMPTY_FORM);
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
+  const honeypotRef = useRef<HTMLInputElement>(null);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
@@ -68,7 +70,7 @@ export default function EnquiryModal({
       const res = await fetch("/api/enquiry", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(form),
+        body: JSON.stringify({ ...form, company: honeypotRef.current?.value ?? "" }),
       });
       if (res.ok) {
         setStatus("success");
@@ -179,6 +181,8 @@ export default function EnquiryModal({
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="px-6 py-6 flex flex-col gap-4">
+                  {/* Honeypot: hidden from people and screen readers; bots that fill it are dropped by the API */}
+                  <input ref={honeypotRef} type="text" name="company" tabIndex={-1} autoComplete="off" aria-hidden="true" style={{ position: "absolute", left: "-10000px", width: 1, height: 1, opacity: 0 }} />
                   {/* Name row */}
                   <div className="grid grid-cols-2 gap-3">
                     <FormField label="First name" required>
@@ -330,7 +334,8 @@ export default function EnquiryModal({
                     className="text-center text-[13px] text-[var(--muted)]"
                     style={{ fontFamily: "var(--font-dm-sans)" }}
                   >
-                    No commitment required. We&apos;ll reply within 24 hours.
+                    No commitment required. We&apos;ll reply within 24 hours and only use these details to handle your enquiry.{" "}
+                    <Link href="/privacy" className="underline hover:text-[var(--ink)]">Privacy policy</Link>
                   </p>
                 </form>
               )}

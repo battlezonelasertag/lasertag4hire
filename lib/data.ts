@@ -81,7 +81,7 @@ export const ADD_ONS: AddOn[] = [
     name: "Inflatable bunkers",
     description: "Pop-up cover for open spaces with nothing to hide behind",
     price: null,
-    priceLabel: "Contact us for pricing",
+    priceLabel: "$78 / 2 bunkers",
   },
 ];
 
@@ -136,6 +136,19 @@ export const EVENT_TYPES: EventType[] = [
 // Google Business Profile for Laser Tag 4 Hire (84 Salamander Way, Salamander Bay).
 // Checked 24 Sep 2026: 24 reviews, 22 five-star and 2 four-star (4.92 average, shown by Google as 4.9).
 // Update the rating and count here when new reviews come in; every rating on the site reads from this.
+// Canonical address for sitemaps, social previews and canonical links. On Vercel this follows the
+// project's production domain (currently lasertag4hire.vercel.app; switches automatically once
+// lasertag4hire.com.au is added to the project), so links never point at the old site.
+export const SITE_URL = process.env.VERCEL_PROJECT_PRODUCTION_URL
+  ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+  : "https://www.lasertag4hire.com.au";
+
+// The team has run laser tag since 2011: Battlezone Laser Tag first, with Laser Tag 4 Hire growing
+// out of it later (see the About story; the risk assessment dates from July 2011). Years copy is
+// calculated from this so it never goes stale.
+export const LASER_TAG_SINCE = 2011;
+export const YEARS_RUNNING_LASER_TAG = new Date().getFullYear() - LASER_TAG_SINCE;
+
 export const GOOGLE_REVIEWS = {
   rating: 4.9,
   count: 24,
@@ -256,12 +269,27 @@ export const FAQS: FAQ[] = [
   {
     question: "When does the equipment arrive?",
     answer:
-      "Equipment is delivered by courier 2 business days before your event, between 9am and 5pm. You'll need someone home to sign for it. If your home address doesn't work, a workplace or alternate address is fine.",
+      "Equipment is delivered by courier 2 business days before your event, between 9am and 5pm. We usually use TNT or StarTrack, who can't give specific time slots. You'll need someone there to sign for it, so if home doesn't work, a workplace or other address is fine. Once it's shipped we can't change the address, so let us know early if your plans change.",
+  },
+  {
+    question: "Can I collect from or return to a depot instead?",
+    answer:
+      "Yes. If you'd rather collect from or return to a local courier depot, let us know when you book and we'll arrange it.",
   },
   {
     question: "How do I send the equipment back?",
     answer:
       "We include everything you need in the box. Return paperwork is pre-filled, and we book the courier pickup for the business day after your event. You don't need to arrange anything, just pack it back up and leave it out for collection.",
+  },
+  {
+    question: "What ages is it suitable for?",
+    answer:
+      "It depends on the package: 5+ for the Bolter without a scope, 10+ for the Bolter with a red-dot scope, and 12+ for the Predator. Younger players may need a hand getting started. There's no upper age limit, and adults have just as much fun as kids.",
+  },
+  {
+    question: "What happens if something gets damaged?",
+    answer:
+      "The gear is built to be durable, but accidents happen. Every hire includes basic damage cover, so ordinary wear and tear is fine. Significant damage may cost extra, as set out in our booking terms. We recommend supervising younger children while they play.",
   },
   {
     question: "What if I need more than 10 taggers?",
@@ -297,7 +325,7 @@ export const FAQS: FAQ[] = [
 
 export const STATS: Stat[] = [
   { value: "500", suffix: "+", label: "Events run", numeric: 500 },
-  { value: "18", suffix: "", label: "Years in business", numeric: 18 },
+  { value: String(YEARS_RUNNING_LASER_TAG), suffix: "", label: "Years running laser tag", numeric: YEARS_RUNNING_LASER_TAG },
   { value: "12", suffix: "hr", label: "Battery life", numeric: 12 },
   { value: "100", suffix: "m", label: "Outdoor range", numeric: 100 },
   { value: "4.9", suffix: "★", label: "Google rating", numeric: 4.9 },

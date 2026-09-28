@@ -352,6 +352,13 @@ export default function PackagesPage() {
                 </div>
               </div>
             </div>
+            <p
+              style={{ fontFamily: "var(--font-dm-sans)", fontSize: 14, color: "var(--muted)", marginTop: "clamp(24px,3vw,36px)" }}
+            >
+              Read the <Link href="/terms" style={{ color: "var(--ink)", textDecoration: "underline" }}>booking terms</Link>, the{" "}
+              <a href="/docs/hire-agreement-form.pdf" target="_blank" rel="noopener noreferrer" style={{ color: "var(--ink)", textDecoration: "underline" }}>hire agreement</a> or our{" "}
+              <a href="/docs/risk-assessment.pdf" target="_blank" rel="noopener noreferrer" style={{ color: "var(--ink)", textDecoration: "underline" }}>risk assessment</a> (PDFs).
+            </p>
           </div>
         </section>
 

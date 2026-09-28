@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { YEARS_RUNNING_LASER_TAG } from "@/lib/data";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -28,8 +29,8 @@ const STATEMENTS = [
     image: "/images/why-choose-us-weekend.jpg",
   },
   {
-    claim: "18 years in business.",
-    detail: "Over 500 events since 2007. Most of how we do things now came from working out what goes wrong at an event and making sure it can't happen again.",
+    claim: `${YEARS_RUNNING_LASER_TAG} years running laser tag.`,
+    detail: "Over 500 events, and years of games at our own Battlezone fields before that. Most of how we do things now came from working out what goes wrong at an event and making sure it can't happen again.",
     image: "/images/why-choose-us-setup.jpg",
   },
 ];

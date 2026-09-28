@@ -5,10 +5,10 @@ import Link from "next/link";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import EnquiryModal from "@/components/ui/EnquiryModal";
-import { GOOGLE_REVIEWS } from "@/lib/data";
+import { GOOGLE_REVIEWS, YEARS_RUNNING_LASER_TAG } from "@/lib/data";
 
 const STATS = [
-  { value: "18", suffix: "yrs", label: "In business" },
+  { value: String(YEARS_RUNNING_LASER_TAG), suffix: "yrs", label: "Running laser tag" },
   { value: "500", suffix: "+", label: "Events delivered" },
   { value: String(GOOGLE_REVIEWS.rating), suffix: "★", label: "Google rating" },
   { value: "Age 5", suffix: "+", label: "Safe for all ages" },
@@ -83,7 +83,7 @@ export default function AboutPage() {
                 lineHeight: 1.05, color: "white", margin: 0,
               }}
             >
-              18 years.<br />500+ events.<br />Still just as excited.
+              {YEARS_RUNNING_LASER_TAG} years.<br />500+ events.<br />Still just as excited.
             </h1>
           </div>
         </div>
@@ -140,7 +140,7 @@ export default function AboutPage() {
                     lineHeight: 1.15, color: "var(--ink)", margin: "0 0 24px",
                   }}
                 >
-                  We started because laser tag shouldn&apos;t need a venue.
+                  It started at our own laser tag fields.
                 </h2>
                 <div
                   style={{
@@ -150,13 +150,13 @@ export default function AboutPage() {
                   }}
                 >
                   <p>
-                    Laser Tag 4 Hire launched in 2007 out of Port Stephens, NSW, well before most of our customers were old enough to hold a tagger. Back then, if you didn&apos;t live near a dedicated venue, laser tag wasn&apos;t really an option.
+                    We&apos;ve been running laser tag games for {YEARS_RUNNING_LASER_TAG} years at our Battlezone Laser Tag fields at Maitland Gaol and Salt Ash. Along the way we kept hearing the same thing from parents, OOSH centres and event organisers: they loved laser tag, but not the stress, travel and cost of booking a staffed event at a venue.
                   </p>
                   <p>
-                    So we built the business the other way around: the equipment comes to you, charged and tested, and you set it up yourself in about ten minutes. It turned out that most people would rather run a party in their own backyard than drive a group of kids across town to a venue.
+                    We already had good gear sitting idle between events, so we started hiring it out. Same game, without organising a crowd to meet somewhere or paying for staff to run it. Laser Tag 4 Hire began as a small side project and grew quickly from there.
                   </p>
                   <p>
-                    Five hundred events later that hasn&apos;t changed, though almost everything else has. The taggers are far better than what we started with in 2007, and we now deliver right across Australia rather than just around Port Stephens.
+                    Now we send kits all over Australia, to suburban backyards, OOSH programs, youth camps and corporate team days. Customers run the show themselves, for as long as they like: open the box, turn the taggers on and play. The headband-free taggers are light enough for younger kids, quick to swap between players, and have enough tech in them to keep serious players hooked.
                   </p>
                 </div>
               </div>
@@ -200,7 +200,7 @@ export default function AboutPage() {
                       color: "rgba(255,255,255,0.65)", fontStyle: "italic",
                     }}
                   >
-                    Founded 2007, Port Stephens NSW
+                    The Battlezone Laser Tag team, Port Stephens NSW
                   </div>
                 </div>
 

@@ -135,7 +135,18 @@ function EventCard({ event }: { event: typeof EVENT_TYPES[0] }) {
                 className="w-1.5 h-1.5 rounded-full flex-shrink-0"
                 style={{ background: "white" }}
               />
-              {h}
+              {h === "Risk assessment included" ? (
+                <a
+                  href="/docs/risk-assessment.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline decoration-white/40 underline-offset-2 hover:decoration-white"
+                >
+                  {h}
+                </a>
+              ) : (
+                h
+              )}
             </span>
           ))}
         </div>

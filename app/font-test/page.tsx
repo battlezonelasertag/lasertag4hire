@@ -6,6 +6,7 @@ import {
   Space_Grotesk,
   DM_Sans,
 } from "next/font/google";
+import { notFound } from "next/navigation";
 
 // A — Bricolage Grotesque: chunky, editorial, modern personality
 const bricolage = Bricolage_Grotesque({
@@ -95,6 +96,9 @@ const PAIRINGS = [
 ];
 
 export default function FontTestPage() {
+  // Local design tool only; never served on the live site.
+  if (process.env.NODE_ENV === "production") notFound();
+
   const vars = [
     bricolage.variable,
     barlowCondensed.variable,

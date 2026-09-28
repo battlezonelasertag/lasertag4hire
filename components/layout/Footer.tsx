@@ -3,15 +3,17 @@ import Link from "next/link";
 const QUICK_LINKS = [
   { label: "Packages", href: "/packages" },
   { label: "How it works", href: "/#how-it-works" },
+  { label: "Quick start guide", href: "/quick-start" },
   { label: "FAQ", href: "/faq" },
   { label: "About us", href: "/about" },
   { label: "Contact", href: "/contact" },
 ];
 
-const LEGAL_LINKS = [
-  { label: "Hire agreement", href: "/hire-agreement" },
+const LEGAL_LINKS: { label: string; href: string; file?: boolean }[] = [
   { label: "Privacy policy", href: "/privacy" },
   { label: "Terms & conditions", href: "/terms" },
+  { label: "Hire agreement (PDF)", href: "/docs/hire-agreement-form.pdf", file: true },
+  { label: "Risk assessment (PDF)", href: "/docs/risk-assessment.pdf", file: true },
 ];
 
 export default function Footer() {
@@ -33,7 +35,7 @@ export default function Footer() {
               />
             </div>
             <p className="text-[var(--muted-dark)] leading-relaxed max-w-xs text-base mb-6">
-              Laser tag equipment delivered to your door across Australia. Birthday parties, school events, corporate days and more. Operating since 2007.
+              Laser tag equipment delivered to your door across Australia. Birthday parties, school events, corporate days and more. From the team behind Battlezone Laser Tag.
             </p>
             <div className="flex flex-col gap-2 text-base text-[var(--muted-dark)]">
               <a
@@ -50,6 +52,7 @@ export default function Footer() {
                 <MailIcon />
                 info@lasertag4hire.com.au
               </a>
+              <p className="mt-1">PO Box 417, Salamander Bay NSW 2317</p>
             </div>
           </div>
 
@@ -99,18 +102,30 @@ export default function Footer() {
         {/* Bottom bar */}
         <div className="border-t border-white/10 pt-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <p className="text-[13px] text-[var(--muted-dark)]">
-            © {new Date().getFullYear()} Laser Tag 4 Hire. All rights reserved. ABN available on request.
+            © {new Date().getFullYear()} CJR Sweeney Pty Ltd trading as Laser Tag 4 Hire. All rights reserved.
           </p>
           <div className="flex items-center gap-4 flex-wrap">
-            {LEGAL_LINKS.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="text-[13px] text-[var(--muted-dark)] hover:text-white transition-colors duration-200"
-              >
-                {link.label}
-              </Link>
-            ))}
+            {LEGAL_LINKS.map((link) =>
+              link.file ? (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[13px] text-[var(--muted-dark)] hover:text-white transition-colors duration-200"
+                >
+                  {link.label}
+                </a>
+              ) : (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className="text-[13px] text-[var(--muted-dark)] hover:text-white transition-colors duration-200"
+                >
+                  {link.label}
+                </Link>
+              ),
+            )}
           </div>
         </div>
       </div>

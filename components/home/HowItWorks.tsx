@@ -64,7 +64,9 @@ export default function HowItWorks() {
   return (
     <section
       ref={sectionRef}
+      id="how-it-works"
       style={{
+        scrollMarginTop: "var(--nav-h, 72px)",
         background: "var(--cream)",
         padding: "clamp(72px, 10vw, 128px) clamp(24px, 6vw, 96px)",
       }}

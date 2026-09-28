@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Space_Grotesk, DM_Sans } from "next/font/google";
 import "./globals.css";
+import { SITE_URL } from "@/lib/data";
 
 const spaceGrotesk = Space_Grotesk({
   variable: "--font-syne",
@@ -15,7 +16,12 @@ const dmSans = DM_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Laser Tag 4 Hire | Laser Tag Equipment Hire, Delivered to You",
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: "Laser Tag 4 Hire | Laser Tag Equipment Hire, Delivered to You",
+    template: "%s | Laser Tag 4 Hire",
+  },
+  alternates: { canonical: "/" },
   description:
     "Hire laser tag equipment for birthdays, school events, corporate team days and more. Delivered to your door across Australia. Three packages from $549, book online today.",
   keywords: [
@@ -31,7 +37,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Laser Tag 4 Hire | Laser Tag. Delivered.",
     description:
-      "Equipment delivered charged, set up in about ten minutes, returned with a prepaid courier. Hired for birthdays, school events and corporate days since 2007.",
+      "Equipment delivered charged, set up in about ten minutes, returned with a prepaid courier. Hired for birthdays, school events and corporate days, from the team behind Battlezone Laser Tag.",
     siteName: "Laser Tag 4 Hire",
     locale: "en_AU",
     type: "website",
