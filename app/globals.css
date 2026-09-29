@@ -25,6 +25,11 @@
      scrolled. Page-top padding uses --nav-h-top; sticky offsets use --nav-h. */
   --nav-h:     72px;
   --nav-h-top: 116px;
+
+  /* Widest the content column gets (matches max-w-7xl / maxWidth: 1280).
+     Full-bleed sections keep their backgrounds edge to edge but hold their
+     content to this width on very large displays. */
+  --site-max: 1280px;
 }
 
 /* ─── Base ───────────────────────────────────────────────────────── */

@@ -45,15 +45,10 @@ export default function PackageTeaser() {
 
 <div style={{ maxWidth: 1200, margin: "0 auto", position: "relative", zIndex: 1 }}>
 
-        {/* Header */}
+        {/* Header — link drops under the heading on phones */}
         <div
-          style={{
-            display: "flex",
-            alignItems: "flex-end",
-            justifyContent: "space-between",
-            gap: 24,
-            marginBottom: "clamp(40px, 6vw, 64px)",
-          }}
+          className="flex flex-col items-start gap-4 sm:flex-row sm:items-end sm:justify-between sm:gap-6"
+          style={{ marginBottom: "clamp(32px, 6vw, 64px)" }}
         >
           <div>
             <h2
@@ -91,13 +86,10 @@ export default function PackageTeaser() {
           </Link>
         </div>
 
-        {/* Cards grid */}
+        {/* Cards grid — stacked row cards on phones, three columns from md */}
         <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(3, 1fr)",
-            gap: "clamp(10px, 1.5vw, 16px)",
-          }}
+          className="grid grid-cols-1 md:grid-cols-3"
+          style={{ gap: "clamp(12px, 1.5vw, 16px)" }}
         >
           {PACKAGES.map((pkg) => (
             <PackageCard key={pkg.id} pkg={pkg} />
@@ -106,12 +98,9 @@ export default function PackageTeaser() {
 
         {/* Footer */}
         <div
+          className="flex flex-col items-stretch gap-4 sm:flex-row sm:items-center sm:justify-between"
           style={{
             marginTop: "clamp(24px, 3vw, 36px)",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            gap: 16,
             paddingTop: "clamp(24px, 3vw, 36px)",
             borderTop: "1px solid rgba(0,0,0,0.08)",
           }}
@@ -126,7 +115,7 @@ export default function PackageTeaser() {
           >
             More than 10 players? Taggers are added in pairs, so tell us your numbers and we&apos;ll price it.
           </p>
-          <Link href="/packages" className="btn-blue">
+          <Link href="/packages" className="btn-blue shrink-0">
             Customise your package
             <span className="btn-icon-wrap btn-icon-wrap-white">
               <ArrowIcon />
@@ -145,11 +134,9 @@ function PackageCard({ pkg }: { pkg: typeof PACKAGES[0] }) {
   return (
     <Link
       href="/packages"
-      className="pkg-card group"
+      className="pkg-card group flex flex-row md:flex-col"
       style={{
         textDecoration: "none",
-        display: "flex",
-        flexDirection: "column",
         borderRadius: "1.25rem",
         overflow: "hidden",
         cursor: "pointer",
@@ -157,8 +144,11 @@ function PackageCard({ pkg }: { pkg: typeof PACKAGES[0] }) {
         boxShadow: "0 2px 8px rgba(0,0,0,0.06), 0 8px 24px rgba(0,0,0,0.04)",
       }}
     >
-      {/* ── Photo section — intrinsic ratio via paddingTop ── */}
-      <div style={{ position: "relative", paddingTop: "68%", overflow: "hidden", flexShrink: 0 }}>
+      {/* ── Photo — fills the left edge on phones, intrinsic 68% ratio from md ── */}
+      <div
+        className="relative w-[38%] min-h-[180px] md:w-full md:min-h-0 md:pt-[68%]"
+        style={{ overflow: "hidden", flexShrink: 0 }}
+      >
         <img
           src={PACKAGE_IMAGES[pkg.id]}
           alt={pkg.name}
@@ -176,14 +166,16 @@ function PackageCard({ pkg }: { pkg: typeof PACKAGES[0] }) {
       </div>
 
       {/* ── Info panel ── */}
-      <div style={{
-        background: "white",
-        borderTop: "1px solid rgba(0,0,0,0.07)",
-        padding: "clamp(14px,1.8vw,20px)",
-        display: "flex",
-        flexDirection: "column",
-        gap: 12,
-      }}>
+      <div
+        className="flex-1 min-w-0 border-l border-black/[0.07] md:border-l-0 md:border-t"
+        style={{
+          background: "white",
+          padding: "clamp(14px,1.8vw,20px)",
+          display: "flex",
+          flexDirection: "column",
+          gap: 12,
+        }}
+      >
 
         {/* Name + tagline */}
         <div>
@@ -209,8 +201,21 @@ function PackageCard({ pkg }: { pkg: typeof PACKAGES[0] }) {
           </p>
         </div>
 
-        {/* Best for */}
-        <div>
+        {/* Best for — a single line on phones, chips from md */}
+        <p
+          className="md:hidden"
+          style={{
+            fontFamily: "var(--font-dm-sans)",
+            fontSize: 13,
+            lineHeight: 1.45,
+            color: "var(--ink)",
+            margin: 0,
+          }}
+        >
+          <span style={{ color: "var(--muted)" }}>Best for </span>
+          {pkg.bestFor.join(", ").toLowerCase()}
+        </p>
+        <div className="hidden md:block">
           <p style={{
             fontFamily: "var(--font-dm-sans)",
             fontSize: 12, fontWeight: 700,
@@ -238,7 +243,7 @@ function PackageCard({ pkg }: { pkg: typeof PACKAGES[0] }) {
         </div>
 
         {/* Price + CTA */}
-        <div style={{
+        <div className="mt-auto" style={{
           display: "flex", alignItems: "center",
           justifyContent: "space-between", gap: 10,
           borderTop: "1px solid rgba(0,0,0,0.06)",

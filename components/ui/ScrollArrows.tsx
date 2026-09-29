@@ -82,7 +82,10 @@ function Arrow({
   visible: boolean;
   onClick: () => void;
 }) {
-  const offset = -(bleed + 26);
+  // Straddle the clip edge, but never overhang more than the gap to the
+  // viewport edge (less 8px), or the arrow gets cut off on tablets and laptops.
+  // Percentages resolve against the (centred) wrapper's width.
+  const offset = `calc(-1 * min(${bleed + 26}px, (100vw - 100%) / 2 - 8px))`;
   return (
     <button
       onClick={onClick}

@@ -125,7 +125,7 @@ export default function ContactPage() {
                       <input type="text" name="lastName" value={form.lastName} onChange={handleChange} required placeholder="Smith" className="form-input" />
                     </label>
                   </div>
-                  <div className="grid grid-cols-2 gap-3">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <label className="flex flex-col gap-1.5">
                       <span className="text-[13px] font-semibold text-[var(--ink)]" style={{ fontFamily: "var(--font-dm-sans)" }}>Email *</span>
                       <input type="email" name="email" value={form.email} onChange={handleChange} required placeholder="jane@example.com" className="form-input" />
@@ -152,7 +152,7 @@ export default function ContactPage() {
                       {EVENT_TYPES.map((t) => <option key={t} value={t}>{t}</option>)}
                     </select>
                   </label>
-                  <div className="grid grid-cols-2 gap-3">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <label className="flex flex-col gap-1.5">
                       <span className="text-[13px] font-semibold text-[var(--ink)]" style={{ fontFamily: "var(--font-dm-sans)" }}>Package interest</span>
                       <select name="packageInterest" value={form.packageInterest} onChange={handleChange} className="form-input">
@@ -190,7 +190,6 @@ export default function ContactPage() {
               {[
                 { icon: "📞", label: "Phone", value: "1300 661 565", href: "tel:1300661565" },
                 { icon: "✉️", label: "Email", value: "info@lasertag4hire.com.au", href: "mailto:info@lasertag4hire.com.au" },
-                { icon: "", label: "Postal address", value: "PO Box 417, Salamander Bay NSW 2317", href: "" },
               ].map((item) => (
                 <div
                   key={item.label}
@@ -219,9 +218,9 @@ export default function ContactPage() {
                 </div>
                 <dl className="grid grid-cols-[auto_1fr] gap-x-4 gap-y-1 text-base text-[var(--ink)]" style={{ fontFamily: "var(--font-dm-sans)" }}>
                   <dt className="text-[var(--muted)]">Mon – Fri</dt>
-                  <dd>8:30am – 3:30pm</dd>
+                  <dd className="whitespace-nowrap">8:30am – 3:30pm</dd>
                   <dt className="text-[var(--muted)]">Weekends &amp; holidays</dt>
-                  <dd>9:00am – 4:00pm</dd>
+                  <dd className="whitespace-nowrap">9:00am – 4:00pm</dd>
                 </dl>
               </div>
 

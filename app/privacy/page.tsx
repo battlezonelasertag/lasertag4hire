@@ -179,7 +179,7 @@ const POLICY: LegalSection[] = [
     id: "contact",
     title: "Contact us",
     blocks: [{
-      paragraphs: [<>CJR Sweeney Pty Ltd trading as Laser Tag 4 Hire, PO Box 417, Salamander Bay NSW 2317. Email {email} or call {phone}.</>],
+      paragraphs: [<>CJR Sweeney Pty Ltd trading as Laser Tag 4 Hire. Email {email} or call {phone}.</>],
     }],
   },
 ];

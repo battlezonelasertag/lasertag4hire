@@ -61,25 +61,27 @@ export default function PackagesPage() {
         {/* Package cards */}
         <div style={{ padding: "clamp(48px,7vw,96px) clamp(24px,6vw,96px)" }}>
           <div style={{ maxWidth: 1280, margin: "0 auto" }}>
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "clamp(12px,2vw,20px)" }}>
+            {/* One column on phones, photo-left rows on tablets, three columns from lg */}
+            <div className="grid grid-cols-1 lg:grid-cols-3" style={{ gap: "clamp(16px,2vw,20px)" }}>
               {PACKAGES.map((pkg) => (
                 <Link
                   key={pkg.id}
                   href={`/packages/${pkg.id}`}
                   style={{
                     textDecoration: "none",
-                    display: "flex",
-                    flexDirection: "column",
                     borderRadius: "1.25rem",
                     overflow: "hidden",
                     background: "white",
                     boxShadow: "0 2px 8px rgba(0,0,0,0.06), 0 8px 24px rgba(0,0,0,0.04)",
                     transition: "transform 240ms cubic-bezier(0.23,1,0.32,1), box-shadow 240ms",
                   }}
-                  className="group"
+                  className="group flex flex-col sm:flex-row lg:flex-col"
                 >
                   {/* Photo */}
-                  <div style={{ position: "relative", paddingTop: "62%", overflow: "hidden", flexShrink: 0 }}>
+                  <div
+                    className="relative pt-[62%] sm:w-[42%] sm:pt-0 lg:w-full lg:pt-[62%]"
+                    style={{ overflow: "hidden", flexShrink: 0 }}
+                  >
                     <img
                       src={PACKAGE_IMAGES[pkg.id]}
                       alt={pkg.name}
@@ -94,7 +96,7 @@ export default function PackagesPage() {
                   </div>
 
                   {/* Info panel */}
-                  <div style={{ padding: "clamp(16px,2vw,22px)", display: "flex", flexDirection: "column", gap: 12 }}>
+                  <div className="flex-1 min-w-0" style={{ padding: "clamp(16px,2vw,22px)", display: "flex", flexDirection: "column", gap: 12 }}>
                     <div>
                       <h2 style={{
                         fontFamily: "var(--font-syne)", fontWeight: 700,
@@ -109,7 +111,7 @@ export default function PackagesPage() {
                     </div>
 
                     {/* Specs row */}
-                    <div style={{ display: "flex", gap: 16 }}>
+                    <div style={{ display: "flex", flexWrap: "wrap", gap: "8px 20px" }}>
                       {[
                         { label: "Range", value: pkg.range },
                         { label: "Weight", value: pkg.weight },
@@ -140,7 +142,7 @@ export default function PackagesPage() {
                     </div>
 
                     {/* Price + CTA */}
-                    <div style={{
+                    <div className="mt-auto" style={{
                       display: "flex", alignItems: "center", justifyContent: "space-between", gap: 10,
                       borderTop: "1px solid rgba(0,0,0,0.06)", paddingTop: 12,
                     }}>
@@ -189,11 +191,10 @@ export default function PackagesPage() {
             </div>
 
             {/* Bento grid */}
-            <div style={{
-              display: "grid",
-              gridTemplateColumns: "1.1fr 0.9fr",
-              gap: "clamp(10px,1.2vw,14px)",
-            }}>
+            <div
+              className="grid grid-cols-1 md:grid-cols-[1.1fr_0.9fr]"
+              style={{ gap: "clamp(10px,1.2vw,14px)" }}
+            >
 
               {/* Left — Free delivery (large blue hero card) */}
               <div style={{
@@ -204,7 +205,7 @@ export default function PackagesPage() {
                 flexDirection: "column",
                 position: "relative",
                 overflow: "hidden",
-                minHeight: "clamp(340px,42vw,500px)",
+                minHeight: "clamp(300px,42vw,500px)",
               }}>
                 <div style={{
                   position: "absolute", inset: 0,
@@ -375,7 +376,7 @@ export default function PackagesPage() {
             <div style={{ display: "flex", flexDirection: "column", gap: "clamp(64px,8vw,96px)" }}>
 
               {/* Row 1 — Colour display */}
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "clamp(32px,5vw,72px)", alignItems: "center" }}>
+              <div className="grid grid-cols-1 md:grid-cols-2" style={{ gap: "clamp(28px,5vw,72px)", alignItems: "center" }}>
                 <MediaClip src="/video/tagger-display" label="Close-up of a tagger display showing fire mode, health and ammo as the mode button is pressed" />
                 <div>
                   <h3 style={{ fontFamily: "var(--font-syne)", fontWeight: 700, fontSize: "clamp(24px,2.8vw,38px)", letterSpacing: "-0.02em", lineHeight: 1.1, color: "var(--ink)", margin: "0 0 20px" }}>
@@ -395,9 +396,9 @@ export default function PackagesPage() {
                 </div>
               </div>
 
-              {/* Row 2 — Real-time hit feedback (flipped) */}
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "clamp(32px,5vw,72px)", alignItems: "center" }}>
-                <div>
+              {/* Row 2 — Real-time hit feedback (flipped from md; video leads when stacked) */}
+              <div className="grid grid-cols-1 md:grid-cols-2" style={{ gap: "clamp(28px,5vw,72px)", alignItems: "center" }}>
+                <div className="order-1 md:order-none">
                   <h3 style={{ fontFamily: "var(--font-syne)", fontWeight: 700, fontSize: "clamp(24px,2.8vw,38px)", letterSpacing: "-0.02em", lineHeight: 1.1, color: "var(--ink)", margin: "0 0 20px" }}>
                     The taggers settle the arguments
                   </h3>
@@ -417,7 +418,7 @@ export default function PackagesPage() {
               </div>
 
               {/* Row 3 — Vibration + simulated recoil */}
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "clamp(32px,5vw,72px)", alignItems: "center" }}>
+              <div className="grid grid-cols-1 md:grid-cols-2" style={{ gap: "clamp(28px,5vw,72px)", alignItems: "center" }}>
                 <MediaClip src="/video/tagger-trigger" label="Hand gripping a tagger and pulling the trigger repeatedly as the ammo count drops" />
                 <div>
                   <h3 style={{ fontFamily: "var(--font-syne)", fontWeight: 700, fontSize: "clamp(24px,2.8vw,38px)", letterSpacing: "-0.02em", lineHeight: 1.1, color: "var(--ink)", margin: "0 0 20px" }}>

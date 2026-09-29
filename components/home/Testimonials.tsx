@@ -90,7 +90,8 @@ export default function Testimonials() {
 
         {/* Draggable carousel — arrows sit outside the overflow clip */}
         <div ref={stripWrapRef} style={{ position: "relative" }}>
-          <div ref={constraintsRef} className="overflow-hidden">
+          {/* On phones the strip bleeds to the screen edge so the next card peeks in */}
+          <div ref={constraintsRef} className="overflow-hidden -mx-6 sm:mx-0">
             <AnimatePresence mode="wait">
               <motion.div
                 key={active}
@@ -98,7 +99,7 @@ export default function Testimonials() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -8 }}
                 transition={{ duration: 0.3, ease: [0.23, 1, 0.32, 1] }}
-                className="flex gap-4 overflow-x-auto scroll-strip pb-4"
+                className="flex gap-4 overflow-x-auto scroll-strip pb-4 px-6 scroll-px-6 sm:px-0 sm:scroll-px-0"
               >
                 {filtered.map((t, i) => (
                   <TestimonialCard key={t.id} t={t} index={i} />

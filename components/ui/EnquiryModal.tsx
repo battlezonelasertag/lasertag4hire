@@ -210,7 +210,7 @@ export default function EnquiryModal({
                   </div>
 
                   {/* Contact row */}
-                  <div className="grid grid-cols-2 gap-3">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <FormField label="Email" required>
                       <input
                         type="email"
@@ -275,7 +275,7 @@ export default function EnquiryModal({
                     </select>
                   </FormField>
 
-                  <div className="grid grid-cols-2 gap-3">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <FormField label="Package interest">
                       <select
                         name="packageInterest"

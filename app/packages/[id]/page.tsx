@@ -170,7 +170,7 @@ export default function PackageDetailPage({ params }: { params: Promise<{ id: st
             zIndex: 10,
             minHeight: "88vh",
             paddingTop: "calc(var(--nav-h-top, 116px) + 32px)",
-            paddingRight: "clamp(24px, 6vw, 96px)",
+            paddingRight: "max(clamp(24px, 6vw, 96px), calc((100% - var(--site-max)) / 2))",
             paddingBottom: 64,
             display: "flex", alignItems: "flex-start", justifyContent: "flex-end",
           }}>
@@ -283,7 +283,8 @@ export default function PackageDetailPage({ params }: { params: Promise<{ id: st
             <div
               className="hidden lg:flex"
               style={{
-                position: "absolute", top: "clamp(480px, 68vh, 680px)", left: "clamp(24px, 6vw, 96px)",
+                position: "absolute", top: "clamp(480px, 68vh, 680px)",
+                left: "max(clamp(24px, 6vw, 96px), calc((100% - var(--site-max)) / 2))",
                 zIndex: 10,
                 gap: 12,
               }}

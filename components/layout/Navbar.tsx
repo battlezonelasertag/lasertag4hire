@@ -51,7 +51,8 @@ export default function Navbar({ onQuoteClick }: { onQuoteClick?: () => void }) 
           top: 0, left: 0, right: 0,
           zIndex: 40,
           height: scrolled ? "var(--nav-h, 72px)" : "var(--nav-h-top, 116px)",
-          padding: "0 clamp(24px, 6vw, 80px)",
+          // Bar stays full-bleed; logo and links hold to the site width on large displays
+          padding: "0 max(clamp(24px, 6vw, 80px), calc((100% - var(--site-max)) / 2))",
           display: "flex",
           alignItems: "center",
           gap: 8,

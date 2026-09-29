@@ -102,7 +102,7 @@ export default function QuickStartPage() {
       <main className="min-h-[100dvh] section-cream">
         <PageHero image="/images/page_header_quickstart.jpg" title="Quick start guide">
           From the box to the first game in a few minutes. The full setup guide is in your kit, and we&apos;re on{" "}
-          <a href="tel:1300661565" className="text-white/80 hover:text-white underline">1300 661 565</a> if anything doesn&apos;t behave.
+          <a href="tel:1300661565" className="text-white/80 hover:text-white underline">1300 661 565</a>{" "}if anything doesn&apos;t behave.
         </PageHero>
 
         <div className="max-w-6xl mx-auto px-6 py-16 lg:py-24">

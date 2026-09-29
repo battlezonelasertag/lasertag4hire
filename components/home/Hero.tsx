@@ -81,11 +81,14 @@ export default function Hero({ onQuoteClick }: { onQuoteClick?: () => void }) {
         }}
       />
 
-      {/* Content — bottom-anchored */}
+      {/* Content — bottom-anchored, held to the site width on large displays */}
       <div
         style={{
           position: "relative",
           zIndex: 2,
+          width: "100%",
+          maxWidth: "calc(var(--site-max) + 2 * clamp(48px, 6vw, 96px))",
+          marginInline: "auto",
           padding: "clamp(48px, 6vw, 96px)",
           paddingBottom: "clamp(48px, 6vw, 80px)",
         }}

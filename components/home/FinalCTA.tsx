@@ -49,7 +49,14 @@ export default function FinalCTA({ onQuoteClick }: { onQuoteClick?: () => void }
 
       <div
         className="lg:grid lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center"
-        style={{ position: "relative", zIndex: 1 }}
+        // Children carry their own clamp(24px, 6vw, 96px) gutters; cap the row so
+        // the content between them never exceeds the site width
+        style={{
+          position: "relative",
+          zIndex: 1,
+          maxWidth: "calc(var(--site-max) + 2 * clamp(24px, 6vw, 96px))",
+          margin: "0 auto",
+        }}
       >
         <div>
           {/* Headline */}
@@ -88,7 +95,7 @@ export default function FinalCTA({ onQuoteClick }: { onQuoteClick?: () => void }
               alignItems: "center",
             }}
           >
-            <div className="cta-bot" style={{ display: "flex", gap: 10, alignItems: "center" }}>
+            <div className="cta-bot flex w-full flex-col items-stretch gap-2.5 sm:w-auto sm:flex-row sm:items-center">
               <Link
                 href="https://fareharbor.com/embeds/book/lasertag4hire/"
                 target="_blank"
@@ -96,6 +103,7 @@ export default function FinalCTA({ onQuoteClick }: { onQuoteClick?: () => void }
                 style={{
                   display: "inline-flex",
                   alignItems: "center",
+                  justifyContent: "center",
                   gap: 8,
                   background: "white",
                   color: "#dc3129",
@@ -116,6 +124,7 @@ export default function FinalCTA({ onQuoteClick }: { onQuoteClick?: () => void }
                 style={{
                   display: "inline-flex",
                   alignItems: "center",
+                  justifyContent: "center",
                   background: "transparent",
                   color: "white",
                   border: "1.5px solid rgba(255,255,255,0.4)",

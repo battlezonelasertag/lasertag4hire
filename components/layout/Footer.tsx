@@ -52,7 +52,6 @@ export default function Footer() {
                 <MailIcon />
                 info@lasertag4hire.com.au
               </a>
-              <p className="mt-1">PO Box 417, Salamander Bay NSW 2317</p>
             </div>
           </div>
 

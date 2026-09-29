@@ -97,9 +97,14 @@ export default function AboutPage() {
             {STATS.map((s, i) => (
               <div
                 key={s.label}
+                /* Dividers follow the grid: 2×2 on phones, one row of four from lg */
+                className={[
+                  "border-white/[0.07]",
+                  i % 2 === 0 ? "border-r" : i < 3 ? "lg:border-r" : "",
+                  i < 2 ? "border-b lg:border-b-0" : "",
+                ].join(" ")}
                 style={{
-                  padding: "clamp(24px,3vw,36px) 24px",
-                  borderRight: i < 3 ? "1px solid rgba(255,255,255,0.07)" : "none",
+                  padding: "clamp(24px,3vw,36px) clamp(12px,2vw,24px)",
                   textAlign: "center",
                 }}
               >
@@ -364,7 +369,9 @@ export default function AboutPage() {
         {/* ── CTA ─────────────────────────────────────── */}
         <div
           style={{
-            background: "var(--ink)", margin: "0 clamp(16px,3vw,40px) clamp(16px,3vw,40px)",
+            background: "var(--ink)",
+            // Card edges line up with the content column on large displays
+            margin: "0 max(clamp(16px,3vw,40px), calc((100% - var(--site-max)) / 2)) clamp(16px,3vw,40px)",
             borderRadius: "1.75rem", overflow: "hidden", position: "relative",
             padding: "clamp(48px,6vw,72px) clamp(32px,6vw,72px)",
           }}
