@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useState, useRef } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import { trackLead } from "@/lib/analytics";
 
 interface FormData {
   firstName: string;
@@ -73,6 +74,7 @@ export default function EnquiryModal({
         body: JSON.stringify({ ...form, company: honeypotRef.current?.value ?? "" }),
       });
       if (res.ok) {
+        trackLead("quote_modal", form.packageInterest);
         setStatus("success");
         setForm(EMPTY_FORM);
       } else {

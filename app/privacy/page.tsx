@@ -11,7 +11,7 @@ import LegalDocument, { type LegalSection } from "@/components/ui/LegalDocument"
 // Written against what the site and booking terms actually do with personal information
 // (enquiry forms, FareHarbor bookings, courier delivery, in-person pick-up, hosting and email
 // providers, the postcode checker). Update it whenever a new tool or process handles personal data.
-const LAST_UPDATED = "28 September 2026";
+const LAST_UPDATED = "29 September 2026";
 
 const email = <a href="mailto:info@lasertag4hire.com.au" className="underline hover:text-[var(--ink)]">info@lasertag4hire.com.au</a>;
 const phone = <a href="tel:1300661565" className="underline hover:text-[var(--ink)]">1300 661 565</a>;
@@ -40,7 +40,7 @@ const POLICY: LegalSection[] = [
         "Identification: if you collect equipment in person, our booking terms require ID showing your address. We look at it to confirm who is hiring the equipment, and we don't copy, record or store it.",
         "Newsletter subscriptions: your name and email address if you subscribe to our emails.",
         "Our communications with you, including emails, social media messages and notes from phone calls.",
-        "Technical information when you use the website, such as your IP address, browser type and the pages you visit, which our hosting provider records in standard server logs.",
+        "Technical information when you use the website, such as your IP address, browser type and the pages you visit, which our hosting provider records in standard server logs and Google Analytics measures on our behalf (see Cookies and website data below).",
       ],
     }],
   },
@@ -91,6 +91,7 @@ const POLICY: LegalSection[] = [
         "Our accounting software, which holds invoices and payment records.",
         "Social media platforms such as Facebook and Instagram, when you contact us through them. Those messages are also handled under the platform's own privacy policy.",
         "Our website host (Vercel), which runs this site and keeps server logs.",
+        "Google Analytics, which measures how visitors use this website.",
         "Map and location services (OpenStreetMap), which receive your IP address when the delivery map loads, and any postcode or suburb you type into the postcode checker.",
         "Professional advisers such as our accountant, and government agencies or authorities when the law requires it.",
       ],
@@ -110,8 +111,10 @@ const POLICY: LegalSection[] = [
     title: "Cookies and website data",
     blocks: [{
       paragraphs: [
-        "This website doesn't use advertising or analytics cookies. Some embedded services, such as the booking calendar and the delivery map, may set their own cookies or collect technical information under their own privacy policies. You can block or clear cookies in your browser settings, although parts of the booking calendar may not work without them.",
-        "If we add analytics or advertising tools in future, we'll update this policy first.",
+        "We use Google Analytics to understand how people find and use this website, such as which pages are visited, how long people stay, roughly where they are (to city level), what device and browser they use, and whether an enquiry form was sent. It uses cookies and your IP address to do this. We don't send Google your name, email address, phone number or anything you type into our forms, and we don't use Google Analytics for advertising.",
+        <>You can stop Google Analytics collecting data about your visits by installing the{" "}<a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener noreferrer" className="underline hover:text-[var(--ink)]">Google Analytics opt-out browser add-on</a>, or by blocking or clearing cookies in your browser settings.</>,
+        "Some embedded services, such as the booking calendar and the delivery map, may set their own cookies or collect technical information under their own privacy policies. Parts of the booking calendar may not work if you block cookies.",
+        "This website doesn't use advertising cookies. If we add advertising tools in future, we'll update this policy first.",
       ],
     }],
   },

@@ -141,6 +141,10 @@ export const EVENT_TYPES: EventType[] = [
 // custom domain (the bare lasertag4hire.com.au, which only redirects to www).
 export const SITE_URL = "https://www.lasertag4hire.com.au";
 
+// Google Analytics 4 web stream for www.lasertag4hire.com.au (Admin → Data streams → Measurement ID).
+// Only loaded on the production deployment, so local dev and Vercel previews don't count as visits.
+export const GA_MEASUREMENT_ID = "G-TTDX2RLRE7";
+
 // The team has run laser tag since 2011: Battlezone Laser Tag first, with Laser Tag 4 Hire growing
 // out of it later (see the About story; the risk assessment dates from July 2011). Years copy is
 // calculated from this so it never goes stale.

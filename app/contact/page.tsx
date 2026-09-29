@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState, useRef } from "react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import { trackLead } from "@/lib/analytics";
 
 interface FormData {
   firstName: string;
@@ -53,7 +54,10 @@ export default function ContactPage() {
         body: JSON.stringify({ ...form, company: honeypotRef.current?.value ?? "" }),
       });
       setStatus(res.ok ? "success" : "error");
-      if (res.ok) setForm(EMPTY_FORM);
+      if (res.ok) {
+        trackLead("contact_page", form.packageInterest);
+        setForm(EMPTY_FORM);
+      }
     } catch {
       setStatus("error");
     }

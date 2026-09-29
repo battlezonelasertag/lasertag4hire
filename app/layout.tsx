@@ -1,7 +1,11 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import { GoogleAnalytics } from "@next/third-parties/google";
 import "./globals.css";
-import { SITE_URL } from "@/lib/data";
+import { GA_MEASUREMENT_ID, SITE_URL } from "@/lib/data";
+
+// Production deployment only: keeps local dev and Vercel preview traffic out of the reports.
+const loadAnalytics = Boolean(GA_MEASUREMENT_ID) && process.env.VERCEL_ENV === "production";
 
 // Self-hosted (latin variable files from Google Fonts, OFL). next/font/google fetches from Google
 // at build time and intermittently fails the build on Vercel, so the files live in the repo.
@@ -61,6 +65,7 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col antialiased overflow-x-hidden">
         {children}
       </body>
+      {loadAnalytics && <GoogleAnalytics gaId={GA_MEASUREMENT_ID} />}
     </html>
   );
 }
