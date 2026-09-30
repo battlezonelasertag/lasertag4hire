@@ -4,7 +4,8 @@ import Link from "next/link";
 import { useState, useRef } from "react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
-import { trackLead } from "@/lib/analytics";
+import { MarketingOptIn } from "@/components/ui/EnquiryModal";
+import { getFirstTouch, track, trackLead } from "@/lib/analytics";
 
 interface FormData {
   firstName: string;
@@ -38,7 +39,15 @@ const PACKAGE_OPTIONS = [
 export default function ContactPage() {
   const [form, setForm] = useState<FormData>(EMPTY_FORM);
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
+  const [marketingOptIn, setMarketingOptIn] = useState(false);
   const honeypotRef = useRef<HTMLInputElement>(null);
+  const startedRef = useRef(false);
+
+  const handleFirstFocus = () => {
+    if (startedRef.current) return;
+    startedRef.current = true;
+    track("enquiry_form_started", { form: "contact_page" });
+  };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -51,12 +60,19 @@ export default function ContactPage() {
       const res = await fetch("/api/enquiry", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...form, company: honeypotRef.current?.value ?? "" }),
+        body: JSON.stringify({
+          ...form,
+          marketingOptIn,
+          form: "contact_page",
+          attribution: getFirstTouch(),
+          company: honeypotRef.current?.value ?? "",
+        }),
       });
       setStatus(res.ok ? "success" : "error");
       if (res.ok) {
-        trackLead("contact_page", form.packageInterest);
+        trackLead("contact_page", { ...form, marketingOptIn });
         setForm(EMPTY_FORM);
+        setMarketingOptIn(false);
       }
     } catch {
       setStatus("error");
@@ -116,7 +132,7 @@ export default function ContactPage() {
                   </p>
                 </div>
               ) : (
-                <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+                <form onSubmit={handleSubmit} onFocus={handleFirstFocus} className="flex flex-col gap-4">
                   {/* Honeypot: hidden from people and screen readers; bots that fill it are dropped by the API */}
                   <input ref={honeypotRef} type="text" name="company" tabIndex={-1} autoComplete="off" aria-hidden="true" style={{ position: "absolute", left: "-10000px", width: 1, height: 1, opacity: 0 }} />
                   <div className="grid grid-cols-2 gap-3">
@@ -173,6 +189,7 @@ export default function ContactPage() {
                     <span className="text-[13px] font-semibold text-[var(--ink)]" style={{ fontFamily: "var(--font-dm-sans)" }}>Message</span>
                     <textarea name="message" value={form.message} onChange={handleChange} rows={4} placeholder="Tell us about your event..." className="form-input resize-none" />
                   </label>
+                  <MarketingOptIn checked={marketingOptIn} onChange={setMarketingOptIn} />
                   {status === "error" && (
                     <p className="text-[15px] text-red-600" style={{ fontFamily: "var(--font-dm-sans)" }}>
                       Something went wrong. Please try again or call 1300 661 565.
@@ -182,7 +199,7 @@ export default function ContactPage() {
                     {status === "sending" ? "Sending..." : "Send message"}
                   </button>
                   <p className="text-center text-[13px] text-[var(--muted)]" style={{ fontFamily: "var(--font-dm-sans)" }}>
-                    We only use these details to reply to your enquiry.{" "}
+                    We use these details to handle your enquiry, and only send offers if you tick the box.{" "}
                     <Link href="/privacy" className="underline hover:text-[var(--ink)]">Privacy policy</Link>
                   </p>
                 </form>

@@ -1,9 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { trackLead } from "@/lib/analytics";
+import { getFirstTouch, track, trackLead } from "@/lib/analytics";
 
 interface FormData {
   firstName: string;
@@ -56,7 +56,20 @@ export default function EnquiryModal({
 }) {
   const [form, setForm] = useState<FormData>(EMPTY_FORM);
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
+  const [marketingOptIn, setMarketingOptIn] = useState(false);
   const honeypotRef = useRef<HTMLInputElement>(null);
+  const startedRef = useRef(false);
+
+  useEffect(() => {
+    if (open) track("quote_form_opened", { location: window.location.pathname });
+  }, [open]);
+
+  // Once per page view: the gap between started and enquiry_submitted is form abandonment.
+  const handleFirstFocus = () => {
+    if (startedRef.current) return;
+    startedRef.current = true;
+    track("enquiry_form_started", { form: "quote_modal" });
+  };
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
@@ -71,12 +84,19 @@ export default function EnquiryModal({
       const res = await fetch("/api/enquiry", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...form, company: honeypotRef.current?.value ?? "" }),
+        body: JSON.stringify({
+          ...form,
+          marketingOptIn,
+          form: "quote_modal",
+          attribution: getFirstTouch(),
+          company: honeypotRef.current?.value ?? "",
+        }),
       });
       if (res.ok) {
-        trackLead("quote_modal", form.packageInterest);
+        trackLead("quote_modal", { ...form, marketingOptIn });
         setStatus("success");
         setForm(EMPTY_FORM);
+        setMarketingOptIn(false);
       } else {
         setStatus("error");
       }
@@ -182,7 +202,7 @@ export default function EnquiryModal({
                   </button>
                 </div>
               ) : (
-                <form onSubmit={handleSubmit} className="px-6 py-6 flex flex-col gap-4">
+                <form onSubmit={handleSubmit} onFocus={handleFirstFocus} className="px-6 py-6 flex flex-col gap-4">
                   {/* Honeypot: hidden from people and screen readers; bots that fill it are dropped by the API */}
                   <input ref={honeypotRef} type="text" name="company" tabIndex={-1} autoComplete="off" aria-hidden="true" style={{ position: "absolute", left: "-10000px", width: 1, height: 1, opacity: 0 }} />
                   {/* Name row */}
@@ -315,6 +335,8 @@ export default function EnquiryModal({
                     />
                   </FormField>
 
+                  <MarketingOptIn checked={marketingOptIn} onChange={setMarketingOptIn} />
+
                   {status === "error" && (
                     <p
                       className="text-[15px] text-red-600"
@@ -347,6 +369,32 @@ export default function EnquiryModal({
         </>
       )}
     </AnimatePresence>
+  );
+}
+
+export function MarketingOptIn({
+  checked,
+  onChange,
+}: {
+  checked: boolean;
+  onChange: (checked: boolean) => void;
+}) {
+  return (
+    <label className="flex items-start gap-3 cursor-pointer">
+      <input
+        type="checkbox"
+        name="marketingOptIn"
+        checked={checked}
+        onChange={(e) => onChange(e.target.checked)}
+        className="mt-0.5 w-[18px] h-[18px] shrink-0 accent-[var(--blue)] cursor-pointer"
+      />
+      <span
+        className="text-[14px] leading-snug text-[var(--ink)]"
+        style={{ fontFamily: "var(--font-dm-sans)" }}
+      >
+        Email me the occasional offer and party idea. Unsubscribe any time.
+      </span>
+    </label>
   );
 }
 

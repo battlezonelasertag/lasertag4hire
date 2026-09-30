@@ -1,5 +1,6 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextRequest, NextResponse, after } from "next/server";
 import { Resend } from "resend";
+import { mailchimpConfigured, syncEnquiryToMailchimp } from "@/lib/mailchimp";
 
 const CONTACT_EMAIL = process.env.CONTACT_EMAIL ?? "info@lasertag4hire.com.au";
 
@@ -21,6 +22,9 @@ const LIMITS: Record<string, number> = {
   firstName: 80, lastName: 80, email: 200, phone: 40, eventDate: 20, eventType: 80,
   postcode: 10, packageInterest: 80, playerCount: 20, message: 2000,
 };
+
+// First-touch attribution recorded in the visitor's browser (lib/analytics.ts).
+const ATTRIBUTION_LIMITS = { source: 100, medium: 100, campaign: 150, landingPage: 200 };
 
 function clean(value: unknown, max: number) {
   return typeof value === "string" ? value.trim().slice(0, max) : "";
@@ -96,6 +100,27 @@ export async function POST(req: NextRequest) {
       html: buildConfirmEmail({ firstName: escapeHtml(firstName) }),
     });
     if (confirmation.error) console.error("Confirmation email failed:", confirmation.error);
+
+    // Add or update the contact in Mailchimp once the visitor has their answer. Best effort:
+    // the enquiry has already reached the inbox, so a CRM failure is only logged.
+    if (mailchimpConfigured()) {
+      const attribution = typeof body?.attribution === "object" && body.attribution ? body.attribution : {};
+      const a = Object.fromEntries(
+        Object.entries(ATTRIBUTION_LIMITS).map(([key, max]) => [key, clean(attribution[key], max)]),
+      ) as Record<keyof typeof ATTRIBUTION_LIMITS, string>;
+      after(async () => {
+        try {
+          await syncEnquiryToMailchimp({
+            firstName, lastName, email, phone, eventDate, eventType, postcode, packageInterest, playerCount, message,
+            ...a,
+            form: body?.form === "contact_page" ? "contact_page" : "quote_modal",
+            marketingOptIn: body?.marketingOptIn === true,
+          });
+        } catch (err) {
+          console.error("Mailchimp sync failed:", err);
+        }
+      });
+    }
 
     return NextResponse.json({ success: true });
   } catch (err) {

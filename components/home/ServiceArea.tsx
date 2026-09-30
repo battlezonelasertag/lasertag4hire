@@ -3,6 +3,7 @@
 import { useState } from "react";
 import dynamic from "next/dynamic";
 import { FREE_POSTCODES } from "@/lib/data";
+import { track } from "@/lib/analytics";
 import type { ServiceAreaMapProps } from "./ServiceAreaMapInner";
 
 const ServiceAreaMap = dynamic<ServiceAreaMapProps>(
@@ -44,6 +45,7 @@ export default function ServiceArea() {
       if (isPostcode) {
         const status = FREE_POSTCODES.includes(q) ? "covered" : "quote";
         setResult(status);
+        track("postcode_checked", { postcode: q, result: status });
         setPinPostcode(q);
 
         const res = await fetch(
@@ -66,12 +68,14 @@ export default function ServiceArea() {
 
         if (!best?.address?.postcode) {
           setResult("not-found");
+          track("postcode_checked", { query: q, result: "not-found" });
           return;
         }
 
         const pc = best.address.postcode.slice(0, 4);
         const status = FREE_POSTCODES.includes(pc) ? "covered" : "quote";
         setResult(status);
+        track("postcode_checked", { postcode: pc, query: q, result: status });
         setPinPostcode(pc);
         setPinCoords([parseFloat(best.lat), parseFloat(best.lon)]);
       }
