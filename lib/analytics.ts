@@ -2,7 +2,8 @@ import { sendGAEvent } from "@next/third-parties/google";
 import posthog from "posthog-js";
 
 export const POSTHOG_REGION = process.env.NEXT_PUBLIC_POSTHOG_REGION === "eu" ? "eu" : "us";
-export const POSTHOG_PROXY_PATH = "/relay-lt4h";
+// PostHog's managed reverse proxy (a CNAME on our domain), so ad blockers don't drop the requests.
+export const POSTHOG_API_HOST = "https://b.lasertag4hire.com.au";
 
 /** Sends a named PostHog event. No-ops when PostHog isn't loaded (local dev, previews, no key). */
 export function track(event: string, properties?: Record<string, unknown>) {

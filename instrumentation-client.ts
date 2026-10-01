@@ -1,5 +1,5 @@
 import posthog from "posthog-js";
-import { POSTHOG_PROXY_PATH, POSTHOG_REGION, recordFirstTouch, track } from "@/lib/analytics";
+import { POSTHOG_API_HOST, POSTHOG_REGION, recordFirstTouch, track } from "@/lib/analytics";
 
 // Remember where this visitor first came from, so an enquiry can carry its lead source into Mailchimp.
 // Stays in the visitor's browser and only leaves it with a form they choose to send.
@@ -10,8 +10,7 @@ recordFirstTouch();
 const key = process.env.NEXT_PUBLIC_POSTHOG_KEY;
 if (key && process.env.NEXT_PUBLIC_VERCEL_ENV === "production") {
   posthog.init(key, {
-    // Sent through our own domain (see rewrites in next.config.ts) so ad blockers don't drop it.
-    api_host: POSTHOG_PROXY_PATH,
+    api_host: POSTHOG_API_HOST,
     ui_host: `https://${POSTHOG_REGION}.posthog.com`,
     defaults: "2026-08-30",
     // Anonymous visitors are counted without a person profile; one is created when they send an
