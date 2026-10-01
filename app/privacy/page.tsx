@@ -11,7 +11,7 @@ import LegalDocument, { type LegalSection } from "@/components/ui/LegalDocument"
 // Written against what the site and booking terms actually do with personal information
 // (enquiry forms, FareHarbor bookings, courier delivery, in-person pick-up, hosting and email
 // providers, the postcode checker). Update it whenever a new tool or process handles personal data.
-const LAST_UPDATED = "30 September 2026";
+const LAST_UPDATED = "1 October 2026";
 
 const email = <a href="mailto:info@lasertag4hire.com.au" className="underline hover:text-[var(--ink)]">info@lasertag4hire.com.au</a>;
 const phone = <a href="tel:1300661565" className="underline hover:text-[var(--ink)]">1300 661 565</a>;
@@ -34,7 +34,7 @@ const POLICY: LegalSection[] = [
       paragraphs: ["We only collect what we need to answer your enquiry and run your hire. Depending on how you deal with us, that can include:"],
       bullets: [
         "Contact details: your name, email address and phone number.",
-        "Event details: the date, type of event, postcode, number of players, the package you're interested in, and anything you write in a message.",
+        "Event details: the date, type of event, suburb and postcode, number of players and their rough ages, the package you're interested in, and anything you write in a message.",
         "Delivery and collection details: the address the equipment goes to and is collected from, and who will be there to sign for it.",
         "Booking and payment details: what you booked, amounts paid and payment status. Online card and Afterpay payments are handled by our booking and payment providers. If you give us card details over the phone, we use them only to process that payment and don't write them down or store them anywhere.",
         "Identification: if you collect equipment in person, our booking terms require ID showing your address. We look at it to confirm who is hiring the equipment, and we don't copy, record or store it.",

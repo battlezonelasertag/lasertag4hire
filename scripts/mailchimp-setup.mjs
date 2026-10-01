@@ -28,7 +28,9 @@ async function call(method, path, body) {
 const FIELDS = [
   { tag: "EVENTDATE", name: "Event date", type: "date", options: { date_format: "DD/MM/YYYY" } },
   { tag: "EVENTTYPE", name: "Event type", type: "text" },
+  { tag: "SUBURB", name: "Event suburb", type: "text" },
   { tag: "POSTCODE", name: "Event postcode", type: "text" },
+  { tag: "AGES", name: "Players' ages", type: "text" },
   { tag: "PACKAGE", name: "Package interest", type: "text" },
   { tag: "PLAYERS", name: "Number of players", type: "text" },
   { tag: "SOURCE", name: "Lead source", type: "text" },

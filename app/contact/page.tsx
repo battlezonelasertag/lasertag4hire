@@ -6,6 +6,7 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { MarketingOptIn } from "@/components/ui/EnquiryModal";
 import { getFirstTouch, track, trackLead } from "@/lib/analytics";
+import { PLAYER_AGE_BANDS } from "@/lib/data";
 
 interface FormData {
   firstName: string;
@@ -14,7 +15,9 @@ interface FormData {
   phone: string;
   eventDate: string;
   eventType: string;
+  suburb: string;
   postcode: string;
+  playerAges: string;
   packageInterest: string;
   playerCount: string;
   message: string;
@@ -22,7 +25,7 @@ interface FormData {
 
 const EMPTY_FORM: FormData = {
   firstName: "", lastName: "", email: "", phone: "",
-  eventDate: "", eventType: "", postcode: "",
+  eventDate: "", eventType: "", suburb: "", postcode: "", playerAges: "",
   packageInterest: "", playerCount: "", message: "",
 };
 
@@ -155,29 +158,35 @@ export default function ContactPage() {
                       <input type="tel" name="phone" value={form.phone} onChange={handleChange} placeholder="04XX XXX XXX" className="form-input" />
                     </label>
                   </div>
-                  <div className="grid grid-cols-2 gap-3">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <label className="flex flex-col gap-1.5">
                       <span className="text-[13px] font-semibold text-[var(--ink)]" style={{ fontFamily: "var(--font-dm-sans)" }}>Event date *</span>
                       <input type="date" name="eventDate" value={form.eventDate} onChange={handleChange} required className="form-input" />
                     </label>
                     <label className="flex flex-col gap-1.5">
-                      <span className="text-[13px] font-semibold text-[var(--ink)]" style={{ fontFamily: "var(--font-dm-sans)" }}>Postcode *</span>
-                      <input type="text" name="postcode" value={form.postcode} onChange={handleChange} required maxLength={4} placeholder="2317" className="form-input" />
+                      <span className="text-[13px] font-semibold text-[var(--ink)]" style={{ fontFamily: "var(--font-dm-sans)" }}>Event type *</span>
+                      <select name="eventType" value={form.eventType} onChange={handleChange} required className="form-input">
+                        <option value="">Select event type</option>
+                        {EVENT_TYPES.map((t) => <option key={t} value={t}>{t}</option>)}
+                      </select>
                     </label>
                   </div>
-                  <label className="flex flex-col gap-1.5">
-                    <span className="text-[13px] font-semibold text-[var(--ink)]" style={{ fontFamily: "var(--font-dm-sans)" }}>Event type *</span>
-                    <select name="eventType" value={form.eventType} onChange={handleChange} required className="form-input">
-                      <option value="">Select event type</option>
-                      {EVENT_TYPES.map((t) => <option key={t} value={t}>{t}</option>)}
-                    </select>
-                  </label>
+                  <div className="grid grid-cols-[minmax(0,1fr)_7.5rem] gap-3">
+                    <label className="flex flex-col gap-1.5">
+                      <span className="text-[13px] font-semibold text-[var(--ink)]" style={{ fontFamily: "var(--font-dm-sans)" }}>Event suburb *</span>
+                      <input type="text" name="suburb" value={form.suburb} onChange={handleChange} required autoComplete="address-level2" placeholder="Nelson Bay" className="form-input" />
+                    </label>
+                    <label className="flex flex-col gap-1.5">
+                      <span className="text-[13px] font-semibold text-[var(--ink)]" style={{ fontFamily: "var(--font-dm-sans)" }}>Postcode *</span>
+                      <input type="text" name="postcode" value={form.postcode} onChange={handleChange} required inputMode="numeric" maxLength={4} placeholder="2315" className="form-input" />
+                    </label>
+                  </div>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <label className="flex flex-col gap-1.5">
-                      <span className="text-[13px] font-semibold text-[var(--ink)]" style={{ fontFamily: "var(--font-dm-sans)" }}>Package interest</span>
-                      <select name="packageInterest" value={form.packageInterest} onChange={handleChange} className="form-input">
-                        <option value="">Not sure yet</option>
-                        {PACKAGE_OPTIONS.map((p) => <option key={p} value={p}>{p}</option>)}
+                      <span className="text-[13px] font-semibold text-[var(--ink)]" style={{ fontFamily: "var(--font-dm-sans)" }}>Players&apos; ages *</span>
+                      <select name="playerAges" value={form.playerAges} onChange={handleChange} required className="form-input">
+                        <option value="">Select age range</option>
+                        {PLAYER_AGE_BANDS.map((b) => <option key={b.label} value={b.label}>{b.label}</option>)}
                       </select>
                     </label>
                     <label className="flex flex-col gap-1.5">
@@ -185,6 +194,13 @@ export default function ContactPage() {
                       <input type="number" name="playerCount" value={form.playerCount} onChange={handleChange} min={1} placeholder="e.g. 14" className="form-input" />
                     </label>
                   </div>
+                  <label className="flex flex-col gap-1.5">
+                    <span className="text-[13px] font-semibold text-[var(--ink)]" style={{ fontFamily: "var(--font-dm-sans)" }}>Package interest</span>
+                    <select name="packageInterest" value={form.packageInterest} onChange={handleChange} className="form-input">
+                      <option value="">Not sure yet</option>
+                      {PACKAGE_OPTIONS.map((p) => <option key={p} value={p}>{p}</option>)}
+                    </select>
+                  </label>
                   <label className="flex flex-col gap-1.5">
                     <span className="text-[13px] font-semibold text-[var(--ink)]" style={{ fontFamily: "var(--font-dm-sans)" }}>Message</span>
                     <textarea name="message" value={form.message} onChange={handleChange} rows={4} placeholder="Tell us about your event..." className="form-input resize-none" />

@@ -16,7 +16,9 @@ export interface Lead {
   lastName: string;
   eventType: string;
   eventDate: string;
+  suburb: string;
   postcode: string;
+  playerAges: string;
   packageInterest?: string;
   playerCount?: string;
   marketingOptIn: boolean;
@@ -42,6 +44,7 @@ export function trackLead(form: "quote_modal" | "contact_page", lead: Lead) {
         email: lead.email.trim(),
         name: `${lead.firstName} ${lead.lastName}`.trim(),
         last_event_type: lead.eventType,
+        last_suburb: lead.suburb,
         last_postcode: lead.postcode,
         marketing_opt_in: lead.marketingOptIn,
       },
@@ -51,7 +54,9 @@ export function trackLead(form: "quote_modal" | "contact_page", lead: Lead) {
       form,
       event_type: lead.eventType,
       event_date: lead.eventDate,
+      suburb: lead.suburb,
       postcode: lead.postcode,
+      player_ages: lead.playerAges,
       package_interest: packageInterest,
       player_count: lead.playerCount || undefined,
       marketing_opt_in: lead.marketingOptIn,

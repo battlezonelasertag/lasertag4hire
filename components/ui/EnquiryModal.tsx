@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState, useRef, useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { getFirstTouch, track, trackLead } from "@/lib/analytics";
+import { PLAYER_AGE_BANDS } from "@/lib/data";
 
 interface FormData {
   firstName: string;
@@ -12,7 +13,9 @@ interface FormData {
   phone: string;
   eventDate: string;
   eventType: string;
+  suburb: string;
   postcode: string;
+  playerAges: string;
   packageInterest: string;
   playerCount: string;
   message: string;
@@ -25,7 +28,9 @@ const EMPTY_FORM: FormData = {
   phone: "",
   eventDate: "",
   eventType: "",
+  suburb: "",
   postcode: "",
+  playerAges: "",
   packageInterest: "",
   playerCount: "",
   message: "",
@@ -257,7 +262,7 @@ export default function EnquiryModal({
                   </div>
 
                   {/* Event details */}
-                  <div className="grid grid-cols-2 gap-3">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <FormField label="Event date" required>
                       <input
                         type="date"
@@ -268,46 +273,62 @@ export default function EnquiryModal({
                         className="form-input"
                       />
                     </FormField>
-                    <FormField label="Event postcode" required>
+                    <FormField label="Event type" required>
+                      <select
+                        name="eventType"
+                        value={form.eventType}
+                        onChange={handleChange}
+                        required
+                        className="form-input"
+                      >
+                        <option value="">Select event type</option>
+                        {EVENT_TYPES.map((t) => (
+                          <option key={t} value={t}>{t}</option>
+                        ))}
+                      </select>
+                    </FormField>
+                  </div>
+
+                  <div className="grid grid-cols-[minmax(0,1fr)_7.5rem] gap-3">
+                    <FormField label="Event suburb" required>
+                      <input
+                        type="text"
+                        name="suburb"
+                        value={form.suburb}
+                        onChange={handleChange}
+                        required
+                        autoComplete="address-level2"
+                        placeholder="Nelson Bay"
+                        className="form-input"
+                      />
+                    </FormField>
+                    <FormField label="Postcode" required>
                       <input
                         type="text"
                         name="postcode"
                         value={form.postcode}
                         onChange={handleChange}
                         required
+                        inputMode="numeric"
                         maxLength={4}
-                        placeholder="2317"
+                        placeholder="2315"
                         className="form-input"
                       />
                     </FormField>
                   </div>
 
-                  <FormField label="Event type" required>
-                    <select
-                      name="eventType"
-                      value={form.eventType}
-                      onChange={handleChange}
-                      required
-                      className="form-input"
-                    >
-                      <option value="">Select event type</option>
-                      {EVENT_TYPES.map((t) => (
-                        <option key={t} value={t}>{t}</option>
-                      ))}
-                    </select>
-                  </FormField>
-
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    <FormField label="Package interest">
+                    <FormField label="Players' ages" required>
                       <select
-                        name="packageInterest"
-                        value={form.packageInterest}
+                        name="playerAges"
+                        value={form.playerAges}
                         onChange={handleChange}
+                        required
                         className="form-input"
                       >
-                        <option value="">Not sure yet</option>
-                        {PACKAGE_OPTIONS.map((p) => (
-                          <option key={p} value={p}>{p}</option>
+                        <option value="">Select age range</option>
+                        {PLAYER_AGE_BANDS.map((b) => (
+                          <option key={b.label} value={b.label}>{b.label}</option>
                         ))}
                       </select>
                     </FormField>
@@ -323,6 +344,20 @@ export default function EnquiryModal({
                       />
                     </FormField>
                   </div>
+
+                  <FormField label="Package interest">
+                    <select
+                      name="packageInterest"
+                      value={form.packageInterest}
+                      onChange={handleChange}
+                      className="form-input"
+                    >
+                      <option value="">Not sure yet</option>
+                      {PACKAGE_OPTIONS.map((p) => (
+                        <option key={p} value={p}>{p}</option>
+                      ))}
+                    </select>
+                  </FormField>
 
                   <FormField label="Message / special requests">
                     <textarea

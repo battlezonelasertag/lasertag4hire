@@ -141,6 +141,31 @@ export const EVENT_TYPES: EventType[] = [
 // custom domain (the bare lasertag4hire.com.au, which only redirects to www).
 export const SITE_URL = "https://www.lasertag4hire.com.au";
 
+// "Players' ages" options on the enquiry forms. Bands split at the package age guides (5+, 10+, 12+)
+// so each enquiry can list the packages that suit the group. minAge is null where it depends on the
+// youngest player.
+export const PLAYER_AGE_BANDS: { label: string; minAge: number | null }[] = [
+  { label: "Under 5", minAge: 0 },
+  { label: "5 to 9", minAge: 5 },
+  { label: "10 to 11", minAge: 10 },
+  { label: "12 to 17", minAge: 12 },
+  { label: "Adults", minAge: 18 },
+  { label: "Mixed kids and adults", minAge: null },
+];
+
+/** Packages whose age guide suits the band, e.g. "Bolter (no scope), Bolter (with red-dot scope)". */
+export function suitablePackages(ageBand: string) {
+  const band = PLAYER_AGE_BANDS.find((b) => b.label === ageBand);
+  if (!band) return "";
+  if (band.minAge === null) return "Depends on the youngest player";
+  const fits = PACKAGES.filter((p) => band.minAge! >= parseInt(p.ageRange.replace(/\D/g, ""), 10));
+  return fits.length
+    ? fits
+        .map((p) => (PACKAGES.filter((q) => q.name === p.name).length > 1 ? `${p.name} (${p.tagline.toLowerCase()})` : p.name))
+        .join(", ")
+    : "Below every package's age guide (youngest is 5+)";
+}
+
 // Google Analytics 4 web stream for www.lasertag4hire.com.au (Admin → Data streams → Measurement ID).
 // Only loaded on the production deployment, so local dev and Vercel previews don't count as visits.
 export const GA_MEASUREMENT_ID = "G-TTDX2RLRE7";

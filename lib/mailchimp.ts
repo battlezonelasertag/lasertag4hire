@@ -1,4 +1,5 @@
 import { createHash } from "node:crypto";
+import { suitablePackages } from "@/lib/data";
 
 // Adds or updates an enquirer in the Mailchimp audience (shared with Battlezone Laser Tag, as the
 // plan allows one audience). Server-only (reads the API key).
@@ -16,7 +17,9 @@ export interface EnquiryContact {
   phone: string;
   eventDate: string;
   eventType: string;
+  suburb: string;
   postcode: string;
+  playerAges: string;
   packageInterest: string;
   playerCount: string;
   message: string;
@@ -90,7 +93,9 @@ export async function syncEnquiryToMailchimp(c: EnquiryContact) {
         PHONE: c.phone,
         EVENTDATE: c.eventDate, // YYYY-MM-DD from the date input
         EVENTTYPE: c.eventType,
+        SUBURB: c.suburb,
         POSTCODE: c.postcode,
+        AGES: c.playerAges,
         PACKAGE: c.packageInterest,
         PLAYERS: c.playerCount,
       }),
@@ -120,6 +125,7 @@ export async function syncEnquiryToMailchimp(c: EnquiryContact) {
     c.form === "contact_page" ? "lt4h-contact-form" : "lt4h-quote-form",
     "Website Enquiry",
     `Event: ${c.eventType}`,
+    c.playerAges && `Ages: ${c.playerAges}`,
     c.packageInterest && `Package: ${c.packageInterest.replace(/\s*\(.*\)$/, "")}`,
     c.marketingOptIn && "Opted in: website form",
   ].filter(Boolean) as string[];
@@ -134,7 +140,9 @@ export async function syncEnquiryToMailchimp(c: EnquiryContact) {
         form: c.form,
         event_type: c.eventType,
         event_date: c.eventDate,
+        suburb: c.suburb,
         postcode: c.postcode,
+        player_ages: c.playerAges,
         package: c.packageInterest,
         players: c.playerCount,
       }),
@@ -147,9 +155,10 @@ function buildNote(c: EnquiryContact, source: string) {
   const region = process.env.NEXT_PUBLIC_POSTHOG_REGION === "eu" ? "eu" : "us";
   const lines = [
     `Website enquiry (${c.form === "contact_page" ? "contact page" : "quote form"})`,
-    `Event: ${c.eventType} on ${c.eventDate}, postcode ${c.postcode}`,
-    c.packageInterest && `Package: ${c.packageInterest}`,
-    c.playerCount && `Players: ${c.playerCount}`,
+    `Event: ${c.eventType} on ${c.eventDate} in ${[c.suburb, c.postcode].filter(Boolean).join(" ")}`,
+    (c.playerCount || c.playerAges) && `Players: ${[c.playerCount, c.playerAges && `aged ${c.playerAges.toLowerCase()}`].filter(Boolean).join(", ")}`,
+    c.playerAges && `Suits (age guide): ${suitablePackages(c.playerAges)}`,
+    c.packageInterest && `Package interest: ${c.packageInterest}`,
     c.phone && `Phone: ${c.phone}`,
     source && `First came from: ${source}${c.campaign ? ` (${c.campaign})` : ""}${c.landingPage ? `, landed on ${c.landingPage}` : ""}`,
     `Marketing opt-in: ${c.marketingOptIn ? "yes" : "no"}`,

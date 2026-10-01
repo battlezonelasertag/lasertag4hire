@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse, after } from "next/server";
 import { Resend } from "resend";
 import { mailchimpConfigured, syncEnquiryToMailchimp } from "@/lib/mailchimp";
+import { suitablePackages } from "@/lib/data";
 
 const CONTACT_EMAIL = process.env.CONTACT_EMAIL ?? "info@lasertag4hire.com.au";
 
@@ -20,7 +21,7 @@ function isRateLimited(ip: string) {
 
 const LIMITS: Record<string, number> = {
   firstName: 80, lastName: 80, email: 200, phone: 40, eventDate: 20, eventType: 80,
-  postcode: 10, packageInterest: 80, playerCount: 20, message: 2000,
+  suburb: 80, postcode: 10, playerAges: 40, packageInterest: 80, playerCount: 20, message: 2000,
 };
 
 // First-touch attribution recorded in the visitor's browser (lib/analytics.ts).
@@ -56,8 +57,10 @@ export async function POST(req: NextRequest) {
     const f = Object.fromEntries(
       Object.entries(LIMITS).map(([key, max]) => [key, clean(body?.[key], max)]),
     ) as Record<keyof typeof LIMITS, string>;
-    const { firstName, lastName, email, phone, eventDate, eventType, postcode, packageInterest, playerCount, message } = f;
+    const { firstName, lastName, email, phone, eventDate, eventType, suburb, postcode, playerAges, packageInterest, playerCount, message } = f;
 
+    // Suburb and players' ages are required by the forms but not here, so a page loaded before they
+    // were added can still send its enquiry.
     if (!firstName || !email || !eventDate || !eventType || !postcode) {
       return NextResponse.json(
         { error: "Missing required fields" },
@@ -83,7 +86,9 @@ export async function POST(req: NextRequest) {
       to: [CONTACT_EMAIL],
       subject: `New quote request: ${firstName} ${lastName} (${eventType})`.replace(/[\r\n]+/g, " "),
       html: buildBusinessEmail(
-        Object.fromEntries(Object.entries(f).map(([k, v]) => [k, escapeHtml(v)])) as Parameters<typeof buildBusinessEmail>[0],
+        Object.fromEntries(
+          Object.entries({ ...f, suitablePackages: suitablePackages(playerAges) }).map(([k, v]) => [k, escapeHtml(v)]),
+        ) as Parameters<typeof buildBusinessEmail>[0],
       ),
       replyTo: email,
     });
@@ -111,7 +116,7 @@ export async function POST(req: NextRequest) {
       after(async () => {
         try {
           await syncEnquiryToMailchimp({
-            firstName, lastName, email, phone, eventDate, eventType, postcode, packageInterest, playerCount, message,
+            firstName, lastName, email, phone, eventDate, eventType, suburb, postcode, playerAges, packageInterest, playerCount, message,
             ...a,
             form: body?.form === "contact_page" ? "contact_page" : "quote_modal",
             marketingOptIn: body?.marketingOptIn === true,
@@ -136,7 +141,10 @@ function buildBusinessEmail(data: {
   phone: string;
   eventDate: string;
   eventType: string;
+  suburb: string;
   postcode: string;
+  playerAges: string;
+  suitablePackages: string;
   packageInterest: string;
   playerCount: string;
   message: string;
@@ -153,9 +161,11 @@ function buildBusinessEmail(data: {
           ${buildRow("Phone", data.phone || "—")}
           ${buildRow("Event date", data.eventDate)}
           ${buildRow("Event type", data.eventType)}
-          ${buildRow("Postcode", data.postcode)}
-          ${buildRow("Package interest", data.packageInterest || "Not specified")}
+          ${buildRow("Location", [data.suburb, data.postcode].filter(Boolean).join(" "))}
+          ${buildRow("Players' ages", data.playerAges || "Not specified")}
           ${buildRow("Number of players", data.playerCount || "Not specified")}
+          ${buildRow("Package interest", data.packageInterest || "Not specified")}
+          ${data.suitablePackages ? buildRow("Suits (age guide)", data.suitablePackages) : ""}
           ${buildRow("Message", (data.message || "—").replace(/\n/g, "<br/>"))}
         </table>
       </div>
